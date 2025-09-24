@@ -58,7 +58,13 @@ class PriceComponent extends StatelessWidget {
                 children: [
                   Text(
                     isRent
-                        ? (rentVideo!.type.validate().isNotEmpty ? rentVideo!.type.validate()[0].toUpperCase() + rentVideo!.type.validate().substring(1).toLowerCase() : '')
+                        ? (rentVideo!.type.validate().isNotEmpty
+                            ? rentVideo!.type.validate()[0].toUpperCase() +
+                                rentVideo!.type
+                                    .validate()
+                                    .substring(1)
+                                    .toLowerCase()
+                            : '')
                         : subscriptionCont.selectPlan.value.name,
                     style: primaryTextStyle(
                       size: 14,
@@ -66,23 +72,39 @@ class PriceComponent extends StatelessWidget {
                     ),
                   ).expand(),
                   PriceWidget(
-                    discount: isRent ? rentVideo!.discount.validate() : subscriptionCont.selectPlan.value.discountPercentage,
-                    isDiscountedPrice: isRent ? rentVideo!.discount > 0 : subscriptionCont.selectPlan.value.discountPercentage > 0,
-                    discountedPrice: isRent ? rentVideo!.discountedPrice.validate() : subscriptionCont.selectPlan.value.totalPrice,
+                    discount: isRent
+                        ? rentVideo!.discount.validate()
+                        : subscriptionCont.selectPlan.value.discountPercentage,
+                    isDiscountedPrice: isRent
+                        ? rentVideo!.discount > 0
+                        : subscriptionCont.selectPlan.value.discountPercentage >
+                            0,
+                    discountedPrice: isRent
+                        ? rentVideo!.discountedPrice.validate()
+                        : subscriptionCont.selectPlan.value.totalPrice,
                     size: 22,
                     color: primaryTextColor,
-                    price: isRent ? rentVideo!.price.validate() : subscriptionCont.selectPlan.value.price,
-                    isLineThroughEnabled: isRent ? rentVideo!.discountedPrice > 0 : subscriptionCont.selectPlan.value.discountPercentage > 0,
+                    price: isRent
+                        ? rentVideo!.price.validate()
+                        : subscriptionCont.selectPlan.value.price,
+                    isLineThroughEnabled: isRent
+                        ? rentVideo!.discountedPrice > 0
+                        : subscriptionCont.selectPlan.value.discountPercentage >
+                            0,
                   ),
                 ],
               ),
             if (subscriptionCont.isShowCoupon.isTrue) 4.height,
-            if (appliedCouponData != null && appliedCouponData!.code.isNotEmpty && subscriptionCont.isShowCoupon.isTrue)
+            if (appliedCouponData != null &&
+                appliedCouponData!.code.isNotEmpty &&
+                subscriptionCont.isShowCoupon.isTrue)
               Row(
                 children: [
                   Row(
                     children: [
-                      Text(locale.value.couponDiscount, style: primaryTextStyle(size: 14, color: darkGrayTextColor)),
+                      Text(locale.value.couponDiscount,
+                          style: primaryTextStyle(
+                              size: 14, color: darkGrayTextColor)),
                       Text(
                         '(${appliedCouponData!.code})',
                         style: boldTextStyle(color: Colors.white, size: 14),
@@ -97,8 +119,11 @@ class PriceComponent extends StatelessWidget {
                   )
                 ],
               ),
-            if (appConfigs.value.taxPercentage.isNotEmpty && subscriptionCont.isShowCoupon.isTrue)
-              if (appConfigs.value.taxPercentage.isNotEmpty && subscriptionCont.isShowCoupon.isTrue && !isRent)
+            if (appConfigs.value.taxPercentage.isNotEmpty &&
+                subscriptionCont.isShowCoupon.isTrue)
+              if (appConfigs.value.taxPercentage.isNotEmpty &&
+                  subscriptionCont.isShowCoupon.isTrue &&
+                  !isRent)
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -118,7 +143,12 @@ class PriceComponent extends StatelessWidget {
                         ).expand(),
                         PriceWidget(
                           price: appConfigs.value.taxPercentage[index].value,
-                          isPercentage: appConfigs.value.taxPercentage[index].type.toLowerCase() == 'percentage' ? true : false,
+                          isPercentage: appConfigs
+                                      .value.taxPercentage[index].type
+                                      .toLowerCase() ==
+                                  'percentage'
+                              ? true
+                              : false,
                           size: 16,
                           color: appColorPrimary,
                         ),
@@ -137,12 +167,14 @@ class PriceComponent extends StatelessWidget {
                   children: [
                     Text(
                       locale.value.pay,
-                      style: primaryTextStyle(size: 14, color: darkGrayTextColor),
+                      style:
+                          primaryTextStyle(size: 14, color: darkGrayTextColor),
                     ),
                     2.height,
                     InkWell(
                       onTap: () {
-                        subscriptionCont.isShowCoupon.value = !subscriptionCont.isShowCoupon.value;
+                        subscriptionCont.isShowCoupon.value =
+                            !subscriptionCont.isShowCoupon.value;
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -150,19 +182,35 @@ class PriceComponent extends StatelessWidget {
                         children: [
                           Obx(() {
                             return PriceWidget(
-                              isDiscountedPrice: isRent ? rentVideo!.discount > 0 : subscriptionCont.selectPlan.value.discount.getBoolInt(),
-                              discountedPrice: isRent ? rentVideo!.discountedPrice : subscriptionCont.totalAmount.value,
-                              price: isRent ? rentVideo!.discountedPrice : subscriptionCont.tempTotalAmount.value,
+                              isDiscountedPrice: isRent
+                                  ? rentVideo!.discount > 0
+                                  : subscriptionCont.selectPlan.value.discount
+                                      .getBoolInt(),
+                              discountedPrice: isRent
+                                  ? rentVideo!.discountedPrice
+                                  : subscriptionCont.totalAmount.value,
+                              price: isRent
+                                  ? rentVideo!.discountedPrice
+                                  : subscriptionCont.tempTotalAmount.value,
                               color: white,
                               size: 18,
-                              isLineThroughEnabled: subscriptionCont.selectPlan.value.discountPercentage > 0,
-                              formatedPrice: subscriptionCont.selectedRevenueCatPackage != null ? subscriptionCont.selectedRevenueCatPackage!.priceString : "",
+                              isLineThroughEnabled: subscriptionCont
+                                      .selectPlan.value.discountPercentage >
+                                  0,
+                              formatedPrice:
+                                  subscriptionCont.selectedRevenueCatPackage !=
+                                          null
+                                      ? subscriptionCont
+                                          .selectedRevenueCatPackage!
+                                          .priceString
+                                      : "",
                             );
                           }),
                           if (subscriptionCont.discount.value != 0.0) 2.width,
                           6.width,
                           RotatedBox(
-                            quarterTurns: subscriptionCont.isShowCoupon.isTrue ? 3 : 1,
+                            quarterTurns:
+                                subscriptionCont.isShowCoupon.isTrue ? 3 : 1,
                             child: const CachedImageWidget(
                               url: Assets.iconsIcBack,
                               height: 18,
@@ -176,24 +224,35 @@ class PriceComponent extends StatelessWidget {
                   ],
                 ).expand(),
                 AppButton(
-                  padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 36, vertical: 12),
                   text: buttonText ?? locale.value.next,
-                  color: buttonColor ?? (isRent ? appColorPrimary : (subscriptionCont.selectPlan.value.name.isNotEmpty ? appColorPrimary : lightBtnColor)),
+                  color: buttonColor ??
+                      (isRent
+                          ? appColorPrimary
+                          : (subscriptionCont.selectPlan.value.name.isNotEmpty
+                              ? appColorPrimary
+                              : lightBtnColor)),
                   textStyle: appButtonTextStyleWhite,
                   shapeBorder: RoundedRectangleBorder(borderRadius: radius(6)),
                   onTap: () async {
                     LiveStream().emit(podPlayerPauseKey);
-                    if (appConfigs.value.enableInAppPurchase.getBoolInt() && !isRent) {
-                      final selectedRevenueCatPackage = subscriptionCont.getSelectedPlanFromRevenueCat(subscriptionCont.selectPlan.value);
+                    if (appConfigs.value.enableInAppPurchase.getBoolInt() &&
+                        !isRent) {
+                      final selectedRevenueCatPackage =
+                          subscriptionCont.getSelectedPlanFromRevenueCat(
+                              subscriptionCont.selectPlan.value);
                       if (selectedRevenueCatPackage != null) {
                         inAppPurchaseService.startPurchase(
                           selectedRevenueCatPackage: selectedRevenueCatPackage,
                           onComplete: (transactionId) {
-                            subscriptionCont.saveSubscription(transactionId: transactionId);
+                            subscriptionCont.saveSubscription(
+                                transactionId: transactionId);
                           },
                         );
                       } else {
-                        toast("Can't find ${subscriptionCont.selectPlan.value.name} on ${isIOS ? 'Appstore' : "PlayStore"}");
+                        toast(
+                            "Can't find ${subscriptionCont.selectPlan.value.name} on ${isIOS ? 'Appstore' : "PlayStore"}");
                       }
                     } else {
                       if (isProceedPayment) {

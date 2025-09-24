@@ -24,14 +24,16 @@ class TvShowSeasonComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListBody(
       children: [
-        if (tvShowController.tvShowDetail.value.tvShowLinks.isNotEmpty) 8.height,
+        if (tvShowController.tvShowDetail.value.tvShowLinks.isNotEmpty)
+          8.height,
         if (tvShowController.tvShowDetail.value.tvShowLinks.isNotEmpty)
           HorizontalList(
             spacing: 8,
             itemCount: tvShowController.tvShowDetail.value.tvShowLinks.length,
             padding: EdgeInsets.zero,
             itemBuilder: (context, index) {
-              SeasonModel seasonData = tvShowController.tvShowDetail.value.tvShowLinks[index];
+              SeasonModel seasonData =
+                  tvShowController.tvShowDetail.value.tvShowLinks[index];
               if (seasonData.episodes.validate().isNotEmpty) {
                 return InkWell(
                   onTap: () async {
@@ -81,25 +83,38 @@ class TvShowSeasonComponent extends StatelessWidget {
                       shrinkWrap: true,
                       controller: tvShowController.scrollController,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: tvShowController.isViewAll.isTrue ? tvShowController.episodeList.length : (tvShowController.episodeList.length > 4 ? 4 : tvShowController.episodeList.length),
+                      itemCount: tvShowController.isViewAll.isTrue
+                          ? tvShowController.episodeList.length
+                          : (tvShowController.episodeList.length > 4
+                              ? 4
+                              : tvShowController.episodeList.length),
                       itemBuilder: (context, index) {
-                        EpisodeModel episode = tvShowController.episodeList[index];
+                        EpisodeModel episode =
+                            tvShowController.episodeList[index];
                         return InkWell(
                           splashColor: appColorPrimary.withAlpha(50),
                           onTap: () {
-                            if (episode.id != tvShowController.selectedEpisode.value.id) {
+                            if (episode.id !=
+                                tvShowController.selectedEpisode.value.id) {
                               onSubscriptionLoginCheck(
                                 planLevel: episode.requiredPlanLevel,
                                 videoAccess: episode.access,
                                 callBack: () {
-                                  if (isLoggedIn.isTrue && (episode.requiredPlanLevel == 0 || currentSubscription.value.level >= tvShowController.selectedEpisode.value.requiredPlanLevel)) {
+                                  if (isLoggedIn.isTrue &&
+                                      (episode.requiredPlanLevel == 0 ||
+                                          currentSubscription.value.level >=
+                                              tvShowController.selectedEpisode
+                                                  .value.requiredPlanLevel)) {
                                     tvShowController.isTrailer(false);
                                     tvShowController.isViewAll(false);
                                     tvShowController.currentEpisodeIndex(index);
                                     tvShowController.selectedEpisode(episode);
                                     tvShowController.selectedEpisode.refresh();
-                                    tvShowController.showData(VideoPlayerModel.fromJson(episode.toJson()));
-                                    tvShowController.getEpisodeDetail(changeVideo: true);
+                                    tvShowController.showData(
+                                        VideoPlayerModel.fromJson(
+                                            episode.toJson()));
+                                    tvShowController.getEpisodeDetail(
+                                        changeVideo: true);
                                   }
                                 },
                                 planId: episode.planId,
@@ -112,12 +127,16 @@ class TvShowSeasonComponent extends StatelessWidget {
                                 children: [
                                   EpisodeCardComponent(
                                     episode: episode,
-                                    season: tvShowController.currentSeason.value,
-                                    isSelected: episode.id == tvShowController.selectedEpisode.value.id,
+                                    season:
+                                        tvShowController.currentSeason.value,
+                                    isSelected: episode.id ==
+                                        tvShowController
+                                            .selectedEpisode.value.id,
                                     episodeNumber: index + 1,
                                     key: ValueKey(index),
                                   ),
-                                  if (episode.id == tvShowController.selectedEpisode.value.id)
+                                  if (episode.id ==
+                                      tvShowController.selectedEpisode.value.id)
                                     IgnorePointer(
                                       ignoring: true,
                                       child: Container(
@@ -141,25 +160,36 @@ class TvShowSeasonComponent extends StatelessWidget {
                                   (index ==
                                       (tvShowController.episodeList.length > 4
                                           ? tvShowController.isViewAll.isTrue
-                                              ? tvShowController.episodeList.length - 1
+                                              ? tvShowController
+                                                      .episodeList.length -
+                                                  1
                                               : 3
-                                          : tvShowController.episodeList.length - 1)))
+                                          : tvShowController
+                                                  .episodeList.length -
+                                              1)))
                                 AppButton(
-                                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 32, vertical: 8),
                                   width: 120,
-                                  text: tvShowController.isViewAll.isTrue ? locale.value.viewLess : locale.value.viewAll,
+                                  text: tvShowController.isViewAll.isTrue
+                                      ? locale.value.viewLess
+                                      : locale.value.viewAll,
                                   color: btnColor,
-                                  textStyle: appButtonTextStyleWhite.copyWith(color: darkGrayTextColor),
-                                  shapeBorder: RoundedRectangleBorder(borderRadius: radius(6)),
+                                  textStyle: appButtonTextStyleWhite.copyWith(
+                                      color: darkGrayTextColor),
+                                  shapeBorder: RoundedRectangleBorder(
+                                      borderRadius: radius(6)),
                                   onTap: () {
-                                    tvShowController.isViewAll(!tvShowController.isViewAll.value);
+                                    tvShowController.isViewAll(
+                                        !tvShowController.isViewAll.value);
                                     if (tvShowController.isViewAll.isTrue) {
                                       tvShowController.onNextPage();
                                     } else {
                                       tvShowController.page(1);
                                     }
                                   },
-                                ).paddingSymmetric(vertical: 4).visible(tvShowController.isLoadingEpisode.isFalse),
+                                ).paddingSymmetric(vertical: 4).visible(
+                                    tvShowController.isLoadingEpisode.isFalse),
                             ],
                           ),
                         );
@@ -168,7 +198,8 @@ class TvShowSeasonComponent extends StatelessWidget {
                         return const SizedBox(height: 16);
                       },
                     ).visible(tvShowController.isLoadingEpisode.isFalse),
-                    if (tvShowController.isLoadingEpisode.isTrue) const EpisodeListShimmer(shimmerListLength: 4),
+                    if (tvShowController.isLoadingEpisode.isTrue)
+                      const EpisodeListShimmer(shimmerListLength: 4),
                   ],
                 ),
               );

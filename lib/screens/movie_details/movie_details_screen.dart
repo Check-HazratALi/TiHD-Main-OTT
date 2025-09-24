@@ -37,7 +37,9 @@ class MovieDetailsScreen extends StatelessWidget {
           () {
             return AnimatedScrollView(
               crossAxisAlignment: CrossAxisAlignment.start,
-              physics: isPipModeOn.value ? NeverScrollableScrollPhysics() : AlwaysScrollableScrollPhysics(),
+              physics: isPipModeOn.value
+                  ? NeverScrollableScrollPhysics()
+                  : AlwaysScrollableScrollPhysics(),
               refreshIndicatorColor: appColorPrimary,
               padding: EdgeInsets.only(bottom: 30),
               children: [
@@ -45,15 +47,18 @@ class MovieDetailsScreen extends StatelessWidget {
                   duration: const Duration(milliseconds: 300),
                   child: VideoPlayersComponent(
                     key: ValueKey(movieDetCont.movieData.value.id),
-                    isTrailer: movieDetCont.isTrailer.value && !isFromContinueWatch,
-                    videoModel: getVideoPlayerResp(movieDetCont.movieData.value.toJson()),
+                    isTrailer:
+                        movieDetCont.isTrailer.value && !isFromContinueWatch,
+                    videoModel: getVideoPlayerResp(
+                        movieDetCont.movieData.value.toJson()),
                     isPipMode: isPipModeOn.value,
                     showWatchNow: movieDetCont.isTrailer.value,
                     onWatchNow: () {
                       movieDetCont.isTrailer(false);
                       movieDetCont.storeView();
                       playMovie(
-                        continueWatchDuration: movieDetCont.movieDetailsResp.value.watchedTime,
+                        continueWatchDuration:
+                            movieDetCont.movieDetailsResp.value.watchedTime,
                         newURL: movieDetCont.movieData.value.videoUrlInput,
                         urlType: movieDetCont.movieData.value.videoUploadType,
                         videoType: VideoType.movie,
@@ -65,7 +70,9 @@ class MovieDetailsScreen extends StatelessWidget {
                 if (!isPipModeOn.value)
                   SnapHelperWidget(
                     future: movieDetCont.getMovieDetailsFuture.value,
-                    loadingWidget: movieDetCont.isLoading.isFalse ? MovieDetailsShimmerScreen() : Offstage(),
+                    loadingWidget: movieDetCont.isLoading.isFalse
+                        ? MovieDetailsShimmerScreen()
+                        : Offstage(),
                     errorBuilder: (error) {
                       return NoDataWidget(
                         titleTextStyle: secondaryTextStyle(color: white),

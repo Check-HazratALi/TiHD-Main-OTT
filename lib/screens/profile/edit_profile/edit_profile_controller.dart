@@ -38,14 +38,15 @@ class EditProfileController extends GetxController {
   FocusNode confPasswordFocus = FocusNode();
   FocusNode mobileNoFocus = FocusNode();
   FocusNode dobFocus = FocusNode();
-  Rx<ProfileModel> profileDet = ProfileModel(planDetails: SubscriptionPlanModel()).obs;
+  Rx<ProfileModel> profileDet =
+      ProfileModel(planDetails: SubscriptionPlanModel()).obs;
 
   var selectedGender = Gender.male.obs;
   RxString profilePic = "".obs;
   Rx<File> imageFile = File("").obs;
   XFile? pickedFile;
   Rx<Country> selectedCountry = defaultCountry.obs;
-  RxString countryCode = "+91".obs;
+  RxString countryCode = "+880".obs;
 
   RxBool isPicLoading = false.obs;
   ProfileController profCont = Get.put(ProfileController());
@@ -108,12 +109,15 @@ class EditProfileController extends GetxController {
           labelStyle: secondaryTextStyle(color: white),
           labelText: locale.value.searchHere,
           prefixIcon: const Icon(Icons.search, color: white),
-          border: const OutlineInputBorder(borderSide: BorderSide(color: borderColor)),
-          focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: white)),
+          border: const OutlineInputBorder(
+              borderSide: BorderSide(color: borderColor)),
+          focusedBorder:
+              const OutlineInputBorder(borderSide: BorderSide(color: white)),
         ),
       ),
 
-      showPhoneCode: true, // optional. Shows phone code before the country name.
+      showPhoneCode:
+          true, // optional. Shows phone code before the country name.
       onSelect: (Country country) {
         countryCode("+${country.phoneCode}");
         selectedCountry(country);
@@ -125,7 +129,8 @@ class EditProfileController extends GetxController {
   Future<void> _handleGalleryClick() async {
     isPicLoading(true);
     Get.back();
-    pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery, maxWidth: 1800, maxHeight: 1800);
+    pickedFile = await ImagePicker().pickImage(
+        source: ImageSource.gallery, maxWidth: 1800, maxHeight: 1800);
     if (pickedFile != null) {
       imageFile(File(pickedFile!.path));
     }
@@ -136,7 +141,8 @@ class EditProfileController extends GetxController {
   Future<void> _handleCameraClick() async {
     isPicLoading(true);
     Get.back();
-    pickedFile = await ImagePicker().pickImage(source: ImageSource.camera, maxWidth: 1800, maxHeight: 1800);
+    pickedFile = await ImagePicker()
+        .pickImage(source: ImageSource.camera, maxWidth: 1800, maxHeight: 1800);
     if (pickedFile != null) {
       imageFile(File(pickedFile!.path));
     }

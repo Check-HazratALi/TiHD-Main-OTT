@@ -39,7 +39,8 @@ class SubscribeCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
             ),
             alignment: Alignment.center,
-            child: Text(locale.value.subscribe.toUpperCase(), style: boldTextStyle(size: 10, color: goldColor)),
+            child: Text(locale.value.subscribe.toUpperCase(),
+                style: boldTextStyle(size: 10, color: goldColor)),
           ),
         ),
       );

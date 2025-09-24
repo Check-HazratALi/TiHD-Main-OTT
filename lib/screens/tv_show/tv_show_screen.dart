@@ -36,27 +36,42 @@ class TvShowScreen extends StatelessWidget {
           return AnimatedScrollView(
             controller: tvShowController.scrollController,
             refreshIndicatorColor: appColorPrimary,
-            physics: isPipModeOn.value ? NeverScrollableScrollPhysics() : AlwaysScrollableScrollPhysics(),
+            physics: isPipModeOn.value
+                ? NeverScrollableScrollPhysics()
+                : AlwaysScrollableScrollPhysics(),
             padding: EdgeInsets.only(bottom: 30),
             children: [
               AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 child: VideoPlayersComponent(
                   key: ValueKey(tvShowController.selectedEpisode.value.id),
-                  isTrailer: tvShowController.isTrailer.value && !isFromContinueWatch,
+                  isTrailer:
+                      tvShowController.isTrailer.value && !isFromContinueWatch,
                   isPipMode: isPipModeOn.value,
-                  videoModel: getVideoPlayerResp(tvShowController.showData.value.toJson()),
-                  showWatchNow: tvShowController.isTrailer.isTrue ? true : isMoviePaid(requiredPlanLevel: tvShowController.selectedEpisode.value.requiredPlanLevel) || tvShowController.showData.value.isPurchased == false,
-                  hasNextEpisode: tvShowController.currentEpisodeIndex.value < tvShowController.episodeList.length,
+                  videoModel: getVideoPlayerResp(
+                      tvShowController.showData.value.toJson()),
+                  showWatchNow: tvShowController.isTrailer.isTrue
+                      ? true
+                      : isMoviePaid(
+                              requiredPlanLevel: tvShowController
+                                  .selectedEpisode.value.requiredPlanLevel) ||
+                          tvShowController.showData.value.isPurchased == false,
+                  hasNextEpisode: tvShowController.currentEpisodeIndex.value <
+                      tvShowController.episodeList.length,
                   onWatchNow: () {
                     tvShowController.isTrailer(false);
                     tvShowController.currentEpisodeIndex.value++;
-                    tvShowController.playNextEpisode(tvShowController.episodeList[tvShowController.currentEpisodeIndex.value]);
+                    tvShowController.playNextEpisode(
+                        tvShowController.episodeList[
+                            tvShowController.currentEpisodeIndex.value]);
                   },
                   onWatchNextEpisode: () {
-                    if (tvShowController.currentEpisodeIndex.value < tvShowController.episodeList.length) {
+                    if (tvShowController.currentEpisodeIndex.value <
+                        tvShowController.episodeList.length) {
                       tvShowController.currentEpisodeIndex.value++;
-                      tvShowController.playNextEpisode(tvShowController.episodeList[tvShowController.currentEpisodeIndex.value]);
+                      tvShowController.playNextEpisode(
+                          tvShowController.episodeList[
+                              tvShowController.currentEpisodeIndex.value]);
                     }
                   },
                 ),
@@ -64,7 +79,9 @@ class TvShowScreen extends StatelessWidget {
               if (!isPipModeOn.value)
                 SnapHelperWidget(
                   future: tvShowController.getTvShowDetailsFuture.value,
-                  loadingWidget: tvShowController.isLoading.isFalse ? TvShowShimmerScreen() : Offstage(),
+                  loadingWidget: tvShowController.isLoading.isFalse
+                      ? TvShowShimmerScreen()
+                      : Offstage(),
                   errorBuilder: (error) {
                     return NoDataWidget(
                       titleTextStyle: secondaryTextStyle(color: white),

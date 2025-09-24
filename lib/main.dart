@@ -84,19 +84,33 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value) {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then((value) {
     PushNotificationService().initFirebaseMessaging();
+    FirebaseMessaging.instance.getToken().then((token) {
+      debugPrint("🔑 FCM Token: $token");
+    });
+
     if (kReleaseMode) {
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+      FlutterError.onError =
+          FirebaseCrashlytics.instance.recordFlutterFatalError;
     }
   }).catchError(onError);
   await GetStorage.init();
   //
-  fontFamilyPrimaryGlobal = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16).fontFamily;
+  fontFamilyPrimaryGlobal =
+      GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16)
+          .fontFamily;
   textPrimarySizeGlobal = 16;
-  fontFamilySecondaryGlobal = GoogleFonts.roboto(fontWeight: FontWeight.normal, color: secondaryTextColor, fontSize: 14).fontFamily;
+  fontFamilySecondaryGlobal = GoogleFonts.roboto(
+          fontWeight: FontWeight.normal,
+          color: secondaryTextColor,
+          fontSize: 14)
+      .fontFamily;
   textSecondarySizeGlobal = 14;
-  fontFamilyBoldGlobal = GoogleFonts.roboto(fontWeight: FontWeight.bold, color: primaryTextColor, fontSize: 16).fontFamily;
+  fontFamilyBoldGlobal = GoogleFonts.roboto(
+          fontWeight: FontWeight.bold, color: primaryTextColor, fontSize: 16)
+      .fontFamily;
   textPrimaryColorGlobal = primaryTextColor;
   textSecondaryColorGlobal = secondaryTextColor;
   //
@@ -109,21 +123,29 @@ Future<void> main() async {
   defaultAppButtonTextColorGlobal = primaryTextColor;
   passwordLengthGlobal = 8;
 
-  selectedLanguageCode(local.getValueFromLocal(SELECTED_LANGUAGE_CODE) ?? DEFAULT_LANGUAGE);
+  selectedLanguageCode(
+      local.getValueFromLocal(SELECTED_LANGUAGE_CODE) ?? DEFAULT_LANGUAGE);
 
-  await initialize(aLocaleLanguageList: languageList(), defaultLanguage: selectedLanguageCode.value);
+  await initialize(
+      aLocaleLanguageList: languageList(),
+      defaultLanguage: selectedLanguageCode.value);
 
-  BaseLanguage temp = await const AppLocalizations().load(Locale(selectedLanguageCode.value));
+  BaseLanguage temp =
+      await const AppLocalizations().load(Locale(selectedLanguageCode.value));
   locale = temp.obs;
-  locale.value = await const AppLocalizations().load(Locale(selectedLanguageCode.value));
+  locale.value =
+      await const AppLocalizations().load(Locale(selectedLanguageCode.value));
 
   if (getStringAsync(SharedPreferenceConst.CONFIGURATION_RESPONSE).isNotEmpty) {
-    ConfigurationResponse configData = ConfigurationResponse.fromJson(jsonDecode(getStringAsync(SharedPreferenceConst.CONFIGURATION_RESPONSE)));
+    ConfigurationResponse configData = ConfigurationResponse.fromJson(
+        jsonDecode(
+            getStringAsync(SharedPreferenceConst.CONFIGURATION_RESPONSE)));
     appConfigs(configData);
   }
 
   try {
-    final getThemeFromLocal = local.getValueFromLocal(SettingsLocalConst.THEME_MODE);
+    final getThemeFromLocal =
+        local.getValueFromLocal(SettingsLocalConst.THEME_MODE);
     if (getThemeFromLocal is int) {
       toggleThemeMode(themeId: getThemeFromLocal);
     } else {
@@ -133,7 +155,9 @@ Future<void> main() async {
     log('getThemeFromLocal from cache E: $e');
   }
 
-  isLoggedIn(getBoolValueAsync(SharedPreferenceConst.IS_LOGGED_IN, defaultValue: false) || getStringAsync(SharedPreferenceConst.USER_DATA).isNotEmpty);
+  isLoggedIn(getBoolValueAsync(SharedPreferenceConst.IS_LOGGED_IN,
+          defaultValue: false) ||
+      getStringAsync(SharedPreferenceConst.USER_DATA).isNotEmpty);
 
   if (isLoggedIn.value) {
     final userData = getStringAsync(SharedPreferenceConst.USER_DATA);
@@ -172,7 +196,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: LanguageDataModel.languageLocales(),
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(0.8)),
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: const TextScaler.linear(0.8)),
           child: SafeArea(
             left: false,
             top: false,
@@ -188,7 +213,8 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      localeResolutionCallback: (locale, supportedLocales) => Locale(selectedLanguageCode.value),
+      localeResolutionCallback: (locale, supportedLocales) =>
+          Locale(selectedLanguageCode.value),
       fallbackLocale: const Locale(DEFAULT_LANGUAGE),
       locale: Locale(selectedLanguageCode.value),
       theme: AppTheme.darkTheme,
@@ -200,7 +226,8 @@ class MyApp extends StatelessWidget {
         if (settings.name.validate().split('/').last.isDigit()) {
           return MaterialPageRoute(
             builder: (context) {
-              return SplashScreen(deepLink: settings.name.validate(), link: true);
+              return SplashScreen(
+                  deepLink: settings.name.validate(), link: true);
             },
           );
         } else {

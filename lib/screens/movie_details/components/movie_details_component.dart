@@ -53,11 +53,15 @@ class MovieDetailsComponent extends StatelessWidget {
                   checkIcon: Assets.iconsIcCheck,
                   onTap: () {
                     if (isLoggedIn.isTrue) {
-                      movieDetCont.saveWatchList(addToWatchList: !movieDetCont.movieDetailsResp.value.isWatchList);
+                      movieDetCont.saveWatchList(
+                          addToWatchList:
+                              !movieDetCont.movieDetailsResp.value.isWatchList);
                     } else {
                       Get.to(() => SignInScreen())?.then((value) {
                         if (isLoggedIn.isTrue) {
-                          movieDetCont.saveWatchList(addToWatchList: !movieDetCont.movieDetailsResp.value.isWatchList);
+                          movieDetCont.saveWatchList(
+                              addToWatchList: !movieDetCont
+                                  .movieDetailsResp.value.isWatchList);
                         }
                       });
                     }
@@ -67,16 +71,22 @@ class MovieDetailsComponent extends StatelessWidget {
                   icon: Assets.iconsIcShare,
                   title: locale.value.share,
                   onTap: () {
-                    shareVideo(type: VideoType.movie, videoId: movieDetCont.movieDetailsResp.value.id);
+                    shareVideo(
+                        type: VideoType.movie,
+                        videoId: movieDetCont.movieDetailsResp.value.id);
                     // viewFiles(movieDetCont.movieDetailsResp.value.name);
                   },
                 ),
                 if (movieDetCont.showDownload.isTrue)
                   CustomIconButton(
-                    icon: movieDetCont.isDownloaded.value ? Assets.iconsIcDownloaded : Assets.iconsIcDownload,
+                    icon: movieDetCont.isDownloaded.value
+                        ? Assets.iconsIcDownloaded
+                        : Assets.iconsIcDownload,
                     title: locale.value.download,
                     isTrue: movieDetCont.isDownloaded.value,
-                    iconWidget: movieDetCont.downloadPercentage.value >= 1 && movieDetCont.downloadPercentage.value < 100 || movieDetCont.isDownloading.value
+                    iconWidget: movieDetCont.downloadPercentage.value >= 1 &&
+                                movieDetCont.downloadPercentage.value < 100 ||
+                            movieDetCont.isDownloading.value
                         ? Stack(
                             alignment: Alignment.center,
                             children: [
@@ -87,8 +97,10 @@ class MovieDetailsComponent extends StatelessWidget {
                               if (movieDetCont.downloadPercentage.value > 0)
                                 Marquee(
                                   child: Text(
-                                    '${movieDetCont.downloadPercentage.value}'.suffixText(value: '%'),
-                                    style: primaryTextStyle(color: appColorPrimary, size: 10),
+                                    '${movieDetCont.downloadPercentage.value}'
+                                        .suffixText(value: '%'),
+                                    style: primaryTextStyle(
+                                        color: appColorPrimary, size: 10),
                                   ),
                                 )
                             ],
@@ -96,19 +108,27 @@ class MovieDetailsComponent extends StatelessWidget {
                         : null,
                     color: Colors.white54,
                     onTap: () async {
-                      if (movieDetCont.isDownloaded.value || movieDetCont.movieDetailsResp.value.requiredPlanLevel == 0) {
+                      if (movieDetCont.isDownloaded.value ||
+                          movieDetCont
+                                  .movieDetailsResp.value.requiredPlanLevel ==
+                              0) {
                         movieDetCont.handleDownloads();
                       } else {
                         onSubscriptionLoginCheck(
-                          videoAccess: movieDetCont.movieDetailsResp.value.movieAccess,
+                          videoAccess:
+                              movieDetCont.movieDetailsResp.value.movieAccess,
                           callBack: () {
-                            if (currentSubscription.value.level >= movieDetCont.movieDetailsResp.value.requiredPlanLevel) {
+                            if (currentSubscription.value.level >=
+                                movieDetCont
+                                    .movieDetailsResp.value.requiredPlanLevel) {
                               movieDetCont.handleDownloads();
                             }
                           },
                           planId: movieDetCont.movieDetailsResp.value.planId,
-                          planLevel: movieDetCont.movieDetailsResp.value.requiredPlanLevel,
-                          isPurchased: movieDetCont.movieDetailsResp.value.isPurchased,
+                          planLevel: movieDetCont
+                              .movieDetailsResp.value.requiredPlanLevel,
+                          isPurchased:
+                              movieDetCont.movieDetailsResp.value.isPurchased,
                         );
                       }
                     },
@@ -141,13 +161,18 @@ class MovieDetailsComponent extends StatelessWidget {
                   () {
                     if (isCastingAvailable.value) {
                       return StreamBuilder<GoogleCastSession?>(
-                        stream: GoogleCastSessionManager.instance.currentSessionStream,
+                        stream: GoogleCastSessionManager
+                            .instance.currentSessionStream,
                         builder: (context, snapshot) {
-                          final bool isConnected = GoogleCastSessionManager.instance.connectionState == GoogleCastConnectState.connected;
+                          final bool isConnected = GoogleCastSessionManager
+                                  .instance.connectionState ==
+                              GoogleCastConnectState.connected;
                           return CustomIconButton(
                             icon: '',
                             title: locale.value.videoCast,
-                            titleTextStyle: !checkCastSupport() ? secondaryTextStyle(size: 14, color: grey) : null,
+                            titleTextStyle: !checkCastSupport()
+                                ? secondaryTextStyle(size: 14, color: grey)
+                                : null,
                             iconWidget: Icon(
                               isConnected ? Icons.cast_connected : Icons.cast,
                               size: 20,
@@ -163,11 +188,15 @@ class MovieDetailsComponent extends StatelessWidget {
                                   checkCastSupported(
                                     onCastSupported: () {
                                       if (isConnected) {
-                                        GoogleCastDiscoveryManager.instance.stopDiscovery();
-                                        GoogleCastSessionManager.instance.endSessionAndStopCasting();
+                                        GoogleCastDiscoveryManager.instance
+                                            .stopDiscovery();
+                                        GoogleCastSessionManager.instance
+                                            .endSessionAndStopCasting();
                                       } else {
                                         LiveStream().emit(podPlayerPauseKey);
-                                        movieDetCont.openBottomSheetForFCCastAvailableDevices(context);
+                                        movieDetCont
+                                            .openBottomSheetForFCCastAvailableDevices(
+                                                context);
                                       }
                                     },
                                   );
@@ -185,10 +214,16 @@ class MovieDetailsComponent extends StatelessWidget {
               ],
             ).paddingSymmetric(vertical: 16, horizontal: 2),
           ),
-          ActorComponent(castDetails: movieDetCont.movieDetailsResp.value.casts, title: locale.value.cast),
-          ActorComponent(castDetails: movieDetCont.movieDetailsResp.value.directors, title: locale.value.directors),
+          ActorComponent(
+              castDetails: movieDetCont.movieDetailsResp.value.casts,
+              title: locale.value.cast),
+          ActorComponent(
+              castDetails: movieDetCont.movieDetailsResp.value.directors,
+              title: locale.value.directors),
           Obx(() {
-            final ads = getDashboardController().getBannerAdsForCategory(targetContentType: 'movie', categoryId: movieDetCont.movieDetailsResp.value.id);
+            final ads = getDashboardController().getBannerAdsForCategory(
+                targetContentType: 'movie',
+                categoryId: movieDetCont.movieDetailsResp.value.id);
             if (ads.isEmpty) {
               return const SizedBox.shrink();
             }
@@ -220,21 +255,28 @@ class MovieDetailsComponent extends StatelessWidget {
             movieId: movieDetCont.movieDetailsResp.value.id,
             isMovie: true,
           ).visible(movieDetCont.movieDetailsResp.value.reviews.isNotEmpty),
-          MoreListComponent(moreList: movieDetCont.movieDetailsResp.value.moreItems).visible(movieDetCont.movieDetailsResp.value.moreItems.isNotEmpty),
+          MoreListComponent(
+                  moreList: movieDetCont.movieDetailsResp.value.moreItems)
+              .visible(
+                  movieDetCont.movieDetailsResp.value.moreItems.isNotEmpty),
         ],
       ),
     );
   }
 
   bool checkCastSupport() {
-    if (movieDetCont.movieData.value.videoUploadType.toLowerCase() == PlayerTypes.hls.toLowerCase() ||
-        movieDetCont.movieData.value.videoUploadType.toLowerCase() == PlayerTypes.url.toLowerCase() ||
-        movieDetCont.movieData.value.videoUploadType.toLowerCase() == PlayerTypes.local.toLowerCase()) {
+    if (movieDetCont.movieData.value.videoUploadType.toLowerCase() ==
+            PlayerTypes.hls.toLowerCase() ||
+        movieDetCont.movieData.value.videoUploadType.toLowerCase() ==
+            PlayerTypes.url.toLowerCase() ||
+        movieDetCont.movieData.value.videoUploadType.toLowerCase() ==
+            PlayerTypes.local.toLowerCase()) {
       return true;
     } else {
       return false;
     }
   }
+
   Widget commonType({required String icon, required Function() onTap}) {
     return InkWell(
       onTap: onTap,

@@ -31,10 +31,12 @@ class CustomPodPlayerControlOverlay extends StatefulWidget {
   });
 
   @override
-  State<CustomPodPlayerControlOverlay> createState() => _CustomPodPlayerControlOverlayState();
+  State<CustomPodPlayerControlOverlay> createState() =>
+      _CustomPodPlayerControlOverlayState();
 }
 
-class _CustomPodPlayerControlOverlayState extends State<CustomPodPlayerControlOverlay> {
+class _CustomPodPlayerControlOverlayState
+    extends State<CustomPodPlayerControlOverlay> {
   bool isVisible = true;
   Timer? _hideTimer;
 
@@ -66,7 +68,6 @@ class _CustomPodPlayerControlOverlayState extends State<CustomPodPlayerControlOv
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -96,7 +97,9 @@ class _CustomPodPlayerControlOverlayState extends State<CustomPodPlayerControlOv
                     ),
                     IconButton(
                       icon: Icon(
-                        widget.isPlaying ? Icons.pause_circle_filled : Icons.play_circle_fill,
+                        widget.isPlaying
+                            ? Icons.pause_circle_filled
+                            : Icons.play_circle_fill,
                         color: Colors.white,
                         size: 40,
                       ),
@@ -133,7 +136,8 @@ class _CustomPodPlayerControlOverlayState extends State<CustomPodPlayerControlOv
                       ).expand(),
                       Text(
                         '${formatDuration(widget.position)} / ${formatDuration(widget.duration)}',
-                        style: const TextStyle(color: Colors.white, fontSize: 12),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 12),
                       ),
                       IconButton(
                         visualDensity: VisualDensity.compact,
@@ -147,7 +151,6 @@ class _CustomPodPlayerControlOverlayState extends State<CustomPodPlayerControlOv
                     ],
                   ),
                 ),
-              
               ],
             ),
           ),

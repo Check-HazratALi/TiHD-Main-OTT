@@ -11,7 +11,10 @@ class SubscriptionListComponent extends StatelessWidget {
 
   final SubscriptionController subscriptionController;
 
-  const SubscriptionListComponent({super.key, required this.planList, required this.subscriptionController});
+  const SubscriptionListComponent(
+      {super.key,
+      required this.planList,
+      required this.subscriptionController});
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +28,23 @@ class SubscriptionListComponent extends StatelessWidget {
         return Obx(
           () => SubscriptionCard(
             planDet: planList[index],
-            isSelected: subscriptionController.selectPlan.value.id == planList[index].id,
-            revenueCatProduct: subscriptionController.getSelectedPlanFromRevenueCat(planList[index])?.storeProduct,
+            isSelected: subscriptionController.selectPlan.value.id ==
+                planList[index].id,
+            revenueCatProduct: subscriptionController
+                .getSelectedPlanFromRevenueCat(planList[index])
+                ?.storeProduct,
             onSelect: () {
               subscriptionController.selectPlan(planList[index]);
               subscriptionController.calculateTotalPrice();
-              if (appConfigs.value.enableInAppPurchase.getBoolInt() && subscriptionController.getSelectedPlanFromRevenueCat(subscriptionController.selectPlan.value) != null) {
-                subscriptionController.selectedRevenueCatPackage = subscriptionController.getSelectedPlanFromRevenueCat(subscriptionController.selectPlan.value)!.storeProduct;
+              if (appConfigs.value.enableInAppPurchase.getBoolInt() &&
+                  subscriptionController.getSelectedPlanFromRevenueCat(
+                          subscriptionController.selectPlan.value) !=
+                      null) {
+                subscriptionController.selectedRevenueCatPackage =
+                    subscriptionController
+                        .getSelectedPlanFromRevenueCat(
+                            subscriptionController.selectPlan.value)!
+                        .storeProduct;
               }
             },
           ).paddingBottom(16),

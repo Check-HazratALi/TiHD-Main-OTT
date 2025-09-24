@@ -18,7 +18,8 @@ class SubscriptionHistoryController extends GetxController {
 
   RxList<SubscriptionPlanModel> subscriptionHistoryList = RxList();
 
-  Rx<Future<RxList<SubscriptionPlanModel>>> getSubscriptionFuture = Future(() => RxList<SubscriptionPlanModel>()).obs;
+  Rx<Future<RxList<SubscriptionPlanModel>>> getSubscriptionFuture =
+      Future(() => RxList<SubscriptionPlanModel>()).obs;
 
   @override
   void onInit() {
@@ -38,12 +39,19 @@ class SubscriptionHistoryController extends GetxController {
       ),
     ).then(
       (value) {
-        if (value.any((element) => element.status == SubscriptionStatus.active)) {
-          currentSubscription(value.firstWhere((element) => element.status == SubscriptionStatus.active));
+        if (value
+            .any((element) => element.status == SubscriptionStatus.active)) {
+          currentSubscription(value.firstWhere(
+              (element) => element.status == SubscriptionStatus.active));
           if (currentSubscription.value.level > -1 &&
               currentSubscription.value.planType.isNotEmpty &&
-              currentSubscription.value.planType.any((element) => element.slug == SubscriptionTitle.videoCast)) {
-            isCastingSupported(currentSubscription.value.planType.firstWhere((element) => element.slug == SubscriptionTitle.videoCast).limitationValue.getBoolInt());
+              currentSubscription.value.planType.any(
+                  (element) => element.slug == SubscriptionTitle.videoCast)) {
+            isCastingSupported(currentSubscription.value.planType
+                .firstWhere(
+                    (element) => element.slug == SubscriptionTitle.videoCast)
+                .limitationValue
+                .getBoolInt());
           } else {
             isCastingSupported(false);
           }
@@ -58,19 +66,28 @@ class SubscriptionHistoryController extends GetxController {
     Get.back();
     isLoading(true);
 
-    CoreServiceApis.cancelSubscription(request: {"id": currentSubscription.value.id, "user_id": loginUserData.value.id}).then((value) async {
+    CoreServiceApis.cancelSubscription(request: {
+      "id": currentSubscription.value.id,
+      "user_id": loginUserData.value.id
+    }).then((value) async {
       final userData = getJSONAsync(SharedPreferenceConst.USER_DATA);
       userData['plan_details'] = SubscriptionPlanModel().toJson();
       currentSubscription(SubscriptionPlanModel());
-      if (currentSubscription.value.level > -1 && currentSubscription.value.planType.isNotEmpty) {
-        isCastingSupported(currentSubscription.value.planType.firstWhere((element) => element.slug == SubscriptionTitle.videoCast).limitationValue.getBoolInt());
+      if (currentSubscription.value.level > -1 &&
+          currentSubscription.value.planType.isNotEmpty) {
+        isCastingSupported(currentSubscription.value.planType
+            .firstWhere(
+                (element) => element.slug == SubscriptionTitle.videoCast)
+            .limitationValue
+            .getBoolInt());
       }
 
       loginUserData.value = UserData.fromJson(userData);
       currentSubscription.value.activePlanInAppPurchaseIdentifier = '';
       setValue(SharedPreferenceConst.USER_SUBSCRIPTION_DATA, '');
       await setValue(SharedPreferenceConst.USER_DATA, loginUserData.toJson());
-      Get.offAll(() => DashboardScreen(dashboardController: getDashboardController()));
+      Get.offAll(
+          () => DashboardScreen(dashboardController: getDashboardController()));
       successSnackBar(value.message.toString());
     }).catchError((e) {
       isLoading(false);

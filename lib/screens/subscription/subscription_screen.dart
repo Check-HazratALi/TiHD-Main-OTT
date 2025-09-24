@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:tihd/screens/profile/components/subscription_component.dart';
 import 'package:tihd/screens/subscription/shimmer_subscription_list.dart';
 import 'package:tihd/screens/subscription/subscription_controller.dart';
+import 'package:tihd/utils/app_common.dart';
 import 'package:tihd/utils/colors.dart';
 import 'package:tihd/generated/assets.dart';
 
@@ -18,7 +20,8 @@ class SubscriptionScreen extends StatelessWidget {
 
   SubscriptionScreen({super.key, required this.launchDashboard});
 
-  final SubscriptionController subscriptionCont = Get.put(SubscriptionController());
+  final SubscriptionController subscriptionCont =
+      Get.put(SubscriptionController());
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,9 @@ class SubscriptionScreen extends StatelessWidget {
         child: Obx(
           () => SnapHelperWidget(
             future: subscriptionCont.getSubscriptionFuture.value,
-            loadingWidget: subscriptionCont.isLoading.value ? const ShimmerSubscriptionList() : const ShimmerSubscriptionList(),
+            loadingWidget: subscriptionCont.isLoading.value
+                ? const ShimmerSubscriptionList()
+                : const ShimmerSubscriptionList(),
             errorBuilder: (error) {
               return NoDataWidget(
                 titleTextStyle: secondaryTextStyle(color: white),
@@ -60,12 +65,15 @@ class SubscriptionScreen extends StatelessWidget {
                 refreshIndicatorColor: appColorPrimary,
                 children: [
                   14.height,
-                  Text(
-                    locale.value.subscribeNowAndDiveInto,
-                    style: boldTextStyle(size: 16, color: white),
+                  SubscriptionComponent(
+                    planDetails: currentSubscription.value,
+                    callback: () {
+                      subscriptionCont.getSubscriptionDetails();
+                    },
                   ),
-                  32.height,
-                  if (subscriptionCont.planList.isEmpty && !subscriptionCont.isLoading.value)
+                  16.height,
+                  if (subscriptionCont.planList.isEmpty &&
+                      !subscriptionCont.isLoading.value)
                     NoDataWidget(
                       titleTextStyle: boldTextStyle(color: white),
                       subTitleTextStyle: primaryTextStyle(color: white),
@@ -77,7 +85,9 @@ class SubscriptionScreen extends StatelessWidget {
                     SubscriptionListComponent(
                       planList: subscriptionCont.planList,
                       subscriptionController: subscriptionCont,
-                    ).paddingBottom(16).visible(!subscriptionCont.isLoading.value),
+                    )
+                        .paddingBottom(16)
+                        .visible(!subscriptionCont.isLoading.value),
                 ],
               ).paddingSymmetric(horizontal: 16);
             },

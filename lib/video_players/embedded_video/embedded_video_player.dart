@@ -17,7 +17,8 @@ class WebViewContentWidget extends StatefulWidget {
   State<WebViewContentWidget> createState() => _WebViewContentWidgetState();
 }
 
-class _WebViewContentWidgetState extends State<WebViewContentWidget> with AutomaticKeepAliveClientMixin {
+class _WebViewContentWidgetState extends State<WebViewContentWidget>
+    with AutomaticKeepAliveClientMixin {
   Timer? _progressTimer;
 
   @override

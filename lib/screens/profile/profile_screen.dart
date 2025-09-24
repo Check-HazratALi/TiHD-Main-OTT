@@ -38,13 +38,16 @@ class ProfileScreen extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-            SettingController controller = Get.isRegistered<SettingController>() ? Get.find<SettingController>() : Get.put(SettingController());
+            SettingController controller = Get.isRegistered<SettingController>()
+                ? Get.find<SettingController>()
+                : Get.put(SettingController());
             Get.to(
               () => SettingScreen(settingCont: controller),
               arguments: profileCont.profileDetailsResp.value,
               binding: BindingsBuilder(
                 () {
-                  if (Get.isRegistered<SettingController>()) controller.onInit();
+                  if (Get.isRegistered<SettingController>())
+                    controller.onInit();
                 },
               ),
             );
@@ -94,31 +97,40 @@ class ProfileScreen extends StatelessWidget {
                     callback: () {
                       profileCont.getProfileDetail(showLoader: false);
                     }),
-                ProfileCardComponent(profileInfo: profileCont.profileDetailsResp.value),
+                ProfileCardComponent(
+                    profileInfo: profileCont.profileDetailsResp.value),
                 if (isLoggedIn.value) ...[
                   AppButton(
                     width: double.infinity,
                     text: locale.value.linkTv,
                     color: appColorPrimary,
                     textStyle: appButtonTextStyleWhite,
-                    shapeBorder: RoundedRectangleBorder(borderRadius: radius(defaultAppButtonRadius / 2)),
+                    shapeBorder: RoundedRectangleBorder(
+                        borderRadius: radius(defaultAppButtonRadius / 2)),
                     onTap: () {
                       Get.to(() => QrScannerScreen());
                     },
                   ).paddingSymmetric(horizontal: 16, vertical: 8),
                 ],
                 if (isLoggedIn.value) UserProfileComponent(),
-                if (appConfigs.value.enableContinueWatch) ContinueWatchComponent(continueWatchList: profileCont.profileDetailsResp.value.continueWatch).paddingSymmetric(vertical: 12),
+                if (appConfigs.value.enableContinueWatch)
+                  ContinueWatchComponent(
+                          continueWatchList: profileCont
+                              .profileDetailsResp.value.continueWatch)
+                      .paddingSymmetric(vertical: 12),
                 HorizontalMovieComponent(
                   movieDet: CategoryListModel(
                     name: locale.value.watchlist,
                     data: profileCont.profileDetailsResp.value.watchlists,
-                    showViewAll: profileCont.profileDetailsResp.value.watchlists.length > 5,
+                    showViewAll:
+                        profileCont.profileDetailsResp.value.watchlists.length >
+                            5,
                   ),
                   isSearch: false,
                   isWatchList: true,
                   type: '',
-                ).visible(profileCont.profileDetailsResp.value.watchlists.isNotEmpty),
+                ).visible(
+                    profileCont.profileDetailsResp.value.watchlists.isNotEmpty),
                 HorizontalMovieComponent(
                   movieDet: CategoryListModel(
                     name: locale.value.unlockedVideo,

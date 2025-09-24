@@ -37,10 +37,16 @@ class CountryModel {
       name: json['name'] is String ? json['name'] : "",
       example: json['example'] is String ? json['example'] : "",
       displayName: json['display_name'] is String ? json['display_name'] : "",
-      fullExampleWithPlusSign: json['full_example_with_plus_sign'] is String ? json['full_example_with_plus_sign'] : "",
-      displayNameNoE164Cc: json['display_name_no_e164_cc'] is String ? json['display_name_no_e164_cc'] : "",
+      fullExampleWithPlusSign: json['full_example_with_plus_sign'] is String
+          ? json['full_example_with_plus_sign']
+          : "",
+      displayNameNoE164Cc: json['display_name_no_e164_cc'] is String
+          ? json['display_name_no_e164_cc']
+          : "",
       e164Key: json['e164_key'] is String ? json['e164_key'] : "",
-      startWithDigit: json['startingDigits'] is List ? List<String>.from(json['startingDigits'].map((x) => x)) : [],
+      startWithDigit: json['startingDigits'] is List
+          ? List<String>.from(json['startingDigits'].map((x) => x))
+          : [],
     );
   }
 
@@ -2739,7 +2745,8 @@ final List<Map<String, dynamic>> countryCodes = [
     "example": "",
     "display_name": "South Georgia and the South Sandwich Islands (GS) [+500]",
     "full_example_with_plus_sign": null,
-    "display_name_no_e164_cc": "South Georgia and the South Sandwich Islands (GS)",
+    "display_name_no_e164_cc":
+        "South Georgia and the South Sandwich Islands (GS)",
     "e164_key": "500-GS-0",
   },
   {

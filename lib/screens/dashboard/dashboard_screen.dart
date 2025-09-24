@@ -25,7 +25,9 @@ class DashboardScreen extends StatelessWidget {
         extendBodyBehindAppBar: true,
         floatingActionButton: Obx(() {
           if (dashboardController.currentIndex.value == 0) {
-            if (!appConfigs.value.enableTvShow && !appConfigs.value.enableMovie && !appConfigs.value.enableVideo) {
+            if (!appConfigs.value.enableTvShow &&
+                !appConfigs.value.enableMovie &&
+                !appConfigs.value.enableVideo) {
               return const Offstage();
             } else {
               return FloatingButton().paddingBottom(16);
@@ -39,7 +41,8 @@ class DashboardScreen extends StatelessWidget {
         body: Obx(
           () => IgnorePointer(
             ignoring: floatingController.isExpanded.value,
-            child: dashboardController.screen[dashboardController.currentIndex.value],
+            child: dashboardController
+                .screen[dashboardController.currentIndex.value],
           ),
         ),
         bottomNavigationBar: Obx(() {
@@ -50,7 +53,8 @@ class DashboardScreen extends StatelessWidget {
               data: NavigationBarThemeData(
                 backgroundColor: context.primaryColor.withValues(alpha: 0.02),
                 indicatorColor: context.primaryColor.withValues(alpha: 0.1),
-                labelTextStyle: WidgetStateProperty.all(primaryTextStyle(size: 14)),
+                labelTextStyle:
+                    WidgetStateProperty.all(primaryTextStyle(size: 14)),
                 shadowColor: Colors.transparent,
                 elevation: 0,
               ),

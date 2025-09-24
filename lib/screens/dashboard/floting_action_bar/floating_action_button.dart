@@ -47,8 +47,8 @@ class FloatingButton extends StatelessWidget {
               24.height,
               if (floatingController.isExpanded.isTrue) ...[
                 if (appConfigs.value.enableVideo) _buildFab(locale.value.videos),
-                if (appConfigs.value.enableTvShow) _buildFab("Series"),
-                if (appConfigs.value.enableMovie) _buildFab("Programs"),
+                if (appConfigs.value.enableMovie) _buildFab(locale.value.movies),
+                if (appConfigs.value.enableTvShow) _buildFab(locale.value.tVShows),
               ],
               24.height,
               Row(
@@ -102,12 +102,12 @@ Widget _buildFab(String label) {
       InkWell(
         onTap: () {
           final FloatingController floatingController = Get.put(FloatingController());
-          if (label == "Programs") {
-            Get.to(() => MovieListScreen());
-          } else if (label == "Series") {
+          if (label == locale.value.videos) {
+            Get.to(() => VideoListScreen());
+          } else if (label == locale.value.tVShows) {
             Get.to(() => TvShowListScreen());
           } else {
-            Get.to(() => VideoListScreen());
+            Get.to(() => MovieListScreen());
           }
           floatingController.toggle();
         },

@@ -34,7 +34,10 @@ class ProfileComponent extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (profile.id != profileId.value) {
-          if (profile.isProtectedProfile.getBoolInt() && profile.profilePin.isNotEmpty && (accountProfiles.any((element) => element.isChildProfile == 1) && selectedAccountProfile.value.isChildProfile.getBoolInt())) {
+          if (profile.isProtectedProfile.getBoolInt() &&
+              profile.profilePin.isNotEmpty &&
+              (accountProfiles.any((element) => element.isChildProfile == 1) &&
+                  selectedAccountProfile.value.isChildProfile.getBoolInt())) {
             Get.bottomSheet(
               isDismissible: true,
               isScrollControlled: true,
@@ -60,7 +63,10 @@ class ProfileComponent extends StatelessWidget {
         decoration: boxDecorationDefault(
           borderRadius: radius(4),
           color: cardColor,
-          border: Border.all(color: profile.id == profileId.value ? appColorPrimary.withValues(alpha: 0.6) : borderColor),
+          border: Border.all(
+              color: profile.id == profileId.value
+                  ? appColorPrimary.withValues(alpha: 0.6)
+                  : borderColor),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -127,7 +133,11 @@ class ProfileComponent extends StatelessWidget {
             // Edit button
             TextIcon(
               onTap: () {
-                if ((profile.isChildProfile.getBoolInt() || profile.isProtectedProfile.getBoolInt()) && accountProfiles.any((element) => element.isProtectedProfile.getBoolInt() && element.profilePin.isNotEmpty)) {
+                if ((profile.isChildProfile.getBoolInt() ||
+                        profile.isProtectedProfile.getBoolInt()) &&
+                    accountProfiles.any((element) =>
+                        element.isProtectedProfile.getBoolInt() &&
+                        element.profilePin.isNotEmpty)) {
                   profile.profilePin = selectedAccountProfile.value.profilePin;
                   Get.bottomSheet(
                     isDismissible: true,
@@ -137,7 +147,8 @@ class ProfileComponent extends StatelessWidget {
                       profileWatchingController: profileWatchingController,
                       profile: profile,
                       onVerificationCompleted: () {
-                        profileWatchingController.handleAddEditProfile(profile, true);
+                        profileWatchingController.handleAddEditProfile(
+                            profile, true);
                       },
                     ),
                   );
@@ -154,7 +165,8 @@ class ProfileComponent extends StatelessWidget {
               text: locale.value.edit,
               maxLine: 1,
               spacing: 4,
-              textStyle: commonW500SecondaryTextStyle(size: 12, color: iconColor),
+              textStyle:
+                  commonW500SecondaryTextStyle(size: 12, color: iconColor),
               useMarquee: true,
             )
           ],

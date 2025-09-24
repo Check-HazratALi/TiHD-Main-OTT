@@ -26,7 +26,7 @@ class TvShowListScreen extends StatelessWidget {
       hasLeadingWidget: false,
       hideAppBar: true,
       scaffoldBackgroundColor: black,
-      floatingActionButton: FloatingWidget(label: "Series"),
+      floatingActionButton: FloatingWidget(label: locale.value.tVShows),
       body: AnimatedListView(
         shrinkWrap: true,
         itemCount: 1,
@@ -88,7 +88,7 @@ class TvShowListScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Series",
+                            locale.value.tVShows,
                             style: primaryTextStyle(),
                           ).paddingDirectional(start: 16),
                           10.height,

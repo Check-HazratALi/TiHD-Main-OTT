@@ -32,7 +32,8 @@ class BannerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        if (sliderController.isLoading.isTrue && !sliderController.isWatchListLoading.value) {
+        if (sliderController.isLoading.isTrue &&
+            !sliderController.isWatchListLoading.value) {
           return ShimmerWidget(
             height: Get.height * 0.45,
             width: Get.width,
@@ -51,7 +52,8 @@ class BannerWidget extends StatelessWidget {
                 retryText: locale.value.reload,
                 imageWidget: const ErrorStateWidget(),
                 onRetry: () async {
-                  return await sliderController.getBanner(type: sliderController.sliderType.value);
+                  return await sliderController.getBanner(
+                      type: sliderController.sliderType.value);
                 },
               ).center(),
             );
@@ -62,7 +64,8 @@ class BannerWidget extends StatelessWidget {
             radius: 6,
           ).paddingOnly(bottom: 22),
           onSuccess: (data) {
-            if (sliderController.bannerList.isEmpty && !sliderController.isLoading.value) {
+            if (sliderController.bannerList.isEmpty &&
+                !sliderController.isLoading.value) {
               return Offstage();
             }
             return Column(
@@ -77,7 +80,8 @@ class BannerWidget extends StatelessWidget {
                         children: List.generate(
                           sliderController.bannerList.length,
                           (index) {
-                            SliderModel data = sliderController.bannerList[index];
+                            SliderModel data =
+                                sliderController.bannerList[index];
                             return Stack(
                               children: [
                                 CachedImageWidget(
@@ -88,13 +92,17 @@ class BannerWidget extends StatelessWidget {
                                 ).onTap(
                                   () {
                                     if (data.type == VideoType.tvshow) {
-                                      Get.to(() => TvShowScreen(), arguments: data.data);
+                                      Get.to(() => TvShowScreen(),
+                                          arguments: data.data);
                                     } else if (data.type == VideoType.movie) {
-                                      Get.to(() => MovieDetailsScreen(), arguments: data.data);
+                                      Get.to(() => MovieDetailsScreen(),
+                                          arguments: data.data);
                                     } else if (data.type == VideoType.video) {
-                                      Get.to(() => VideoDetailsScreen(), arguments: data.data);
+                                      Get.to(() => VideoDetailsScreen(),
+                                          arguments: data.data);
                                     } else if (data.type == VideoType.liveTv) {
-                                      Get.to(() => LiveShowDetailsScreen(), arguments: data.data);
+                                      Get.to(() => LiveShowDetailsScreen(),
+                                          arguments: data.data);
                                     }
                                   },
                                 ),
@@ -177,7 +185,8 @@ class BannerWidget extends StatelessWidget {
     );
   }
 
-  Positioned sliderDetails(VideoPlayerModel data, String type, int index, {Color? buttonColor}) {
+  Positioned sliderDetails(VideoPlayerModel data, String type, int index,
+      {Color? buttonColor}) {
     return Positioned(
       bottom: 20,
       left: 0,
@@ -201,7 +210,9 @@ class BannerWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                data.releaseDate.isNotEmpty ? DateTime.parse(data.releaseDate).year.toString() : "",
+                data.releaseDate.isNotEmpty
+                    ? DateTime.parse(data.releaseDate).year.toString()
+                    : "",
                 style: commonSecondaryTextStyle(size: 12),
               ),
               24.width,
@@ -259,11 +270,13 @@ class BannerWidget extends StatelessWidget {
                     iconWidth: 16,
                     iconColor: data.isWatchList ? white : iconColor,
                     padding: EdgeInsets.all(12),
-                    buttonColor: data.isWatchList ? appColorPrimary : buttonColor,
+                    buttonColor:
+                        data.isWatchList ? appColorPrimary : buttonColor,
                     onTap: () {
                       doIfLogin(
                         onLoggedIn: () {
-                          sliderController.saveWatchLists(index, addToWatchList: !data.isWatchList, type: type);
+                          sliderController.saveWatchLists(index,
+                              addToWatchList: !data.isWatchList, type: type);
                         },
                       );
                     },
@@ -273,15 +286,19 @@ class BannerWidget extends StatelessWidget {
                 16.width,
                 AppButton(
                   height: 40,
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                   color: appColorPrimary,
-                  shapeBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                  shapeBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
                   enabled: true,
                   onTap: () {
                     if (type == VideoType.tvshow) {
                       Get.to(() => TvShowScreen(), arguments: data);
                     } else if (type == VideoType.liveTv) {
-                      Get.to(() => LiveShowDetailsScreen(), arguments: ChannelModel(id: data.id, name: data.name));
+                      Get.to(() => LiveShowDetailsScreen(),
+                          arguments:
+                              ChannelModel(id: data.id, name: data.name));
                     } else if (type == VideoType.movie) {
                       Get.to(() => MovieDetailsScreen(), arguments: data);
                     } else if (type == VideoType.video) {
@@ -298,7 +315,8 @@ class BannerWidget extends StatelessWidget {
                         width: 10,
                       ),
                       12.width,
-                      Text(locale.value.watchNow, style: appButtonTextStyleWhite),
+                      Text(locale.value.watchNow,
+                          style: appButtonTextStyleWhite),
                     ],
                   ),
                 ),

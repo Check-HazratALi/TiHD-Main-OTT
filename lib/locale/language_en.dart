@@ -53,7 +53,8 @@ class LanguageEn extends BaseLanguage {
   String get delete => 'Delete';
 
   @override
-  String get demoUserCannotBeGrantedForThis => 'Demo user cannot be granted for this action';
+  String get demoUserCannotBeGrantedForThis =>
+      'Demo user cannot be granted for this action';
 
   @override
   String get somethingWentWrong => 'Something Went Wrong';
@@ -65,10 +66,12 @@ class LanguageEn extends BaseLanguage {
   String get profileUpdatedSuccessfully => 'Profile Updated Successfully';
 
   @override
-  String get wouldYouLikeToSetProfilePhotoAs => 'Would you like to set this picture as your profile photo?';
+  String get wouldYouLikeToSetProfilePhotoAs =>
+      'Would you like to set this picture as your profile photo?';
 
   @override
-  String get yourConfirmPasswordDoesnT => "Your confirm password doesn't match password!";
+  String get yourConfirmPasswordDoesnT =>
+      "Your confirm password doesn't match password!";
 
   @override
   String get yes => 'Yes';
@@ -95,7 +98,8 @@ class LanguageEn extends BaseLanguage {
   String get emailIsARequiredField => 'Email is a required field';
 
   @override
-  String get pleaseEnterValidEmailAddress => 'Please enter a valid email address!!';
+  String get pleaseEnterValidEmailAddress =>
+      'Please enter a valid email address!!';
 
   @override
   String get signIn => 'Sign In';
@@ -140,25 +144,31 @@ class LanguageEn extends BaseLanguage {
   String get stayTunedNoNew => 'Stay tuned! No new notifications.';
 
   @override
-  String get noNewNotificationsAt => "No new notifications at the moment. We'll keep you posted when there's an update";
+  String get noNewNotificationsAt =>
+      "No new notifications at the moment. We'll keep you posted when there's an update";
 
   @override
-  String get walkthroughTitle1 => 'Watch on any device: Enjoy our content wherever you go!';
+  String get walkthroughTitle1 => 'Welcome to TiHD';
 
   @override
-  String get walkthroughDesp1 => 'Stream across all devices without extra charges.';
+  String get walkthroughDesp1 =>
+      'We Are Very Excited To Have You In Our Community!';
 
   @override
-  String get walkthroughTitle2 => 'Download and Go: Access Your Content Anywhere, Anytime, on Any Device';
+  String get walkthroughTitle2 =>
+      'Download and Go: Access Your Content Anywhere, Anytime, on Any Device';
 
   @override
-  String get walkthroughDesp2 => 'Download & enjoy content on the go, anywhere, anytime.';
+  String get walkthroughDesp2 =>
+      'Download & enjoy content on the go, anywhere, anytime.';
 
   @override
-  String get walkthroughTitle3 => 'Enjoy Freedom Without Commitments or Hassles - Join Us Today!';
+  String get walkthroughTitle3 =>
+      'Enjoy Freedom Without Commitments or Hassles - Join Us Today!';
 
   @override
-  String get walkthroughDesp3 => 'Join us hassle-free and no contracts required.';
+  String get walkthroughDesp3 =>
+      'Join us hassle-free and no contracts required.';
 
   @override
   String get lblSkip => 'Skip';
@@ -170,16 +180,19 @@ class LanguageEn extends BaseLanguage {
   String get lblGetStarted => 'Get started';
 
   @override
-  String get optionTitle => 'Discover top shows with genres tailored to your preferences.';
+  String get optionTitle =>
+      'Discover top shows with genres tailored to your preferences.';
 
   @override
-  String get optionDesp => 'Explore curated shows across genres tailored to suit your viewing preferences.';
+  String get optionDesp =>
+      'Explore curated shows across genres tailored to suit your viewing preferences.';
 
   @override
-  String get welcomeBackToStreamIt => 'Welcome Back to StreamIt!';
+  String get welcomeBackToStreamIt => 'Welcome Back to TiHD!';
 
   @override
-  String get weHaveEagerlyAwaitedYourReturn => 'We have eagerly awaited your return.';
+  String get weHaveEagerlyAwaitedYourReturn =>
+      'We have eagerly awaited your return.';
 
   @override
   String get dontHaveAnAccount => 'Don’t have an account? ';
@@ -188,13 +201,15 @@ class LanguageEn extends BaseLanguage {
   String get or => 'OR';
 
   @override
-  String get dontWorryItHappens => 'Don’t worry! it happens. please enter the email associated with your account';
+  String get dontWorryItHappens =>
+      'Don’t worry! it happens. please enter the email associated with your account';
 
   @override
   String get linkSentToYourEmail => 'Link sent to your Email!';
 
   @override
-  String get checkYourInboxAndChangePassword => 'Check your inbox and change password';
+  String get checkYourInboxAndChangePassword =>
+      'Check your inbox and change password';
 
   @override
   String get continues => 'Continue';
@@ -203,7 +218,8 @@ class LanguageEn extends BaseLanguage {
   String get oTPVerification => 'OTP verification';
 
   @override
-  String get checkYourSmsInboxAndEnterTheCodeYouGet => 'Check your SMS Inbox and enter the code you recieved.';
+  String get checkYourSmsInboxAndEnterTheCodeYouGet =>
+      'Check your SMS Inbox and enter the code you recieved.';
 
   @override
   String get didntGetTheOTP => 'Didn’t get the OTP?';
@@ -221,10 +237,12 @@ class LanguageEn extends BaseLanguage {
   String get notificationDeleted => 'Notification deleted';
 
   @override
-  String get doYouWantToRemoveNotification => 'Do you want to remove notification';
+  String get doYouWantToRemoveNotification =>
+      'Do you want to remove notification';
 
   @override
-  String get doYouWantToClearAllNotification => 'Do you want to clear all notification';
+  String get doYouWantToClearAllNotification =>
+      'Do you want to clear all notification';
 
   @override
   String get successfully => 'Successfully';
@@ -233,7 +251,8 @@ class LanguageEn extends BaseLanguage {
   String get userCancelled => 'User cancelled';
 
   @override
-  String get appleSigninIsNot => 'Apple SignIn is not available for your device';
+  String get appleSigninIsNot =>
+      'Apple SignIn is not available for your device';
 
   @override
   String get searchHere => 'Search Here';
@@ -257,7 +276,8 @@ class LanguageEn extends BaseLanguage {
   String get shareYourThoughtsWithUs => 'Share Your Thoughts with Us!';
 
   @override
-  String get weValueYourOpinion => 'We value your opinion! Share your feedback with us today.';
+  String get weValueYourOpinion =>
+      'We value your opinion! Share your feedback with us today.';
 
   @override
   String get genres => 'Genres';
@@ -311,7 +331,8 @@ class LanguageEn extends BaseLanguage {
   String get moreLikeThis => 'More like this';
 
   @override
-  String get shareYourThoughtsOnYourFavoriteMovie => 'Share your thoughts on your favorite movie';
+  String get shareYourThoughtsOnYourFavoriteMovie =>
+      'Share your thoughts on your favorite movie';
 
   @override
   String get rateThisMovie => 'Rate This Movie';
@@ -329,7 +350,8 @@ class LanguageEn extends BaseLanguage {
   String get close => 'Close';
 
   @override
-  String get oppsLooksLikeYouReview => 'Opps! looks like you have not added any review yet.';
+  String get oppsLooksLikeYouReview =>
+      'Opps! looks like you have not added any review yet.';
 
   @override
   String get retry => 'Retry';
@@ -410,7 +432,8 @@ class LanguageEn extends BaseLanguage {
   String get yourDownloads => 'Your Downloads';
 
   @override
-  String get subscriptionPlanDeviceConnected => 'Subscription plan, device connected';
+  String get subscriptionPlanDeviceConnected =>
+      'Subscription plan, device connected';
 
   @override
   String get accountSettings => 'Account Settings';
@@ -446,10 +469,11 @@ class LanguageEn extends BaseLanguage {
   String get savechanges => 'Save changes';
 
   @override
-  String get loginToStreamit => 'Login to Streamit';
+  String get loginToStreamit => 'Login to TiHD';
 
   @override
-  String get startWatchingFromWhereYouLeftOff => 'Start watching from where you left off';
+  String get startWatchingFromWhereYouLeftOff =>
+      'Start watching from where you left off';
 
   @override
   String get troubleLoggingIn => 'Trouble logging in?';
@@ -461,13 +485,15 @@ class LanguageEn extends BaseLanguage {
   String get yourWatchlistIsEmpty => 'Your Watch list is empty';
 
   @override
-  String get contentAddedToYourWatchlist => 'Content added to your Watch list will appear here';
+  String get contentAddedToYourWatchlist =>
+      'Content added to your Watch list will appear here';
 
   @override
   String get add => 'Add';
 
   @override
-  String get subscribeNowAndDiveInto => 'Subscribe now and dive into endless streaming';
+  String get subscribeNowAndDiveInto =>
+      'Subscribe now and dive into endless streaming';
 
   @override
   String get pay => 'Pay';
@@ -503,7 +529,8 @@ class LanguageEn extends BaseLanguage {
   String get areYou18Above => 'Are you 18+ above?';
 
   @override
-  String get displayAClearProminentWarning => "Display a clear & prominent warning before accessing the content, stating it's intended for mature audiences ";
+  String get displayAClearProminentWarning =>
+      "Display a clear & prominent warning before accessing the content, stating it's intended for mature audiences ";
 
   @override
   String get all => 'All';
@@ -533,22 +560,26 @@ class LanguageEn extends BaseLanguage {
   String get whatYourMobileNo => "What's Your Mobile Number";
 
   @override
-  String get withAValidMobileNumberYouCanConnectWithStreamit => 'With a valid mobile number you can connect with Streamit';
+  String get withAValidMobileNumberYouCanConnectWithStreamit =>
+      'With a valid mobile number you can connect with TiHD';
 
   @override
   String get otpSentToYourSMS => 'OTP Sent To Your SMS!';
 
   @override
-  String get checkYourSmsInboxAndVerifyYoourMobile => 'Check your sms inbox and verify your mobile number';
+  String get checkYourSmsInboxAndVerifyYoourMobile =>
+      'Check your sms inbox and verify your mobile number';
 
   @override
-  String get pleaseTryAgainAfterSomeTime => 'Please try again after some time. You have used multiple time verification requests!';
+  String get pleaseTryAgainAfterSomeTime =>
+      'Please try again after some time. You have used multiple time verification requests!';
 
   @override
   String get pleaseEnterAValidCode => 'Please enter a valid OTP';
 
   @override
-  String get pleaseCheckYourMobileInternetConnection => 'Please check your mobile internet connection';
+  String get pleaseCheckYourMobileInternetConnection =>
+      'Please check your mobile internet connection';
 
   @override
   String get error => 'Error';
@@ -620,7 +651,8 @@ class LanguageEn extends BaseLanguage {
   String get mobileNumberIsRequiredField => 'Mobile Number is a required field';
 
   @override
-  String get youHaveAlreadyDownloadedThisMovie => 'You have already downloaded this movie';
+  String get youHaveAlreadyDownloadedThisMovie =>
+      'You have already downloaded this movie';
 
   @override
   String get imdb => 'IMDB';
@@ -707,7 +739,8 @@ class LanguageEn extends BaseLanguage {
   String get ok => 'Ok';
 
   @override
-  String get removeFromContinueWatch => 'Do you want to remove from continue watch?';
+  String get removeFromContinueWatch =>
+      'Do you want to remove from continue watch?';
 
   @override
   String get addedToWatchList => 'Watch list added successfully';
@@ -716,7 +749,8 @@ class LanguageEn extends BaseLanguage {
   String get removedFromWatchList => 'Watch list deleted successfully';
 
   @override
-  String get removeSelectedFromWatchList => 'Do you want to remove selected content from your Watchlist?';
+  String get removeSelectedFromWatchList =>
+      'Do you want to remove selected content from your Watchlist?';
 
   @override
   String get removedFromContinueWatch => 'Continue watch deleted successfully';
@@ -728,10 +762,12 @@ class LanguageEn extends BaseLanguage {
   String get pleaseAddYourReview => 'Please add your rating';
 
   @override
-  String get thisMovieIsCurrentlUnavailableToWatch => 'This movie is currently unavailable to watch';
+  String get thisMovieIsCurrentlUnavailableToWatch =>
+      'This movie is currently unavailable to watch';
 
   @override
-  String get thisVideoIsCurrentlUnavailableToWatch => 'This video is currently unavailable to watch';
+  String get thisVideoIsCurrentlUnavailableToWatch =>
+      'This video is currently unavailable to watch';
 
   @override
   String get subscriptionHistory => 'Subscription History';
@@ -764,7 +800,8 @@ class LanguageEn extends BaseLanguage {
   String get viewLess => 'View Less';
 
   @override
-  String get removeSelectedFromDownloads => 'Do you want to remove this from your downloads';
+  String get removeSelectedFromDownloads =>
+      'Do you want to remove this from your downloads';
 
   @override
   String get noPaymentMethodsFound => 'No payment methods found';
@@ -776,7 +813,8 @@ class LanguageEn extends BaseLanguage {
   String get completeProfile => 'Complete Your Profile';
 
   @override
-  String get completeProfileSubtitle => 'Tell us more about yourself to get started';
+  String get completeProfileSubtitle =>
+      'Tell us more about yourself to get started';
 
   @override
   String get getVerificationCode => 'Get verification code';
@@ -791,10 +829,12 @@ class LanguageEn extends BaseLanguage {
   String get addProfile => 'Add Profile';
 
   @override
-  String get clearSearchHistoryConfirmation => 'Do you want to clear your search history?';
+  String get clearSearchHistoryConfirmation =>
+      'Do you want to clear your search history?';
 
   @override
-  String get clearSearchHistorySubtitle => 'This action cannot be undone, and all previous searches will be permanently deleted.';
+  String get clearSearchHistorySubtitle =>
+      'This action cannot be undone, and all previous searches will be permanently deleted.';
 
   @override
   String get searchingForDevice => 'Searching for devices';
@@ -935,7 +975,8 @@ class LanguageEn extends BaseLanguage {
   String get newProfileAddedSuccessfully => 'New profile added successfully';
 
   @override
-  String get doYouWantToDeleteYourReview => 'Do you want to delete your review?';
+  String get doYouWantToDeleteYourReview =>
+      'Do you want to delete your review?';
 
   @override
   String get noSearchDataFound => 'No Search Data Found';
@@ -944,7 +985,8 @@ class LanguageEn extends BaseLanguage {
   String get searchHistory => 'Search history';
 
   @override
-  String get youHaveBeenLoggedOutOfYourAccountOn => 'You have been logged out of your account on';
+  String get youHaveBeenLoggedOutOfYourAccountOn =>
+      'You have been logged out of your account on';
 
   @override
   String get faqs => 'FAQs';
@@ -977,16 +1019,7 @@ class LanguageEn extends BaseLanguage {
   String get ios => 'iOS';
 
   @override
-  String get hindi => 'Hindi';
-
-  @override
-  String get arabic => 'Arabic';
-
-  @override
-  String get french => 'French';
-
-  @override
-  String get german => 'German';
+  String get bangla => 'Bangla';
 
   @override
   String get noFAQsfound => 'No FAQs found';
@@ -998,10 +1031,12 @@ class LanguageEn extends BaseLanguage {
   String get downloadHasBeenStarted => 'Download has been started';
 
   @override
-  String get yourDeviceIsNot => 'Your device is not supported with the current plan';
+  String get yourDeviceIsNot =>
+      'Your device is not supported with the current plan';
 
   @override
-  String get pleaseUpgradeToContinue => 'Please upgrade to continue enjoying the service';
+  String get pleaseUpgradeToContinue =>
+      'Please upgrade to continue enjoying the service';
 
   @override
   String get cancelled => 'Cancelled';
@@ -1016,7 +1051,8 @@ class LanguageEn extends BaseLanguage {
   String get connectToWIFI => 'Please connect to WIFI';
 
   @override
-  String get logoutAllConfirmation => 'Do you want to log out all other device?';
+  String get logoutAllConfirmation =>
+      'Do you want to log out all other device?';
 
   @override
   String get share => 'Share';
@@ -1031,7 +1067,8 @@ class LanguageEn extends BaseLanguage {
   String get videoCast => 'Cast';
 
   @override
-  String get castingNotSupported => 'Casting is not supported with the current plan.';
+  String get castingNotSupported =>
+      'Casting is not supported with the current plan.';
 
   @override
   String get left => "left";
@@ -1049,13 +1086,15 @@ class LanguageEn extends BaseLanguage {
   String get changePassword => 'Change Password';
 
   @override
-  String get yourNewPasswordMust => 'Your New Password Must Be Different From Your Previous Password';
+  String get yourNewPasswordMust =>
+      'Your New Password Must Be Different From Your Previous Password';
 
   @override
   String get yourOldPasswordDoesnT => "Your old password doesn't correct!";
 
   @override
-  String get yourNewPasswordDoesnT => "Your new password doesn't match confirm password!";
+  String get yourNewPasswordDoesnT =>
+      "Your new password doesn't match confirm password!";
 
   @override
   String get oldAndNewPassword => 'Old and new password are same.';
@@ -1064,7 +1103,8 @@ class LanguageEn extends BaseLanguage {
   String get yourPasswordHasBeen => 'Your Password Has Been Successfully Reset';
 
   @override
-  String get youCanNowLog => 'You Can Now Log In To Your New Account With Your New Password';
+  String get youCanNowLog =>
+      'You Can Now Log In To Your New Account With Your New Password';
 
   @override
   String get done => 'Done';
@@ -1097,7 +1137,8 @@ class LanguageEn extends BaseLanguage {
   String get otpSentSuccessfully => 'OTP sent successfully';
 
   @override
-  String get weHaveSentYouOTPOnYourRegisterEmailAddress => 'We have sent you OTP on your registered email address';
+  String get weHaveSentYouOTPOnYourRegisterEmailAddress =>
+      'We have sent you OTP on your registered email address';
 
   @override
   String get otpVerification => 'OTP Verification';
@@ -1106,7 +1147,8 @@ class LanguageEn extends BaseLanguage {
   String get enterPIN => 'Enter PIN';
 
   @override
-  String get enterYourNewParentalPinForYourKids => 'Enter your new parental pin for your kids';
+  String get enterYourNewParentalPinForYourKids =>
+      'Enter your new parental pin for your kids';
 
   @override
   String get confirmPIN => 'Confirm PIN';
@@ -1127,7 +1169,8 @@ class LanguageEn extends BaseLanguage {
   String get kids => 'KIDS';
 
   @override
-  String get enter4DigitParentalControlPIN => 'Enter 4 digit parental control PIN';
+  String get enter4DigitParentalControlPIN =>
+      'Enter 4 digit parental control PIN';
 
   @override
   String get parentalLock => 'Parental Lock';
@@ -1172,7 +1215,8 @@ class LanguageEn extends BaseLanguage {
   String get allCoupons => 'All Coupons';
 
   @override
-  String get oopsWeCouldnTFind => 'Oops! We couldn’t find any matching coupon codes';
+  String get oopsWeCouldnTFind =>
+      'Oops! We couldn’t find any matching coupon codes';
 
   @override
   String get doYouWantToRemoveCoupon => 'Do you want to remove this coupon ?';
@@ -1187,7 +1231,8 @@ class LanguageEn extends BaseLanguage {
   String get linkTv => 'Link Tv';
 
   @override
-  String get youHaveBeenLoggedOutSuccessfully => 'You have been logged out successfully';
+  String get youHaveBeenLoggedOutSuccessfully =>
+      'You have been logged out successfully';
 
   @override
   String get rented => 'RENTED';
@@ -1199,19 +1244,23 @@ class LanguageEn extends BaseLanguage {
   String get rentFor => 'Rent For';
 
   @override
-  String rentedesc(int availableFor, String duration) => 'You have $availableFor days to start watching once rented. You will have $duration days to finish once started streaming.';
+  String rentedesc(int availableFor, String duration) =>
+      'You have $availableFor days to start watching once rented. You will have $duration days to finish once started streaming.';
 
   @override
-  String youCanWatchThis(int duration) => 'You can watch this content multiple times during the $duration days period.';
+  String youCanWatchThis(int duration) =>
+      'You can watch this content multiple times during the $duration days period.';
 
   @override
   String get thisIsANonRefundable => 'This is a non-refundable transaction.';
 
   @override
-  String get thisContentIsOnly => 'This content is only available for rent and not part of the Premium Subscription.';
+  String get thisContentIsOnly =>
+      'This content is only available for rent and not part of the Premium Subscription.';
 
   @override
-  String get youCanPlayYour => 'You can play your content on supported devices.';
+  String get youCanPlayYour =>
+      'You can play your content on supported devices.';
 
   @override
   String get validity => 'Validity';
@@ -1229,7 +1278,8 @@ class LanguageEn extends BaseLanguage {
   String get byRentingYouAgreeToOur => 'By renting you agree to our ';
 
   @override
-  String get pleaseAgreeToThe => 'Please agree to the Terms Of Use before proceeding.';
+  String get pleaseAgreeToThe =>
+      'Please agree to the Terms Of Use before proceeding.';
 
   @override
   String get successfullyRentedMoviesOn => 'Successfully Rented Movies on';
@@ -1241,7 +1291,8 @@ class LanguageEn extends BaseLanguage {
   String get beginWatching => 'Begin Watching';
 
   @override
-  String doYouConfirmThis(String movieName) => 'Do you confirm this rented plan for $movieName';
+  String doYouConfirmThis(String movieName) =>
+      'Do you confirm this rented plan for $movieName';
 
   @override
   String get unlockedVideo => 'Unlocked Video';
@@ -1285,13 +1336,15 @@ class LanguageEn extends BaseLanguage {
   String get tvLinkedSuccessfully => 'TV linked successfully!';
 
   @override
-  String get cameraPermissionDenied => 'Camera permission denied. Please enable it in settings.';
+  String get cameraPermissionDenied =>
+      'Camera permission denied. Please enable it in settings.';
 
   @override
   String get advertisement => 'Advertisement';
-  
+
   @override
-  String get castConnectInfo => 'Make sure your Chromecast device is powered on and connected to the same Wi-Fi network.';
+  String get castConnectInfo =>
+      'Make sure your Chromecast device is powered on and connected to the same Wi-Fi network.';
 
   @override
   String get connect => 'Connect';
@@ -1306,5 +1359,6 @@ class LanguageEn extends BaseLanguage {
   String get readyToCastToYourDevice => 'Ready to cast to your device';
 
   @override
-  String get castSupportInfo => 'Casting is only supported for videos of type URL, HLS, or Local. Other formats are not supported for casting.';
+  String get castSupportInfo =>
+      'Casting is only supported for videos of type URL, HLS, or Local. Other formats are not supported for casting.';
 }

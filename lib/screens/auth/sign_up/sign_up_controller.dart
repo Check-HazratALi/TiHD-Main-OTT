@@ -23,7 +23,7 @@ class SignUpController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isBtnEnable = false.obs;
   RxBool isPhoneAuth = false.obs;
-  RxString countryCode = "+91".obs;
+  RxString countryCode = "+880".obs;
   final GlobalKey<FormState> signUpFormKey = GlobalKey();
 
   var selectedGender = Gender.male.obs;
@@ -87,7 +87,7 @@ class SignUpController extends GetxController {
         "last_name": lastNameCont.text.trim(),
         "password": mobileCont.text.trim(),
         "mobile": mobileCont.text.trim(),
-        "gender":selectedGender.value.name,
+        "gender": selectedGender.value.name,
         UserKeys.username: mobileCont.text.trim(),
         UserKeys.loginType: LoginTypeConst.LOGIN_TYPE_OTP,
       };
@@ -98,7 +98,7 @@ class SignUpController extends GetxController {
         "last_name": lastNameCont.text.trim(),
         "password": passwordCont.text.trim(),
         "mobile": "${countryCode.value}${mobileCont.text.trim()}",
-        "gender":selectedGender.value.name,
+        "gender": selectedGender.value.name,
         "date_of_birth": dobCont.value.text.toString(),
         "confirm_password": confPasswordCont.text.trim(),
       };
@@ -106,8 +106,10 @@ class SignUpController extends GetxController {
 
     await AuthServiceApis.createUser(request: req).then((value) async {
       if (isPhoneAuth.isTrue) {
-        final SignInController verificationController = Get.put(SignInController());
-        verificationController.mobileNo(mobileCont.text.trim().splitAfter(countryCode.value));
+        final SignInController verificationController =
+            Get.put(SignInController());
+        verificationController
+            .mobileNo(mobileCont.text.trim().splitAfter(countryCode.value));
         verificationController.phoneSignIn();
       } else {
         try {
@@ -140,7 +142,12 @@ class SignUpController extends GetxController {
   }
 
   void onBtnEnable() {
-    if (mobileCont.text.isNotEmpty && firstNameCont.text.isNotEmpty && lastNameCont.text.isNotEmpty && emailCont.text.isNotEmpty && passwordCont.text.isNotEmpty && confPasswordCont.text.isNotEmpty) {
+    if (mobileCont.text.isNotEmpty &&
+        firstNameCont.text.isNotEmpty &&
+        lastNameCont.text.isNotEmpty &&
+        emailCont.text.isNotEmpty &&
+        passwordCont.text.isNotEmpty &&
+        confPasswordCont.text.isNotEmpty) {
       isBtnEnable(true);
     } else {
       isBtnEnable(false);
@@ -183,12 +190,15 @@ class SignUpController extends GetxController {
           labelStyle: secondaryTextStyle(color: white),
           labelText: locale.value.searchHere,
           prefixIcon: const Icon(Icons.search, color: white),
-          border: const OutlineInputBorder(borderSide: BorderSide(color: borderColor)),
-          focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: white)),
+          border: const OutlineInputBorder(
+              borderSide: BorderSide(color: borderColor)),
+          focusedBorder:
+              const OutlineInputBorder(borderSide: BorderSide(color: white)),
         ),
       ),
 
-      showPhoneCode: true, // optional. Shows phone code before the country name.
+      showPhoneCode:
+          true, // optional. Shows phone code before the country name.
       onSelect: (Country country) {
         countryCode("+${country.phoneCode}");
         selectedCountry(country);

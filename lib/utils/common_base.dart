@@ -33,11 +33,13 @@ Widget get commonDivider => const Column(
       ],
     );
 
-final fontFamilyWeight700 = GoogleFonts.interTight(fontWeight: FontWeight.w700).fontFamily;
+final fontFamilyWeight700 =
+    GoogleFonts.interTight(fontWeight: FontWeight.w700).fontFamily;
 
 void handleRate() async {
   if (isIOS) {
-    if (getStringAsync(APP_APPSTORE_URL).isNotEmpty) launchUrlCustomURL(APP_APPSTORE_URL);
+    if (getStringAsync(APP_APPSTORE_URL).isNotEmpty)
+      launchUrlCustomURL(APP_APPSTORE_URL);
   } else {
     launchUrlCustomURL('$playStoreBaseURL${await getPackageName()}');
   }
@@ -73,43 +75,26 @@ List<LanguageDataModel> languageList() {
     ),
     LanguageDataModel(
       id: 2,
-      name: locale.value.hindi,
-      languageCode: 'hi',
+      name: locale.value.bangla,
+      languageCode: 'bn',
       fullLanguageCode: 'hi-IN',
-      flag: Assets.flagsIcIndia,
-    ),
-    LanguageDataModel(
-      id: 3,
-      name: locale.value.arabic,
-      languageCode: 'ar',
-      fullLanguageCode: 'ar-AR',
-      flag: Assets.flagsIcAr,
-    ),
-    LanguageDataModel(
-      id: 4,
-      name: locale.value.french,
-      languageCode: 'fr',
-      fullLanguageCode: 'fr-FR',
-      flag: Assets.flagsIcFr,
-    ),
-    LanguageDataModel(
-      id: 4,
-      name: locale.value.german,
-      languageCode: 'de',
-      fullLanguageCode: 'de-DE',
-      flag: Assets.flagsIcDe,
+      flag: Assets.flagsIcBan,
     ),
   ];
 }
 
-Widget appCloseIconButton(BuildContext context, {required void Function() onPressed, double size = 12}) {
+Widget appCloseIconButton(BuildContext context,
+    {required void Function() onPressed, double size = 12}) {
   return IconButton(
     iconSize: size,
     padding: EdgeInsets.zero,
     onPressed: onPressed,
     icon: Container(
       padding: EdgeInsets.all(size - 8),
-      decoration: boxDecorationDefault(color: context.cardColor, borderRadius: BorderRadius.circular(size - 4), border: Border.all()),
+      decoration: boxDecorationDefault(
+          color: context.cardColor,
+          borderRadius: BorderRadius.circular(size - 4),
+          border: Border.all()),
       child: Icon(
         Icons.close_rounded,
         size: size,
@@ -118,7 +103,8 @@ Widget appCloseIconButton(BuildContext context, {required void Function() onPres
   );
 }
 
-Future<void> commonLaunchUrl(String address, {LaunchMode launchMode = LaunchMode.inAppWebView}) async {
+Future<void> commonLaunchUrl(String address,
+    {LaunchMode launchMode = LaunchMode.inAppWebView}) async {
   await launchUrl(Uri.parse(address), mode: launchMode).catchError((e) {
     toast('${locale.value.invalidUrl}: $address');
   });
@@ -126,13 +112,17 @@ Future<void> commonLaunchUrl(String address, {LaunchMode launchMode = LaunchMode
 
 //region Common TextStyle
 
-TextStyle get appButtonTextStyleGray => boldTextStyle(color: appColorSecondary, size: 14);
+TextStyle get appButtonTextStyleGray =>
+    boldTextStyle(color: appColorSecondary, size: 14);
 
-TextStyle get appButtonPrimaryColorText => boldTextStyle(color: appColorPrimary);
+TextStyle get appButtonPrimaryColorText =>
+    boldTextStyle(color: appColorPrimary);
 
-TextStyle get appButtonFontColorText => boldTextStyle(color: Colors.grey, size: 14);
+TextStyle get appButtonFontColorText =>
+    boldTextStyle(color: Colors.grey, size: 14);
 
-TextStyle get appButtonTextStyleWhite => boldTextStyle(color: primaryTextColor, size: 14, weight: FontWeight.w600);
+TextStyle get appButtonTextStyleWhite =>
+    boldTextStyle(color: primaryTextColor, size: 14, weight: FontWeight.w600);
 
 TextStyle commonW600SecondaryTextStyle({int? size, Color? color}) {
   return secondaryTextStyle(
@@ -259,7 +249,8 @@ InputDecoration inputDecorationWithFillBorder(
   Color? fillColor,
 }) {
   return InputDecoration(
-    contentPadding: const EdgeInsets.only(left: 12, bottom: 10, top: 10, right: 10),
+    contentPadding:
+        const EdgeInsets.only(left: 12, bottom: 10, top: 10, right: 10),
     labelText: labelText,
     hintText: hintText,
     hintStyle: secondaryTextStyle(size: 12),
@@ -306,7 +297,8 @@ Widget backButton({Object? result, double size = 20, EdgeInsets? padding}) {
     onPressed: () {
       Get.back(result: result);
     },
-    icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white, size: size),
+    icon: Icon(Icons.arrow_back_ios_new_outlined,
+        color: Colors.white, size: size),
   );
 }
 
@@ -315,7 +307,9 @@ Widget backButton({Object? result, double size = 20, EdgeInsets? padding}) {
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
 
@@ -327,7 +321,8 @@ String movieDurationTime(String time) {
   int seconds = parts.length > 2 ? int.parse(parts[2]) : 0;
 
   // Create a Duration object
-  Duration duration = Duration(hours: hours, minutes: minutes, seconds: seconds);
+  Duration duration =
+      Duration(hours: hours, minutes: minutes, seconds: seconds);
 
   // Extract hours, minutes, and seconds
   int h = duration.inHours;
@@ -351,7 +346,8 @@ String movieDurationTimeWithFull(String time) {
   int seconds = parts.length > 2 ? int.parse(parts[2]) : 0;
 
   // Create a Duration object
-  Duration duration = Duration(hours: hours, minutes: minutes, seconds: seconds);
+  Duration duration =
+      Duration(hours: hours, minutes: minutes, seconds: seconds);
 
   // Extract hours, minutes, and seconds
   int h = duration.inHours;
@@ -371,7 +367,8 @@ String movieDurationTimeWithFull(String time) {
 }
 
 // Pending Movie Percentage
-(double pendingPercentage, String timeLeft) calculatePendingPercentage(String totalDuration, String pendingDuration) {
+(double pendingPercentage, String timeLeft) calculatePendingPercentage(
+    String totalDuration, String pendingDuration) {
   Duration parseTime(String time) {
     if (time.isEmpty) {
       return Duration.zero; // Handle empty input
@@ -487,16 +484,20 @@ String formatMobileNumber(String mobileNumber) {
   return formattedNumber;
 }
 
-DateTime calculateExpirationDate(DateTime startDate, String duration, int durationTime) {
+DateTime calculateExpirationDate(
+    DateTime startDate, String duration, int durationTime) {
   int durationTimes = durationTime;
 
   switch (duration.toLowerCase()) {
     case 'month':
-      return DateTime(startDate.year, startDate.month + durationTimes, startDate.day);
+      return DateTime(
+          startDate.year, startDate.month + durationTimes, startDate.day);
     case 'year':
-      return DateTime(startDate.year + durationTimes, startDate.month, startDate.day);
+      return DateTime(
+          startDate.year + durationTimes, startDate.month, startDate.day);
     case 'quarterly':
-      return DateTime(startDate.year, startDate.month + (durationTimes * 3), startDate.day);
+      return DateTime(
+          startDate.year, startDate.month + (durationTimes * 3), startDate.day);
     case 'week':
       return startDate.add(Duration(days: durationTimes * 7));
 
@@ -506,7 +507,8 @@ DateTime calculateExpirationDate(DateTime startDate, String duration, int durati
   }
 }
 
-Future<SnackbarController> errorSnackBar({required dynamic error, SnackPosition? position}) async {
+Future<SnackbarController> errorSnackBar(
+    {required dynamic error, SnackPosition? position}) async {
   String message = '';
   if (error is String) {
     message = error;
@@ -577,7 +579,8 @@ String getNumberInString(int durationTime) {
 }
 
 bool isMoviePaid({required int requiredPlanLevel}) {
-  return (requiredPlanLevel != 0 && currentSubscription.value.level < requiredPlanLevel);
+  return (requiredPlanLevel != 0 &&
+      currentSubscription.value.level < requiredPlanLevel);
 }
 
 String formatDuration(Duration duration) {
@@ -629,15 +632,18 @@ Future<void> playMovie({
   VideoPlayerModel? videoModel,
 }) async {
   if (changeVideo) {
-    LiveStream().emit(changeVideoInPodPlayer, [newURL, false, urlType, videoType, videoModel]);
+    LiveStream().emit(changeVideoInPodPlayer,
+        [newURL, false, urlType, videoType, videoModel]);
   }
 
   if (isWatchVideo) {
-    LiveStream().emit(mOnWatchVideo, [newURL, false, urlType, videoType, videoModel]);
+    LiveStream()
+        .emit(mOnWatchVideo, [newURL, false, urlType, videoType, videoModel]);
   }
 }
 
-Widget commonLeadingWid({required String imgPath, IconData? icon, Color? color, double size = 20}) {
+Widget commonLeadingWid(
+    {required String imgPath, IconData? icon, Color? color, double size = 20}) {
   return Image.asset(
     imgPath,
     width: size,
@@ -774,7 +780,8 @@ String getSubscriptionPlanStatus(String status) {
   }
 }
 
-void showNewUpdateDialog(BuildContext context, {required int currentAppVersionCode}) async {
+void showNewUpdateDialog(BuildContext context,
+    {required int currentAppVersionCode}) async {
   showInDialog(
     context,
     contentPadding: EdgeInsets.zero,
@@ -782,9 +789,11 @@ void showNewUpdateDialog(BuildContext context, {required int currentAppVersionCo
     builder: (_) {
       return WillPopScope(
         onWillPop: () {
-          return Future(() => currentAppVersionCode >= getPlatformMinimumVersion());
+          return Future(
+              () => currentAppVersionCode >= getPlatformMinimumVersion());
         },
-        child: NewUpdateDialog(canClose: currentAppVersionCode >= getPlatformMinimumVersion()),
+        child: NewUpdateDialog(
+            canClose: currentAppVersionCode >= getPlatformMinimumVersion()),
       );
     },
   );

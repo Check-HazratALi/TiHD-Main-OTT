@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 abstract class BaseLanguage {
-  static BaseLanguage of(BuildContext context) => Localizations.of<BaseLanguage>(context, BaseLanguage)!;
+  static BaseLanguage of(BuildContext context) =>
+      Localizations.of<BaseLanguage>(context, BaseLanguage)!;
 
   String get language;
 
@@ -653,13 +654,7 @@ abstract class BaseLanguage {
 
   String get ios;
 
-  String get hindi;
-
-  String get arabic;
-
-  String get french;
-
-  String get german;
+  String get bangla;
 
   String get noFAQsfound;
 

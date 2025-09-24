@@ -36,12 +36,14 @@ class SignUpScreen extends StatelessWidget {
             children: [
               const CachedImageWidget(
                 url: Assets.assetsAppLogo,
-                height: 41,
+                height: 45,
               ).center(),
               40.height,
-              Text(locale.value.createYourAccount, style: boldTextStyle(size: 20)),
+              Text(locale.value.createYourAccount,
+                  style: boldTextStyle(size: 20)),
               8.height,
-              Text(locale.value.completeProfileSubtitle, style: secondaryTextStyle()),
+              Text(locale.value.completeProfileSubtitle,
+                  style: secondaryTextStyle()),
               28.height,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,16 +61,24 @@ class SignUpScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             decoration: boxDecorationDefault(
                               borderRadius: BorderRadiusDirectional.zero,
-                              border: Border(bottom: BorderSide(color: borderColor.withValues(alpha: 0.6))),
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color:
+                                          borderColor.withValues(alpha: 0.6))),
                               color: appScreenBackgroundDark,
                             ),
                             child: Row(
                               children: [
-                                Text(signUpController.selectedCountry.value.flagEmoji, style: primaryTextStyle(size: 20)),
+                                Text(
+                                    signUpController
+                                        .selectedCountry.value.flagEmoji,
+                                    style: primaryTextStyle(size: 20)),
                                 6.width,
-                                Text(signUpController.countryCode.value, style: primaryTextStyle()),
+                                Text(signUpController.countryCode.value,
+                                    style: primaryTextStyle()),
                                 6.width,
-                                const Icon(Icons.arrow_drop_down, color: iconColor)
+                                const Icon(Icons.arrow_drop_down,
+                                    color: iconColor)
                               ],
                             ),
                           ),
@@ -80,8 +90,13 @@ class SignUpScreen extends StatelessWidget {
                           textFieldType: TextFieldType.PHONE,
                           cursorColor: white,
                           nextFocus: signUpController.firstNameFocus,
-                          maxLength: getValidPhoneNumberLength(CountryModel.fromJson(signUpController.selectedCountry.value.toJson())),
-                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          maxLength: getValidPhoneNumberLength(
+                              CountryModel.fromJson(signUpController
+                                  .selectedCountry.value
+                                  .toJson())),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           validator: (mobileCont) {
                             if (mobileCont!.isEmpty) {
                               return locale.value.phnRequiredText;
@@ -174,22 +189,34 @@ class SignUpScreen extends StatelessWidget {
                     onTap: () async {
                       DateTime? selectedDate = await showDatePicker(
                           context: context,
-                          initialDate: signUpController.dobCont.text.isNotEmpty ? DateTime.parse(signUpController.dobCont.text) : null,
+                          initialDate: signUpController.dobCont.text.isNotEmpty
+                              ? DateTime.parse(signUpController.dobCont.text)
+                              : null,
                           firstDate: DateTime(1900),
                           lastDate: DateTime.now(),
                           confirmText: locale.value.ok,
                           cancelText: locale.value.cancel,
                           helpText: locale.value.dateOfBirth,
-                          locale: Locale(selectedLanguageDataModel?.languageCode ?? getStringAsync(SELECTED_LANGUAGE_CODE)),
+                          locale: Locale(
+                              selectedLanguageDataModel?.languageCode ??
+                                  getStringAsync(SELECTED_LANGUAGE_CODE)),
                           builder: (context, child) {
                             return Theme(
                               data: Theme.of(context).copyWith(
-                                colorScheme: ColorScheme.dark(brightness: Brightness.dark, surface: cardColor, surfaceTint: cardColor, primary: appColorPrimary, onPrimary: primaryTextColor),
+                                colorScheme: ColorScheme.dark(
+                                    brightness: Brightness.dark,
+                                    surface: cardColor,
+                                    surfaceTint: cardColor,
+                                    primary: appColorPrimary,
+                                    onPrimary: primaryTextColor),
                                 hintColor: secondaryTextColor,
-                                inputDecorationTheme: const InputDecorationTheme(
+                                inputDecorationTheme:
+                                    const InputDecorationTheme(
                                   isDense: true,
-                                  contentPadding: EdgeInsets.only(left: 10, right: 10, top: 2, bottom: 2),
-                                  hintStyle: TextStyle(fontSize: 16, color: Colors.white),
+                                  contentPadding: EdgeInsets.only(
+                                      left: 10, right: 10, top: 2, bottom: 2),
+                                  hintStyle: TextStyle(
+                                      fontSize: 16, color: Colors.white),
                                   fillColor: appColorPrimary,
                                 ),
                               ),
@@ -197,7 +224,8 @@ class SignUpScreen extends StatelessWidget {
                             );
                           });
                       if (selectedDate != null) {
-                        signUpController.dobCont.text = selectedDate.formatDateYYYYmmdd();
+                        signUpController.dobCont.text =
+                            selectedDate.formatDateYYYYmmdd();
                       } else {
                         log("Date is not selected");
                       }
@@ -236,7 +264,8 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         Radio(
                             value: Gender.male,
-                            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+                            visualDensity: const VisualDensity(
+                                horizontal: -4, vertical: -4),
                             groupValue: signUpController.selectedGender.value,
                             onChanged: (value) {
                               signUpController.setGender(value!);
@@ -247,7 +276,8 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         Radio(
                             value: Gender.female,
-                            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+                            visualDensity: const VisualDensity(
+                                horizontal: -4, vertical: -4),
                             groupValue: signUpController.selectedGender.value,
                             onChanged: (value) {
                               signUpController.setGender(value!);
@@ -258,7 +288,8 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         Radio(
                             value: Gender.other,
-                            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+                            visualDensity: const VisualDensity(
+                                horizontal: -4, vertical: -4),
                             groupValue: signUpController.selectedGender.value,
                             onChanged: (value) {
                               signUpController.setGender(value!);
@@ -286,7 +317,11 @@ class SignUpScreen extends StatelessWidget {
                       context,
                       contentPadding: const EdgeInsets.only(top: 15),
                       hintText: locale.value.email,
-                      prefixIcon: commonLeadingWid(imgPath: Assets.iconsIcEmail, color: secondaryTextColor, size: 12).paddingAll(14),
+                      prefixIcon: commonLeadingWid(
+                              imgPath: Assets.iconsIcEmail,
+                              color: secondaryTextColor,
+                              size: 12)
+                          .paddingAll(14),
                     ),
                     onChanged: (value) {
                       signUpController.onBtnEnable();
@@ -302,15 +337,28 @@ class SignUpScreen extends StatelessWidget {
                     textFieldType: TextFieldType.PASSWORD,
                     cursorColor: white,
                     isValidationRequired: true,
-                    errorThisFieldRequired: locale.value.passwordIsRequiredField,
+                    errorThisFieldRequired:
+                        locale.value.passwordIsRequiredField,
                     decoration: inputDecoration(
                       context,
                       hintText: locale.value.password,
                       contentPadding: const EdgeInsets.only(top: 14),
-                      prefixIcon: commonLeadingWid(imgPath: Assets.iconsIcLockKey, color: iconColor, size: 12).paddingAll(16),
+                      prefixIcon: commonLeadingWid(
+                              imgPath: Assets.iconsIcLockKey,
+                              color: iconColor,
+                              size: 12)
+                          .paddingAll(16),
                     ),
-                    suffixPasswordVisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEye, color: iconColor, size: 12).paddingAll(16),
-                    suffixPasswordInvisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEyeSlash, color: iconColor, size: 12).paddingAll(16),
+                    suffixPasswordVisibleWidget: commonLeadingWid(
+                            imgPath: Assets.iconsIcEye,
+                            color: iconColor,
+                            size: 12)
+                        .paddingAll(16),
+                    suffixPasswordInvisibleWidget: commonLeadingWid(
+                            imgPath: Assets.iconsIcEyeSlash,
+                            color: iconColor,
+                            size: 12)
+                        .paddingAll(16),
                     onChanged: (value) {
                       signUpController.onBtnEnable();
                     },
@@ -329,14 +377,29 @@ class SignUpScreen extends StatelessWidget {
                       context,
                       hintText: locale.value.confirmPassword,
                       contentPadding: const EdgeInsets.only(top: 14),
-                      prefixIcon: commonLeadingWid(imgPath: Assets.iconsIcLockKey, color: iconColor, size: 12).paddingAll(16),
+                      prefixIcon: commonLeadingWid(
+                              imgPath: Assets.iconsIcLockKey,
+                              color: iconColor,
+                              size: 12)
+                          .paddingAll(16),
                     ),
                     validator: (value) {
-                      if (value!.isEmpty) return locale.value.passwordIsRequiredField;
-                      return signUpController.passwordCont.text == value ? null : locale.value.yourConfirmPasswordDoesnT;
+                      if (value!.isEmpty)
+                        return locale.value.passwordIsRequiredField;
+                      return signUpController.passwordCont.text == value
+                          ? null
+                          : locale.value.yourConfirmPasswordDoesnT;
                     },
-                    suffixPasswordVisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEye, color: iconColor, size: 12).paddingAll(16),
-                    suffixPasswordInvisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEyeSlash, color: iconColor, size: 12).paddingAll(16),
+                    suffixPasswordVisibleWidget: commonLeadingWid(
+                            imgPath: Assets.iconsIcEye,
+                            color: iconColor,
+                            size: 12)
+                        .paddingAll(16),
+                    suffixPasswordInvisibleWidget: commonLeadingWid(
+                            imgPath: Assets.iconsIcEyeSlash,
+                            color: iconColor,
+                            size: 12)
+                        .paddingAll(16),
                     onChanged: (value) {
                       signUpController.onBtnEnable();
                     },
@@ -347,9 +410,11 @@ class SignUpScreen extends StatelessWidget {
                     text: locale.value.signUp,
                     color: appColorPrimary,
                     textStyle: appButtonTextStyleWhite,
-                    shapeBorder: RoundedRectangleBorder(borderRadius: radius(defaultAppButtonRadius / 2)),
+                    shapeBorder: RoundedRectangleBorder(
+                        borderRadius: radius(defaultAppButtonRadius / 2)),
                     onTap: () {
-                      if (signUpController.signUpFormKey.currentState!.validate()) {
+                      if (signUpController.signUpFormKey.currentState!
+                          .validate()) {
                         hideKeyboard(context);
                         signUpController.saveForm();
                       }

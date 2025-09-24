@@ -29,7 +29,7 @@ class MovieListScreen extends StatelessWidget {
       hasLeadingWidget: false,
       hideAppBar: true,
       scaffoldBackgroundColor: black,
-      floatingActionButton: FloatingWidget(label: "Programs"),
+      floatingActionButton: FloatingWidget(label: locale.value.movies),
       body: AnimatedListView(
         shrinkWrap: true,
         itemCount: 1,
@@ -77,7 +77,7 @@ class MovieListScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text("programs", style: primaryTextStyle()).paddingDirectional(start: 16),
+                        Text(title ?? locale.value.movies, style: primaryTextStyle()).paddingDirectional(start: 16),
                         10.height,
                         Obx(() {
                           if (movieListCont.originalMovieList.isEmpty && !movieListCont.isLoading.value) {

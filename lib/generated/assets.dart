@@ -3,10 +3,7 @@ class Assets {
   Assets._();
 
   static const String assetsAppLogo = 'assets/app_logo.png';
-  static const String flagsIcAr = 'assets/flags/ic_ar.png';
-  static const String flagsIcDe = 'assets/flags/ic_de.png';
-  static const String flagsIcFr = 'assets/flags/ic_fr.png';
-  static const String flagsIcIndia = 'assets/flags/ic_india.png';
+  static const String flagsIcBan = 'assets/flags/ic_ban.png';
   static const String flagsIcUs = 'assets/flags/ic_us.png';
   static const String iconsIcAboutUs = 'assets/icons/ic_about_us.png';
   static const String iconsIcAccount = 'assets/icons/ic_account.png';
@@ -35,7 +32,8 @@ class Assets {
   static const String iconsIcFemale = 'assets/icons/ic_female.png';
   static const String iconsIcHeadphones = 'assets/icons/ic_headphones.png';
   static const String iconsIcHelp = 'assets/icons/ic_help.png';
-  static const String iconsIcHighDefinition = 'assets/icons/ic_high_definition.png';
+  static const String iconsIcHighDefinition =
+      'assets/icons/ic_high_definition.png';
   static const String iconsIcIcon = 'assets/icons/ic_icon.png';
   static const String iconsIcInfo = 'assets/icons/ic_info.png';
   static const String iconsIcLanguage = 'assets/icons/ic_language.png';
@@ -47,12 +45,15 @@ class Assets {
   static const String iconsIcNotepad = 'assets/icons/ic_notepad.png';
   static const String iconsIcNotification = 'assets/icons/ic_notification.png';
   static const String iconsIcPage = 'assets/icons/ic_page.png';
-  static const String iconsIcParentPassword = 'assets/icons/ic_parent_password.png';
-  static const String iconsIcPaymentHistory = 'assets/icons/ic_payment_history.png';
+  static const String iconsIcParentPassword =
+      'assets/icons/ic_parent_password.png';
+  static const String iconsIcPaymentHistory =
+      'assets/icons/ic_payment_history.png';
   static const String iconsIcPending = 'assets/icons/ic_pending.png';
   static const String iconsIcPercent = 'assets/icons/ic_percent.png';
   static const String iconsIcPhone = 'assets/icons/ic_phone.png';
-  static const String iconsIcPictureInPicture = 'assets/icons/ic_picture_in_picture.png';
+  static const String iconsIcPictureInPicture =
+      'assets/icons/ic_picture_in_picture.png';
   static const String iconsIcPlay = 'assets/icons/ic_play.png';
   static const String iconsIcPlus = 'assets/icons/ic_plus.png';
   static const String iconsIcPrivacy = 'assets/icons/ic_privacy.png';
@@ -73,56 +74,86 @@ class Assets {
   static const String iconsIcUser = 'assets/icons/ic_user.jpg';
   static const String iconsIcVector = 'assets/icons/ic_vector.png';
   static const String imagesCircleCheck = 'assets/images/circle_check.png';
-  static const String imagesIcChooseOptionBg = 'assets/images/ic_choose_option_bg.png';
+  static const String imagesIcChooseOptionBg =
+      'assets/images/ic_choose_option_bg.png';
   static const String imagesIcDelete = 'assets/images/ic_delete.png';
-  static const String imagesIcDeviceNotSupported = 'assets/images/ic_device_not_supported.png';
+  static const String imagesIcDeviceNotSupported =
+      'assets/images/ic_device_not_supported.png';
   static const String imagesIcForceUpdate = 'assets/images/ic_force_update.png';
   static const String imagesIcLogin = 'assets/images/ic_login.png';
   static const String imagesIcLogout = 'assets/images/ic_logout.png';
   static const String imagesIcRating = 'assets/images/ic_rating.png';
   static const String lottieEmptyLottie = 'assets/lottie/empty_lottie.json';
-  static const String lottieEqualizerLottie = 'assets/lottie/equalizer-lottie.json';
+  static const String lottieEqualizerLottie =
+      'assets/lottie/equalizer-lottie.json';
   static const String lottieErrorLottie = 'assets/lottie/error_lottie.json';
   static const String lottieLive = 'assets/lottie/live.json';
   static const String lottieRemind = 'assets/lottie/remind.json';
   static const String lottieSucess = 'assets/lottie/sucess.json';
   static const String lottieTyping = 'assets/lottie/typing.json';
   static const String lottieVoiceSearch = 'assets/lottie/voice_search.json';
-  static const String navigationIcComingSoonFilled = 'assets/icons/navigation/ic_coming_soon_filled.png';
-  static const String navigationIcComingSoonOutlined = 'assets/icons/navigation/ic_coming_soon_outlined.png';
-  static const String navigationIcHomeFilled = 'assets/icons/navigation/ic_home_filled.png';
-  static const String navigationIcHomeFilled2 = 'assets/icons/navigation/ic_home_filled2.png';
-  static const String navigationIcHomeOutlined = 'assets/icons/navigation/ic_home_outlined.png';
-  static const String navigationIcLiveFilled = 'assets/icons/navigation/ic_live_filled.png';
-  static const String navigationIcLiveOutlined = 'assets/icons/navigation/ic_live_outlined.png';
-  static const String navigationIcNotifyFilled = 'assets/icons/navigation/ic_notify_filled.png';
-  static const String navigationIcNotifyOutlined = 'assets/icons/navigation/ic_notify_outlined.png';
-  static const String navigationIcSearchFilled = 'assets/icons/navigation/ic_search_filled.png';
-  static const String navigationIcSearchOutlined = 'assets/icons/navigation/ic_search_outlined.png';
-  static const String navigationIcUserFilled = 'assets/icons/navigation/ic_user_filled.png';
-  static const String navigationIcUserOutlined = 'assets/icons/navigation/ic_user_outlined.png';
-  static const String paymentLogoFlutterWaveLogo = 'assets/icons/payment_logo/flutter_wave_logo.png';
+  static const String navigationIcComingSoonFilled =
+      'assets/icons/navigation/ic_coming_soon_filled.png';
+  static const String navigationIcComingSoonOutlined =
+      'assets/icons/navigation/ic_coming_soon_outlined.png';
+  static const String navigationIcHomeFilled =
+      'assets/icons/navigation/ic_home_filled.png';
+  static const String navigationIcHomeFilled2 =
+      'assets/icons/navigation/ic_home_filled2.png';
+  static const String navigationIcHomeOutlined =
+      'assets/icons/navigation/ic_home_outlined.png';
+  static const String navigationIcLiveFilled =
+      'assets/icons/navigation/ic_live_filled.png';
+  static const String navigationIcLiveOutlined =
+      'assets/icons/navigation/ic_live_outlined.png';
+  static const String navigationIcNotifyFilled =
+      'assets/icons/navigation/ic_notify_filled.png';
+  static const String navigationIcNotifyOutlined =
+      'assets/icons/navigation/ic_notify_outlined.png';
+  static const String navigationIcSearchFilled =
+      'assets/icons/navigation/ic_search_filled.png';
+  static const String navigationIcSearchOutlined =
+      'assets/icons/navigation/ic_search_outlined.png';
+  static const String navigationIcUserFilled =
+      'assets/icons/navigation/ic_user_filled.png';
+  static const String navigationIcUserOutlined =
+      'assets/icons/navigation/ic_user_outlined.png';
+  static const String paymentLogoFlutterWaveLogo =
+      'assets/icons/payment_logo/flutter_wave_logo.png';
   static const String socialMediaApple = 'assets/icons/social_media/apple.png';
-  static const String socialMediaGoogle = 'assets/icons/social_media/google.png';
+  static const String socialMediaGoogle =
+      'assets/icons/social_media/google.png';
   static const String socialMediaPhone = 'assets/icons/social_media/phone.png';
-  static const String top10IconIcEight = 'assets/icons/top_10_icon/ic_eight.png';
+  static const String top10IconIcEight =
+      'assets/icons/top_10_icon/ic_eight.png';
   static const String top10IconIcFive = 'assets/icons/top_10_icon/ic_five.png';
   static const String top10IconIcFour = 'assets/icons/top_10_icon/ic_four.png';
   static const String top10IconIcNine = 'assets/icons/top_10_icon/ic_nine.png';
   static const String top10IconIcOne = 'assets/icons/top_10_icon/ic_one.png';
-  static const String top10IconIcSeven = 'assets/icons/top_10_icon/ic_seven.png';
+  static const String top10IconIcSeven =
+      'assets/icons/top_10_icon/ic_seven.png';
   static const String top10IconIcSix = 'assets/icons/top_10_icon/ic_six.png';
   static const String top10IconIcTen = 'assets/icons/top_10_icon/ic_ten.png';
-  static const String top10IconIcThree = 'assets/icons/top_10_icon/ic_three.png';
+  static const String top10IconIcThree =
+      'assets/icons/top_10_icon/ic_three.png';
   static const String top10IconIcTwo = 'assets/icons/top_10_icon/ic_two.png';
-  static const String walkthroughImagesWalkImage1 = 'assets/images/walkthrough_images/walk_image1.png';
-  static const String walkthroughImagesWalkImage2 = 'assets/images/walkthrough_images/walk_image2.png';
-  static const String walkthroughImagesWalkImage3 = 'assets/images/walkthrough_images/walk_image3.png';
-  static const String watchingProfileDefaultAvatar1 = 'assets/images/watching_profile/default_avatar_1.jpg';
-  static const String watchingProfileDefaultAvatar2 = 'assets/images/watching_profile/default_avatar_2.jpg';
-  static const String watchingProfileDefaultAvatar3 = 'assets/images/watching_profile/default_avatar_3.jpg';
-  static const String watchingProfileDefaultAvatar4 = 'assets/images/watching_profile/default_avatar_4.jpg';
-  static const String watchingProfileDefaultAvatar5 = 'assets/images/watching_profile/default_avatar_5.jpg';
-  static const String watchingProfileUserLogo = 'assets/images/watching_profile/user_logo.png';
+  static const String walkthroughImagesWalkImage1 =
+      'assets/images/walkthrough_images/walk_image1.jpeg';
+  static const String walkthroughImagesWalkImage2 =
+      'assets/images/walkthrough_images/walk_image2.jpg';
+  static const String walkthroughImagesWalkImage3 =
+      'assets/images/walkthrough_images/walk_image3.jpg';
+  static const String watchingProfileDefaultAvatar1 =
+      'assets/images/watching_profile/default_avatar_1.jpg';
+  static const String watchingProfileDefaultAvatar2 =
+      'assets/images/watching_profile/default_avatar_2.jpg';
+  static const String watchingProfileDefaultAvatar3 =
+      'assets/images/watching_profile/default_avatar_3.jpg';
+  static const String watchingProfileDefaultAvatar4 =
+      'assets/images/watching_profile/default_avatar_4.jpg';
+  static const String watchingProfileDefaultAvatar5 =
+      'assets/images/watching_profile/default_avatar_5.jpg';
+  static const String watchingProfileUserLogo =
+      'assets/images/watching_profile/user_logo.png';
   static const String iconsIcError = 'assets/icons/ic_error.png';
 }

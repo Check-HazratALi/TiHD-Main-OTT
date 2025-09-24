@@ -53,7 +53,8 @@ class CustomAnimatedScrollView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedScrollView(
-      padding: EdgeInsets.only(left: paddingLeft, right: paddingRight, bottom: paddingBottom),
+      padding: EdgeInsets.only(
+          left: paddingLeft, right: paddingRight, bottom: paddingBottom),
       onNextPage: onNextPage,
       onSwipeRefresh: onSwipeRefresh,
       refreshIndicatorColor: appColorPrimary,
@@ -86,9 +87,8 @@ class CustomAnimatedScrollView extends StatelessWidget {
             width: double.infinity,
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                child: ThreeBounceLoadingWidget()
-              ),
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: ThreeBounceLoadingWidget()),
             ),
           ),
       ],
@@ -141,7 +141,8 @@ class CustomAnimatedChannelScrollView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedScrollView(
-      padding: EdgeInsets.only(left: paddingLeft, right: paddingRight, bottom: paddingBottom + 30),
+      padding: EdgeInsets.only(
+          left: paddingLeft, right: paddingRight, bottom: paddingBottom + 30),
       onNextPage: onNextPage,
       onSwipeRefresh: onSwipeRefresh,
       listAnimationType: commonListAnimationType,
@@ -160,7 +161,10 @@ class CustomAnimatedChannelScrollView extends StatelessWidget {
                     height: posterHeight,
                     width: posterWidth,
                     onTap: () => onTap(posterDet),
-                    posterDetail: VideoPlayerModel(posterImage: posterDet.posterImage,access: posterDet.access,requiredPlanLevel: posterDet.requiredPlanLevel),
+                    posterDetail: VideoPlayerModel(
+                        posterImage: posterDet.posterImage,
+                        access: posterDet.access,
+                        requiredPlanLevel: posterDet.requiredPlanLevel),
                     isHorizontalList: isHorizontalList,
                     isLoading: isLoading,
                     isTopChannel: isTopChannel,

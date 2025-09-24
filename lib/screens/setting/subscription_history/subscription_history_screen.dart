@@ -20,7 +20,8 @@ class SubscriptionHistoryScreen extends StatelessWidget {
     super.key,
   });
 
-  final SubscriptionHistoryController controller = Get.put(SubscriptionHistoryController());
+  final SubscriptionHistoryController controller =
+      Get.put(SubscriptionHistoryController());
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +48,11 @@ class SubscriptionHistoryScreen extends StatelessWidget {
             return controller.getSubscriptionFuture();
           },
           children: [
-            if (currentSubscription.value.status == SubscriptionStatus.active) ...[
+            if (currentSubscription.value.status ==
+                SubscriptionStatus.active) ...[
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 width: double.infinity,
                 decoration: boxDecorationDefault(
@@ -64,30 +67,65 @@ class SubscriptionHistoryScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (currentSubscription.value.startDate.isNotEmpty && currentSubscription.value.endDate.isNotEmpty)
+                    if (currentSubscription.value.startDate.isNotEmpty &&
+                        currentSubscription.value.endDate.isNotEmpty)
                       Text(
                         "${dateFormat(currentSubscription.value.startDate)} - ${dateFormat(currentSubscription.value.endDate)}",
                         textAlign: TextAlign.center,
-                        style: secondaryTextStyle(color: primaryTextColor, size: 16, weight: FontWeight.w500),
+                        style: secondaryTextStyle(
+                            color: primaryTextColor,
+                            size: 16,
+                            weight: FontWeight.w500),
                       ).center(),
-                    if (currentSubscription.value.startDate.isNotEmpty && currentSubscription.value.endDate.isNotEmpty) 10.height,
-                    planRows(title: locale.value.plan, value: currentSubscription.value.name.capitalizeEachWord(), isAmount: false).visible(currentSubscription.value.name.isNotEmpty),
+                    if (currentSubscription.value.startDate.isNotEmpty &&
+                        currentSubscription.value.endDate.isNotEmpty)
+                      10.height,
+                    planRows(
+                            title: locale.value.plan,
+                            value: currentSubscription.value.name
+                                .capitalizeEachWord(),
+                            isAmount: false)
+                        .visible(currentSubscription.value.name.isNotEmpty),
                     6.height.visible(currentSubscription.value.name.isNotEmpty),
-                    planRows(title: locale.value.type, value: currentSubscription.value.type.capitalizeEachWord(), isAmount: false).visible(currentSubscription.value.type.isNotEmpty),
+                    planRows(
+                            title: locale.value.type,
+                            value: currentSubscription.value.type
+                                .capitalizeEachWord(),
+                            isAmount: false)
+                        .visible(currentSubscription.value.type.isNotEmpty),
                     6.height.visible(currentSubscription.value.type.isNotEmpty),
-                    planRows(title: locale.value.amount, value: currentSubscription.value.amount.toString(), isAmount: true),
-                    6.height.visible(currentSubscription.value.couponDiscount>0),
-                    if(currentSubscription.value.couponDiscount>0)planRows(title: "Coupon Discount", value: currentSubscription.value.couponDiscount.toString(), isAmount: true),
+                    planRows(
+                        title: locale.value.amount,
+                        value: currentSubscription.value.amount.toString(),
+                        isAmount: true),
+                    6
+                        .height
+                        .visible(currentSubscription.value.couponDiscount > 0),
+                    if (currentSubscription.value.couponDiscount > 0)
+                      planRows(
+                          title: "Coupon Discount",
+                          value: currentSubscription.value.couponDiscount
+                              .toString(),
+                          isAmount: true),
                     if (currentSubscription.value.discountAmount > 0)
                       planRows(
-                        title: 'Discounted Amount (${currentSubscription.value.discountPercentage}%)',
-                        value: currentSubscription.value.discountAmount.toString(),
+                        title:
+                            'Discounted Amount (${currentSubscription.value.discountPercentage}%)',
+                        value:
+                            currentSubscription.value.discountAmount.toString(),
                         isAmount: true,
                       ).paddingTop(6),
                     if (currentSubscription.value.taxAmount > 0) 12.height,
-                    if (currentSubscription.value.taxAmount > 0) planRows(title: locale.value.tax, value: currentSubscription.value.taxAmount.toString(), isAmount: true),
+                    if (currentSubscription.value.taxAmount > 0)
+                      planRows(
+                          title: locale.value.tax,
+                          value: currentSubscription.value.taxAmount.toString(),
+                          isAmount: true),
                     12.height,
-                    planRows(title: locale.value.total, value: currentSubscription.value.totalAmount.toString(), isAmount: true),
+                    planRows(
+                        title: locale.value.total,
+                        value: currentSubscription.value.totalAmount.toString(),
+                        isAmount: true),
                     12.height,
                     AppButton(
                       height: Get.height * 0.04,
@@ -95,11 +133,13 @@ class SubscriptionHistoryScreen extends StatelessWidget {
                       text: locale.value.cancelPlan.toUpperCase(),
                       color: appColorPrimary,
                       textStyle: appButtonTextStyleWhite,
-                      shapeBorder: RoundedRectangleBorder(borderRadius: radius(6)),
+                      shapeBorder:
+                          RoundedRectangleBorder(borderRadius: radius(6)),
                       onTap: () async {
                         Get.bottomSheet(
                           AppDialogWidget(
-                            title: "Do you want to cancel your current subscription?",
+                            title:
+                                "Do you want to cancel your current subscription?",
                             onAccept: () {
                               controller.cancelSubscriptionHistory();
                             },
@@ -116,7 +156,9 @@ class SubscriptionHistoryScreen extends StatelessWidget {
             ],
             SnapHelperWidget(
               future: controller.getSubscriptionFuture.value,
-              loadingWidget: controller.isLoading.value ? const ShimmerSubscriptionList() : const ShimmerSubscriptionList(),
+              loadingWidget: controller.isLoading.value
+                  ? const ShimmerSubscriptionList()
+                  : const ShimmerSubscriptionList(),
               errorBuilder: (error) {
                 return NoDataWidget(
                   titleTextStyle: secondaryTextStyle(color: white),
@@ -132,9 +174,12 @@ class SubscriptionHistoryScreen extends StatelessWidget {
               onSuccess: (res) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: controller.subscriptionHistoryList.isEmpty ? MainAxisAlignment.center : MainAxisAlignment.start,
+                  mainAxisAlignment: controller.subscriptionHistoryList.isEmpty
+                      ? MainAxisAlignment.center
+                      : MainAxisAlignment.start,
                   children: [
-                    if (controller.subscriptionHistoryList.isEmpty && controller.isLoading.isFalse)
+                    if (controller.subscriptionHistoryList.isEmpty &&
+                        controller.isLoading.isFalse)
                       SizedBox(
                         height: Get.height * 0.6,
                         width: Get.width,
@@ -153,7 +198,8 @@ class SubscriptionHistoryScreen extends StatelessWidget {
                       AnimatedWrap(
                         listAnimationType: commonListAnimationType,
                         itemBuilder: (context, index) {
-                          final item = controller.subscriptionHistoryList[index];
+                          final item =
+                              controller.subscriptionHistoryList[index];
 
                           if (item.status == SubscriptionStatus.active) {
                             return Offstage();
@@ -166,7 +212,6 @@ class SubscriptionHistoryScreen extends StatelessWidget {
                             );
                           }
                         },
-
                         runSpacing: 16,
                         spacing: 16,
                         itemCount: controller.subscriptionHistoryList.length,
@@ -181,7 +226,8 @@ class SubscriptionHistoryScreen extends StatelessWidget {
     );
   }
 
-  Widget planRows({required String title, required String value, required bool isAmount}) {
+  Widget planRows(
+      {required String title, required String value, required bool isAmount}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,

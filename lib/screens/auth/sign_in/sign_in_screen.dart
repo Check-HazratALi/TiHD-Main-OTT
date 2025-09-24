@@ -48,13 +48,15 @@ class SignInScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 child: CachedImageWidget(
                   url: Assets.assetsAppLogo,
-                  height: 41,
+                  height: 75,
                 ),
               ),
               50.height,
-              Text(locale.value.welcomeBackToStreamIt, style: commonW500PrimaryTextStyle(size: 20)),
+              Text(locale.value.welcomeBackToStreamIt,
+                  style: commonW500PrimaryTextStyle(size: 20)),
               8.height,
-              Text(locale.value.weHaveEagerlyAwaitedYourReturn, style: secondaryTextStyle()),
+              Text(locale.value.weHaveEagerlyAwaitedYourReturn,
+                  style: secondaryTextStyle()),
               40.height,
               Obx(
                 () {
@@ -72,17 +74,25 @@ class SignInScreen extends StatelessWidget {
                                   signInController.changeCountry(context);
                                 },
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
                                   decoration: boxDecorationDefault(
                                     borderRadius: BorderRadiusDirectional.zero,
-                                    border: Border(bottom: BorderSide(color: borderColor.withValues(alpha: 0.6))),
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            color: borderColor.withValues(
+                                                alpha: 0.6))),
                                     color: appScreenBackgroundDark,
                                   ),
                                   child: Row(
                                     children: [
-                                      Text(signInController.selectedCountry.value.flagEmoji, style: primaryTextStyle(size: 20)),
+                                      Text(
+                                          signInController
+                                              .selectedCountry.value.flagEmoji,
+                                          style: primaryTextStyle(size: 20)),
                                       6.width,
-                                      Text(signInController.countryCode.value, style: primaryTextStyle()),
+                                      Text(signInController.countryCode.value,
+                                          style: primaryTextStyle()),
                                       6.width,
                                       const Icon(
                                         Icons.arrow_drop_down,
@@ -98,19 +108,30 @@ class SignInScreen extends StatelessWidget {
                                 controller: signInController.phoneCont,
                                 textFieldType: TextFieldType.PHONE,
                                 cursorColor: white,
-                                maxLength: getValidPhoneNumberLength(CountryModel.fromJson(signInController.selectedCountry.value.toJson())),
-                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                maxLength: getValidPhoneNumberLength(
+                                    CountryModel.fromJson(signInController
+                                        .selectedCountry.value
+                                        .toJson())),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
                                 validator: (mobileCont) {
                                   if (mobileCont!.isEmpty) {
                                     return locale.value.phnRequiredText;
-                                  } else if (!validatePhoneNumberByCountry(signInController.phoneCont.text, CountryModel.fromJson(signInController.selectedCountry.value.toJson()))) {
-                                    return locale.value.pleaseEnterAValidMobileNo;
+                                  } else if (!validatePhoneNumberByCountry(
+                                      signInController.phoneCont.text,
+                                      CountryModel.fromJson(signInController
+                                          .selectedCountry.value
+                                          .toJson()))) {
+                                    return locale
+                                        .value.pleaseEnterAValidMobileNo;
                                   }
                                   return null;
                                 },
                                 decoration: inputDecoration(
                                   context,
-                                  contentPadding: const EdgeInsets.only(top: 14),
+                                  contentPadding:
+                                      const EdgeInsets.only(top: 14),
                                   hintText: locale.value.mobileNumber,
                                   prefixIcon: Image.asset(
                                     Assets.iconsIcPhone,
@@ -123,7 +144,9 @@ class SignInScreen extends StatelessWidget {
                                   signInController.getBtnEnable();
                                 },
                                 onFieldSubmitted: (value) {
-                                  if (signInController.signInformKey.currentState!.validate()) {
+                                  if (signInController
+                                      .signInformKey.currentState!
+                                      .validate()) {
                                     hideKeyboard(context);
                                     signInController.isPhoneAuthLoading(true);
                                     signInController.checkIfDemoUser(
@@ -141,7 +164,8 @@ class SignInScreen extends StatelessWidget {
                         Obx(
                           () => AppButton(
                             onTap: () {
-                              if (signInController.signInformKey.currentState!.validate()) {
+                              if (signInController.signInformKey.currentState!
+                                  .validate()) {
                                 hideKeyboard(context);
                                 signInController.isPhoneAuthLoading(true);
                                 signInController.checkIfDemoUser(
@@ -152,10 +176,14 @@ class SignInScreen extends StatelessWidget {
                               }
                             },
                             width: Get.width,
-                            color: signInController.isBtnEnable.isTrue ? appColorPrimary : lightBtnColor,
+                            color: signInController.isBtnEnable.isTrue
+                                ? appColorPrimary
+                                : lightBtnColor,
                             textStyle: appButtonTextStyleWhite,
-                            shapeBorder: RoundedRectangleBorder(borderRadius: radius(4)),
-                            child: Text(locale.value.getVerificationCode, style: boldTextStyle()),
+                            shapeBorder:
+                                RoundedRectangleBorder(borderRadius: radius(4)),
+                            child: Text(locale.value.getVerificationCode,
+                                style: boldTextStyle()),
                           ),
                         ),
                       ],
@@ -184,16 +212,21 @@ class SignInScreen extends StatelessWidget {
               28.height,
               Obx(() {
                 return SocialIconWidget(
-                  icon: signInController.isNormalLogin.value ? Assets.iconsIcPhone : Assets.iconsIcEmail,
+                  icon: signInController.isNormalLogin.value
+                      ? Assets.iconsIcPhone
+                      : Assets.iconsIcEmail,
                   buttonWidth: Get.width,
-                  text: signInController.isNormalLogin.value ? locale.value.loginWithOtp : locale.value.loginWithEmail,
+                  text: signInController.isNormalLogin.value
+                      ? locale.value.loginWithOtp
+                      : locale.value.loginWithEmail,
                   onTap: () {
-                    signInController.isNormalLogin(!signInController.isNormalLogin.value);
+                    signInController
+                        .isNormalLogin(!signInController.isNormalLogin.value);
                   },
                 );
               }),
               16.height,
-              if(appConfigs.value.isEnableSocialLogin)SocialAuthComponent(),
+              if (appConfigs.value.isEnableSocialLogin) SocialAuthComponent(),
               48.height,
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -204,28 +237,42 @@ class SignInScreen extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            final AboutDataModel aboutDataModel = appPageList.firstWhere((element) => element.slug == AppPages.termsAndCondition);
-                            if (aboutDataModel.url.validate().isNotEmpty) launchUrlCustomURL(aboutDataModel.url.validate());
+                            final AboutDataModel aboutDataModel =
+                                appPageList.firstWhere((element) =>
+                                    element.slug == AppPages.termsAndCondition);
+                            if (aboutDataModel.url.validate().isNotEmpty)
+                              launchUrlCustomURL(aboutDataModel.url.validate());
                           },
                           child: Wrap(
                             alignment: WrapAlignment.center,
                             children: [
-                              Text('${locale.value.bySigningYouAgreeTo} $APP_NAME ', style: commonW500SecondaryTextStyle()),
-                              Text('${locale.value.termsConditions} ', style: commonW500SecondaryTextStyle(color: appColorPrimary)),
-                              Text(locale.value.ofAll, style: commonW500SecondaryTextStyle()),
+                              Text(
+                                  '${locale.value.bySigningYouAgreeTo} $APP_NAME ',
+                                  style: commonW500SecondaryTextStyle()),
+                              Text('${locale.value.termsConditions} ',
+                                  style: commonW500SecondaryTextStyle(
+                                      color: appColorPrimary)),
+                              Text(locale.value.ofAll,
+                                  style: commonW500SecondaryTextStyle()),
                             ],
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
-                            final AboutDataModel aboutDataModel = appPageList.firstWhere((element) => element.slug == AppPages.privacyPolicy);
-                            if (aboutDataModel.url.validate().isNotEmpty) launchUrlCustomURL(aboutDataModel.url.validate());
+                            final AboutDataModel aboutDataModel =
+                                appPageList.firstWhere((element) =>
+                                    element.slug == AppPages.privacyPolicy);
+                            if (aboutDataModel.url.validate().isNotEmpty)
+                              launchUrlCustomURL(aboutDataModel.url.validate());
                           },
                           child: Wrap(
                             alignment: WrapAlignment.center,
                             children: [
-                              Text(locale.value.servicesAnd, style: commonW500SecondaryTextStyle()),
-                              Text(locale.value.privacyPolicy, style: commonW500SecondaryTextStyle(color: appColorPrimary)),
+                              Text(locale.value.servicesAnd,
+                                  style: commonW500SecondaryTextStyle()),
+                              Text(locale.value.privacyPolicy,
+                                  style: commonW500SecondaryTextStyle(
+                                      color: appColorPrimary)),
                             ],
                           ),
                         ),
@@ -265,7 +312,11 @@ class SignInScreen extends StatelessWidget {
             context,
             hintText: locale.value.email,
             contentPadding: const EdgeInsets.only(top: 14),
-            prefixIcon: commonLeadingWid(imgPath: Assets.iconsIcEmail, color: secondaryTextColor, size: 12).paddingAll(16),
+            prefixIcon: commonLeadingWid(
+                    imgPath: Assets.iconsIcEmail,
+                    color: secondaryTextColor,
+                    size: 12)
+                .paddingAll(16),
           ),
           onChanged: (value) {
             signInController.getBtnEnable();
@@ -285,10 +336,16 @@ class SignInScreen extends StatelessWidget {
             context,
             hintText: locale.value.password,
             contentPadding: const EdgeInsets.only(top: 14),
-            prefixIcon: commonLeadingWid(imgPath: Assets.iconsIcLockKey, color: iconColor, size: 12).paddingAll(16),
+            prefixIcon: commonLeadingWid(
+                    imgPath: Assets.iconsIcLockKey, color: iconColor, size: 12)
+                .paddingAll(16),
           ),
-          suffixPasswordVisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEye, color: iconColor, size: 12).paddingAll(16),
-          suffixPasswordInvisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEyeSlash, color: iconColor, size: 12).paddingAll(16),
+          suffixPasswordVisibleWidget: commonLeadingWid(
+                  imgPath: Assets.iconsIcEye, color: iconColor, size: 12)
+              .paddingAll(16),
+          suffixPasswordInvisibleWidget: commonLeadingWid(
+                  imgPath: Assets.iconsIcEyeSlash, color: iconColor, size: 12)
+              .paddingAll(16),
           onChanged: (value) {
             signInController.getBtnEnable();
           },
@@ -301,18 +358,23 @@ class SignInScreen extends StatelessWidget {
             Obx(
               () => InkWell(
                 onTap: () {
-                  signInController.isRememberMe.value = !signInController.isRememberMe.value;
+                  signInController.isRememberMe.value =
+                      !signInController.isRememberMe.value;
                 },
                 child: Container(
                   padding: const EdgeInsets.all(1),
                   decoration: boxDecorationDefault(
                     borderRadius: BorderRadius.circular(2),
-                    color: signInController.isRememberMe.isTrue ? appColorPrimary : appScreenBackgroundDark,
+                    color: signInController.isRememberMe.isTrue
+                        ? appColorPrimary
+                        : appScreenBackgroundDark,
                     border: Border.all(color: appColorPrimary),
                   ),
                   child: Icon(
                     Icons.check,
-                    color: signInController.isRememberMe.isTrue ? Colors.white : appScreenBackgroundDark,
+                    color: signInController.isRememberMe.isTrue
+                        ? Colors.white
+                        : appScreenBackgroundDark,
                     size: 9,
                   ),
                 ),
@@ -321,10 +383,12 @@ class SignInScreen extends StatelessWidget {
             14.width,
             Text(
               locale.value.rememberMe,
-              style: secondaryTextStyle(color: white.withValues(alpha: 0.6), size: 12),
+              style: secondaryTextStyle(
+                  color: white.withValues(alpha: 0.6), size: 12),
             ).onTap(
               () {
-                signInController.isRememberMe.value = !signInController.isRememberMe.value;
+                signInController.isRememberMe.value =
+                    !signInController.isRememberMe.value;
               },
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
@@ -352,7 +416,8 @@ class SignInScreen extends StatelessWidget {
             text: locale.value.signIn,
             color: appColorPrimary,
             textStyle: appButtonTextStyleWhite,
-            shapeBorder: RoundedRectangleBorder(borderRadius: radius(defaultAppButtonRadius / 2)),
+            shapeBorder: RoundedRectangleBorder(
+                borderRadius: radius(defaultAppButtonRadius / 2)),
             onTap: () {
               if (signInController.signInformKey.currentState!.validate()) {
                 signInController.saveForm(isNormalLogin: true);
@@ -364,10 +429,13 @@ class SignInScreen extends StatelessWidget {
         RichText(
           text: TextSpan(
             children: [
-              TextSpan(text: locale.value.dontHaveAnAccount, style: secondaryTextStyle(size: 12)),
+              TextSpan(
+                  text: locale.value.dontHaveAnAccount,
+                  style: secondaryTextStyle(size: 12)),
               TextSpan(
                 text: locale.value.signUp.prefixText(value: ' '),
-                style: commonW500SecondaryTextStyle(size: 12, color: appColorPrimary),
+                style: commonW500SecondaryTextStyle(
+                    size: 12, color: appColorPrimary),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     Get.to(() => SignUpScreen());

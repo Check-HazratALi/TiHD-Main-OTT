@@ -52,12 +52,16 @@ class TvShowDetailsComponent extends StatelessWidget {
                           iconWidth: 22,
                           onTap: () {
                             if (isLoggedIn.isTrue) {
-                              showDetailCont.saveWatchList(addToWatchList: !showDetailCont.tvShowDetail.value.isWatchList);
+                              showDetailCont.saveWatchList(
+                                  addToWatchList: !showDetailCont
+                                      .tvShowDetail.value.isWatchList);
                             } else {
                               LiveStream().emit(podPlayerPauseKey);
                               Get.to(() => SignInScreen())?.then((value) {
                                 if (isLoggedIn.isTrue) {
-                                  showDetailCont.saveWatchList(addToWatchList: !showDetailCont.tvShowDetail.value.isWatchList);
+                                  showDetailCont.saveWatchList(
+                                      addToWatchList: !showDetailCont
+                                          .tvShowDetail.value.isWatchList);
                                 }
                               });
                             }
@@ -69,7 +73,9 @@ class TvShowDetailsComponent extends StatelessWidget {
                           icon: Assets.iconsIcShare,
                           title: locale.value.share,
                           onTap: () {
-                            shareVideo(type: showDetailCont.tvShowDetail.value.type, videoId: showDetailCont.tvShowDetail.value.id);
+                            shareVideo(
+                                type: showDetailCont.tvShowDetail.value.type,
+                                videoId: showDetailCont.tvShowDetail.value.id);
                           },
                         ),
                         CustomIconButton(
@@ -95,22 +101,32 @@ class TvShowDetailsComponent extends StatelessWidget {
                           color: iconColor,
                           onTap: () async {
                             /// Handle Picture In Picture Mode
-                            handlePip(controller: showDetailCont, context: context);
+                            handlePip(
+                                controller: showDetailCont, context: context);
                           },
                         ),
                         Obx(
                           () {
                             if (isCastingAvailable.value) {
                               return StreamBuilder<GoogleCastSession?>(
-                                stream: GoogleCastSessionManager.instance.currentSessionStream,
+                                stream: GoogleCastSessionManager
+                                    .instance.currentSessionStream,
                                 builder: (context, snapshot) {
-                                  final bool isConnected = GoogleCastSessionManager.instance.connectionState == GoogleCastConnectState.connected;
+                                  final bool isConnected =
+                                      GoogleCastSessionManager
+                                              .instance.connectionState ==
+                                          GoogleCastConnectState.connected;
                                   return CustomIconButton(
                                     icon: '',
                                     title: locale.value.videoCast,
-                                    titleTextStyle: !checkCastSupport() ? secondaryTextStyle(size: 14, color: grey) : null,
+                                    titleTextStyle: !checkCastSupport()
+                                        ? secondaryTextStyle(
+                                            size: 14, color: grey)
+                                        : null,
                                     iconWidget: Icon(
-                                      isConnected ? Icons.cast_connected : Icons.cast,
+                                      isConnected
+                                          ? Icons.cast_connected
+                                          : Icons.cast,
                                       size: 20,
                                       color: !checkCastSupport() ? grey : white,
                                     ),
@@ -121,15 +137,21 @@ class TvShowDetailsComponent extends StatelessWidget {
                                       }
                                       doIfLogin(
                                         onLoggedIn: () {
-                                        
                                           checkCastSupported(
                                             onCastSupported: () {
                                               if (isConnected) {
-                                                GoogleCastDiscoveryManager.instance.stopDiscovery();
-                                                GoogleCastSessionManager.instance.endSessionAndStopCasting();
+                                                GoogleCastDiscoveryManager
+                                                    .instance
+                                                    .stopDiscovery();
+                                                GoogleCastSessionManager
+                                                    .instance
+                                                    .endSessionAndStopCasting();
                                               } else {
-                                                LiveStream().emit(podPlayerPauseKey);
-                                                showDetailCont.openBottomSheetForFCCastAvailableDevices(context);
+                                                LiveStream()
+                                                    .emit(podPlayerPauseKey);
+                                                showDetailCont
+                                                    .openBottomSheetForFCCastAvailableDevices(
+                                                        context);
                                               }
                                             },
                                           );
@@ -147,10 +169,24 @@ class TvShowDetailsComponent extends StatelessWidget {
                       ],
                     ).paddingSymmetric(vertical: 16, horizontal: 2),
                     TvShowSeasonComponent().paddingSymmetric(horizontal: 10),
-                    ActorComponent(castDetails: showDetailCont.tvShowDetail.value.casts, title: locale.value.cast).visible(showDetailCont.tvShowDetail.value.casts.isNotEmpty),
-                    ActorComponent(castDetails: showDetailCont.tvShowDetail.value.directors, title: locale.value.directors).visible(showDetailCont.tvShowDetail.value.directors.isNotEmpty),
+                    ActorComponent(
+                            castDetails:
+                                showDetailCont.tvShowDetail.value.casts,
+                            title: locale.value.cast)
+                        .visible(
+                            showDetailCont.tvShowDetail.value.casts.isNotEmpty),
+                    ActorComponent(
+                            castDetails:
+                                showDetailCont.tvShowDetail.value.directors,
+                            title: locale.value.directors)
+                        .visible(showDetailCont
+                            .tvShowDetail.value.directors.isNotEmpty),
                     Obx(() {
-                      final ads = getDashboardController().getBannerAdsForCategory(targetContentType: 'tvshow', categoryId: showDetailCont.selectedEpisode.value.id);
+                      final ads = getDashboardController()
+                          .getBannerAdsForCategory(
+                              targetContentType: 'tvshow',
+                              categoryId:
+                                  showDetailCont.selectedEpisode.value.id);
                       if (ads.isEmpty) {
                         return const SizedBox.shrink();
                       }
@@ -184,8 +220,13 @@ class TvShowDetailsComponent extends StatelessWidget {
                       movieName: showDetailCont.tvShowDetail.value.name,
                       movieId: showDetailCont.tvShowDetail.value.id,
                       isMovie: false,
-                    ).visible(showDetailCont.tvShowDetail.value.reviews.isNotEmpty),
-                    MoreListComponent(moreList: showDetailCont.tvShowDetail.value.moreItems).visible(showDetailCont.tvShowDetail.value.moreItems.isNotEmpty),
+                    ).visible(
+                        showDetailCont.tvShowDetail.value.reviews.isNotEmpty),
+                    MoreListComponent(
+                            moreList:
+                                showDetailCont.tvShowDetail.value.moreItems)
+                        .visible(showDetailCont
+                            .tvShowDetail.value.moreItems.isNotEmpty),
                   ]
                 : [
                     Row(
@@ -196,47 +237,70 @@ class TvShowDetailsComponent extends StatelessWidget {
                           title: locale.value.share,
                           onTap: () {
                             LiveStream().emit(podPlayerPauseKey);
-                            shareVideo(type: VideoType.episode, videoId: showDetailCont.selectedEpisode.value.id);
+                            shareVideo(
+                                type: VideoType.episode,
+                                videoId:
+                                    showDetailCont.selectedEpisode.value.id);
                           },
                         ),
                         if (showDetailCont.showDownload.value)
                           CustomIconButton(
                             buttonColor: Colors.transparent,
-                            icon: showDetailCont.isDownloaded.value ? Assets.iconsIcDownloaded : Assets.iconsIcDownload,
+                            icon: showDetailCont.isDownloaded.value
+                                ? Assets.iconsIcDownloaded
+                                : Assets.iconsIcDownload,
                             title: locale.value.download,
                             isTrue: showDetailCont.isDownloaded.value,
-                            iconWidget: showDetailCont.downloadPercentage.value >= 1 && showDetailCont.downloadPercentage.value < 100 || showDetailCont.isDownloading.value
-                                ? Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      LoaderWidget(
-                                        size: 30,
-                                        loaderColor: appColorPrimary,
-                                      ),
-                                      if (showDetailCont.downloadPercentage.value > 0)
-                                        Marquee(
-                                          child: Text(
-                                            '${showDetailCont.downloadPercentage.value}'.suffixText(value: '%'),
-                                            style: primaryTextStyle(color: appColorPrimary, size: 10),
+                            iconWidget:
+                                showDetailCont.downloadPercentage.value >= 1 &&
+                                            showDetailCont
+                                                    .downloadPercentage.value <
+                                                100 ||
+                                        showDetailCont.isDownloading.value
+                                    ? Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          LoaderWidget(
+                                            size: 30,
+                                            loaderColor: appColorPrimary,
                                           ),
-                                        )
-                                    ],
-                                  )
-                                : null,
+                                          if (showDetailCont
+                                                  .downloadPercentage.value >
+                                              0)
+                                            Marquee(
+                                              child: Text(
+                                                '${showDetailCont.downloadPercentage.value}'
+                                                    .suffixText(value: '%'),
+                                                style: primaryTextStyle(
+                                                    color: appColorPrimary,
+                                                    size: 10),
+                                              ),
+                                            )
+                                        ],
+                                      )
+                                    : null,
                             color: iconColor,
                             onTap: () {
-                              if (showDetailCont.isDownloaded.value || showDetailCont.selectedEpisode.value.requiredPlanLevel == 0) {
+                              if (showDetailCont.isDownloaded.value ||
+                                  showDetailCont.selectedEpisode.value
+                                          .requiredPlanLevel ==
+                                      0) {
                                 showDetailCont.handleDownloads(context);
                               } else {
                                 onSubscriptionLoginCheck(
-                                  videoAccess: showDetailCont.selectedEpisode.value.access,
+                                  videoAccess: showDetailCont
+                                      .selectedEpisode.value.access,
                                   callBack: () {
-                                    if (currentSubscription.value.level >= showDetailCont.selectedEpisode.value.requiredPlanLevel) {
+                                    if (currentSubscription.value.level >=
+                                        showDetailCont.selectedEpisode.value
+                                            .requiredPlanLevel) {
                                       showDetailCont.handleDownloads(context);
                                     }
                                   },
-                                  planId: showDetailCont.selectedEpisode.value.planId,
-                                  planLevel: showDetailCont.selectedEpisode.value.requiredPlanLevel,
+                                  planId: showDetailCont
+                                      .selectedEpisode.value.planId,
+                                  planLevel: showDetailCont
+                                      .selectedEpisode.value.requiredPlanLevel,
                                 );
                               }
                             },
@@ -247,22 +311,32 @@ class TvShowDetailsComponent extends StatelessWidget {
                           color: iconColor,
                           onTap: () async {
                             /// Handle Picture In Picture Mode
-                            handlePip(controller: showDetailCont, context: context);
+                            handlePip(
+                                controller: showDetailCont, context: context);
                           },
                         ),
                         Obx(
                           () {
                             if (isCastingAvailable.value) {
                               return StreamBuilder<GoogleCastSession?>(
-                                stream: GoogleCastSessionManager.instance.currentSessionStream,
+                                stream: GoogleCastSessionManager
+                                    .instance.currentSessionStream,
                                 builder: (context, snapshot) {
-                                  final bool isConnected = GoogleCastSessionManager.instance.connectionState == GoogleCastConnectState.connected;
+                                  final bool isConnected =
+                                      GoogleCastSessionManager
+                                              .instance.connectionState ==
+                                          GoogleCastConnectState.connected;
                                   return CustomIconButton(
                                     icon: '',
                                     title: locale.value.videoCast,
-                                    titleTextStyle: !checkCastSupport() ? secondaryTextStyle(size: 14, color: grey) : null,
+                                    titleTextStyle: !checkCastSupport()
+                                        ? secondaryTextStyle(
+                                            size: 14, color: grey)
+                                        : null,
                                     iconWidget: Icon(
-                                      isConnected ? Icons.cast_connected : Icons.cast,
+                                      isConnected
+                                          ? Icons.cast_connected
+                                          : Icons.cast,
                                       size: 20,
                                       color: !checkCastSupport() ? grey : white,
                                     ),
@@ -276,11 +350,18 @@ class TvShowDetailsComponent extends StatelessWidget {
                                           checkCastSupported(
                                             onCastSupported: () {
                                               if (isConnected) {
-                                                GoogleCastDiscoveryManager.instance.stopDiscovery();
-                                                GoogleCastSessionManager.instance.endSessionAndStopCasting();
+                                                GoogleCastDiscoveryManager
+                                                    .instance
+                                                    .stopDiscovery();
+                                                GoogleCastSessionManager
+                                                    .instance
+                                                    .endSessionAndStopCasting();
                                               } else {
-                                                LiveStream().emit(podPlayerPauseKey);
-                                                showDetailCont.openBottomSheetForFCCastAvailableDevices(context);
+                                                LiveStream()
+                                                    .emit(podPlayerPauseKey);
+                                                showDetailCont
+                                                    .openBottomSheetForFCCastAvailableDevices(
+                                                        context);
                                               }
                                             },
                                           );
@@ -298,14 +379,22 @@ class TvShowDetailsComponent extends StatelessWidget {
                       ],
                     ).paddingSymmetric(vertical: 16, horizontal: 2),
                     Obx(() {
-                      final ads = getDashboardController().getBannerAdsForCategory(targetContentType: 'tvshow', categoryId: showDetailCont.selectedEpisode.value.id);
+                      final ads = getDashboardController()
+                          .getBannerAdsForCategory(
+                              targetContentType: 'tvshow',
+                              categoryId:
+                                  showDetailCont.selectedEpisode.value.id);
                       if (ads.isEmpty) {
                         return const SizedBox.shrink();
                       }
                       return CustomAdComponent(ads: ads);
                     }),
                     TvShowSeasonComponent().paddingSymmetric(horizontal: 10),
-                    MoreListComponent(moreList: showDetailCont.tvShowDetail.value.moreItems).visible(showDetailCont.tvShowDetail.value.moreItems.isNotEmpty),
+                    MoreListComponent(
+                            moreList:
+                                showDetailCont.tvShowDetail.value.moreItems)
+                        .visible(showDetailCont
+                            .tvShowDetail.value.moreItems.isNotEmpty),
                   ]
           ],
         );
@@ -314,9 +403,12 @@ class TvShowDetailsComponent extends StatelessWidget {
   }
 
   bool checkCastSupport() {
-    if (showDetailCont.showData.value.videoUploadType.toLowerCase() == PlayerTypes.hls.toLowerCase() ||
-        showDetailCont.showData.value.videoUploadType.toLowerCase() == PlayerTypes.url.toLowerCase() ||
-        showDetailCont.showData.value.videoUploadType.toLowerCase() == PlayerTypes.local.toLowerCase()) {
+    if (showDetailCont.showData.value.videoUploadType.toLowerCase() ==
+            PlayerTypes.hls.toLowerCase() ||
+        showDetailCont.showData.value.videoUploadType.toLowerCase() ==
+            PlayerTypes.url.toLowerCase() ||
+        showDetailCont.showData.value.videoUploadType.toLowerCase() ==
+            PlayerTypes.local.toLowerCase()) {
       return true;
     } else {
       return false;

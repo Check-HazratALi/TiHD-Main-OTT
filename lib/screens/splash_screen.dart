@@ -15,7 +15,8 @@ class SplashScreen extends StatelessWidget {
 
   SplashScreen({super.key, this.deepLink = "", this.link});
 
-  final SplashScreenController splashController = Get.put(SplashScreenController());
+  final SplashScreenController splashController =
+      Get.put(SplashScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class SplashScreen extends StatelessWidget {
           children: [
             Image.asset(
               Assets.assetsAppLogo,
-              height: 56,
+              height: 150,
             ).center(),
             Obx(
               () => splashController.isLoading.value

@@ -60,18 +60,26 @@ class SubscriptionCard extends StatelessWidget {
                 children: [
                   if (planDet.discountPercentage > 0)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-                      decoration: boxDecorationDefault(color: appColorPrimary, borderRadius: BorderRadius.circular(4)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 6),
+                      decoration: boxDecorationDefault(
+                          color: appColorPrimary,
+                          borderRadius: BorderRadius.circular(4)),
                       margin: const EdgeInsets.only(right: 12),
                       child: Text(
-                        locale.value.save.suffixText(value: ' ${planDet.discountPercentage.toString().suffixText(value: '%')}'),
+                        locale.value.save.suffixText(
+                            value:
+                                ' ${planDet.discountPercentage.toString().suffixText(value: '%')}'),
                         style: boldTextStyle(
                           size: 12,
                         ),
                       ),
                     ),
                   Text(
-                    appConfigs.value.enableInAppPurchase.getBoolInt() && revenueCatProduct != null ? revenueCatProduct!.title : planDet.name.toUpperCase(),
+                    appConfigs.value.enableInAppPurchase.getBoolInt() &&
+                            revenueCatProduct != null
+                        ? revenueCatProduct!.title
+                        : planDet.name.toUpperCase(),
                     style: secondaryTextStyle(
                       size: 12,
                       color: darkGrayTextColor,
@@ -83,7 +91,9 @@ class SubscriptionCard extends StatelessWidget {
                   InkWell(
                     onTap: onSelect,
                     child: Icon(
-                      isSelected ? Icons.radio_button_checked_rounded : Icons.radio_button_off_rounded,
+                      isSelected
+                          ? Icons.radio_button_checked_rounded
+                          : Icons.radio_button_off_rounded,
                       size: isSelected ? 18 : 20,
                       color: isSelected ? appColorPrimary : darkGrayColor,
                     ),
@@ -102,14 +112,18 @@ class SubscriptionCard extends StatelessWidget {
                     color: primaryTextColor,
                     price: planDet.price,
                     isLineThroughEnabled: planDet.discountPercentage > 0,
-                    formatedPrice: revenueCatProduct != null ? revenueCatProduct!.priceString : "",
+                    formatedPrice: revenueCatProduct != null
+                        ? revenueCatProduct!.priceString
+                        : "",
                   ),
                   Text.rich(
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: " / ${planDet.duration == "1" ? "" : getNumberInString(planDet.durationValue)} ",
-                          style: primaryTextStyle(size: 14, color: darkGrayTextColor),
+                          text:
+                              " / ${planDet.duration == "1" ? "" : getNumberInString(planDet.durationValue)} ",
+                          style: primaryTextStyle(
+                              size: 14, color: darkGrayTextColor),
                         ),
                         TextSpan(
                           text: planDet.duration.toLowerCase(),
@@ -118,9 +132,11 @@ class SubscriptionCard extends StatelessWidget {
                             color: darkGrayTextColor,
                           ),
                         ),
-                        if (revenueCatProduct != null && planDet.discountPercentage > 0)
+                        if (revenueCatProduct != null &&
+                            planDet.discountPercentage > 0)
                           TextSpan(
-                            text: ' (${planDet.discountPercentage} % discount included)',
+                            text:
+                                ' (${planDet.discountPercentage} % discount included)',
                             style: boldTextStyle(
                               size: 14,
                             ),
@@ -144,7 +160,9 @@ class SubscriptionCard extends StatelessWidget {
                   itemCount: planDet.planType.length,
                   itemBuilder: (context, index) {
                     if (planDet.planType[index].status.getBoolInt()) {
-                      return subscriptionBenefitsTile(planType: planDet.planType[index]).paddingBottom(8);
+                      return subscriptionBenefitsTile(
+                              planType: planDet.planType[index])
+                          .paddingBottom(8);
                     } else {
                       return Offstage();
                     }
@@ -188,7 +206,9 @@ Widget subscriptionBenefitsTile({required PlanType planType}) {
           planType.slug != SubscriptionTitle.videoCast &&
           planType.slug != SubscriptionTitle.ads &&
           planType.slug != SubscriptionTitle.deviceLimit),
-      if (planType.slug == SubscriptionTitle.deviceLimit && planType.limitationValue.getBoolInt() && planType.limit.value.isNotEmpty)
+      if (planType.slug == SubscriptionTitle.deviceLimit &&
+          planType.limitationValue.getBoolInt() &&
+          planType.limit.value.isNotEmpty)
         ULWidget(
           titleWidget: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -216,7 +236,8 @@ Widget subscriptionBenefitsTile({required PlanType planType}) {
           customSymbol: SizedBox.shrink(),
           children: [],
         ),
-      if (planType.slug == SubscriptionTitle.videoCast && planType.limitationValue.getBoolInt())
+      if (planType.slug == SubscriptionTitle.videoCast &&
+          planType.limitationValue.getBoolInt())
         ULWidget(
           titleWidget: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -231,7 +252,9 @@ Widget subscriptionBenefitsTile({required PlanType planType}) {
               8.width,
               Marquee(
                 child: Text(
-                  planType.limitationValue == 1 ? "Video Casting is enabled." : "Video Casting is not available.",
+                  planType.limitationValue == 1
+                      ? "Video Casting is enabled."
+                      : "Video Casting is not available.",
                   style: primaryTextStyle(
                     size: 12,
                     color: darkGrayTextColor,
@@ -259,7 +282,9 @@ Widget subscriptionBenefitsTile({required PlanType planType}) {
               8.width,
               Marquee(
                 child: Text(
-                  planType.limitationValue == 1 ? "Ads will be shown" : "Ads will not be shown",
+                  planType.limitationValue == 1
+                      ? "Ads will be shown"
+                      : "Ads will not be shown",
                   style: primaryTextStyle(
                     size: 12,
                     color: darkGrayTextColor,
@@ -272,7 +297,8 @@ Widget subscriptionBenefitsTile({required PlanType planType}) {
           customSymbol: SizedBox.shrink(),
           children: [],
         ),
-      if (planType.slug == SubscriptionTitle.supportedDeviceType && planType.limitationValue.getBoolInt())
+      if (planType.slug == SubscriptionTitle.supportedDeviceType &&
+          planType.limitationValue.getBoolInt())
         ULWidget(
           titleWidget: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -299,7 +325,8 @@ Widget subscriptionBenefitsTile({required PlanType planType}) {
           edgeInsets: EdgeInsets.only(left: 16, top: 2, bottom: 2),
           customSymbol: SizedBox.shrink(),
           children: getSupportedDeviceText(
-            isDesktopSupported: planType.limit.enableLaptop.toInt().getBoolInt(),
+            isDesktopSupported:
+                planType.limit.enableLaptop.toInt().getBoolInt(),
             isMobileSupported: planType.limit.enableMobile.toInt().getBoolInt(),
             isTabletSupported: planType.limit.enableTablet.toInt().getBoolInt(),
           )
@@ -318,7 +345,9 @@ Widget subscriptionBenefitsTile({required PlanType planType}) {
               )
               .toList(),
         ),
-      if (planType.slug == SubscriptionTitle.profileLimit && planType.limit.value.isNotEmpty && planType.limitationValue.getBoolInt())
+      if (planType.slug == SubscriptionTitle.profileLimit &&
+          planType.limit.value.isNotEmpty &&
+          planType.limitationValue.getBoolInt())
         ULWidget(
           titleWidget: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -346,7 +375,8 @@ Widget subscriptionBenefitsTile({required PlanType planType}) {
           customSymbol: SizedBox.shrink(),
           children: [],
         ),
-      if (planType.slug == SubscriptionTitle.downloadStatus && planType.limitationValue.getBoolInt())
+      if (planType.slug == SubscriptionTitle.downloadStatus &&
+          planType.limitationValue.getBoolInt())
         ULWidget(
           titleWidget: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -382,7 +412,8 @@ Widget subscriptionBenefitsTile({required PlanType planType}) {
                     color: discountColor,
                   ),
                   2.width,
-                  Text(getDownloadQuality(planType.limit).$1, style: secondaryTextStyle()),
+                  Text(getDownloadQuality(planType.limit).$1,
+                      style: secondaryTextStyle()),
                 ],
               ),
             if (getDownloadQuality(planType.limit).$2.isNotEmpty)
@@ -394,7 +425,8 @@ Widget subscriptionBenefitsTile({required PlanType planType}) {
                     color: appColorPrimary,
                   ),
                   2.width,
-                  Text(getDownloadQuality(planType.limit).$2, style: secondaryTextStyle()),
+                  Text(getDownloadQuality(planType.limit).$2,
+                      style: secondaryTextStyle()),
                 ],
               )
           ],

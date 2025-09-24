@@ -48,11 +48,14 @@ import '../video_players/model/video_model.dart';
 class CoreServiceApis {
   static Future<DashboardDetailResponse> getDashboard() async {
     List<String> params = [];
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
     if (profileId.value != 0) params.add('profile_id=${profileId.value}');
-    if (selectedAccountProfile.value.isChildProfile.validate() == 1) params.add('is_restricted=0');
+    if (selectedAccountProfile.value.isChildProfile.validate() == 1)
+      params.add('is_restricted=0');
 
-    DashboardDetailResponse dashboardDetailsResp = DashboardDetailResponse.fromJson(
+    DashboardDetailResponse dashboardDetailsResp =
+        DashboardDetailResponse.fromJson(
       await handleResponse(
         await buildHttpResponse(
           getEndPoint(
@@ -75,25 +78,31 @@ class CoreServiceApis {
 
   static Future<DashboardDetailResponse> getDashboardDetailOtherData() async {
     List<String> params = [];
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
     if (profileId.value != 0) params.add('profile_id=${profileId.value}');
-    if (selectedAccountProfile.value.isChildProfile.validate() == 1) params.add('is_restricted=0');
+    if (selectedAccountProfile.value.isChildProfile.validate() == 1)
+      params.add('is_restricted=0');
 
-    DashboardDetailResponse dashboardDetailsResp = DashboardDetailResponse.fromJson(
+    DashboardDetailResponse dashboardDetailsResp =
+        DashboardDetailResponse.fromJson(
       await handleResponse(
         await buildHttpResponse(
-          getEndPoint(endPoint: APIEndPoints.dashboardDetailsOtherData, params: params),
+          getEndPoint(
+              endPoint: APIEndPoints.dashboardDetailsOtherData, params: params),
           method: HttpMethodType.GET,
           manageApiVersion: true,
         ),
       ),
     );
     if (cachedDashboardDetailResponse != null) {
-      DashboardDetailResponse res = cachedDashboardDetailResponse ?? DashboardDetailResponse(data: DashboardModel());
+      DashboardDetailResponse res = cachedDashboardDetailResponse ??
+          DashboardDetailResponse(data: DashboardModel());
       cachedDashboardDetailResponse = dashboardDetailsResp;
 
       cachedDashboardDetailResponse?.data.slider = res.data.slider;
-      cachedDashboardDetailResponse?.data.continueWatch = res.data.continueWatch;
+      cachedDashboardDetailResponse?.data.continueWatch =
+          res.data.continueWatch;
       cachedDashboardDetailResponse?.data.top10List = res.data.top10List;
     }
     setValue(
@@ -105,7 +114,8 @@ class CoreServiceApis {
   }
 
   static Future<LiveChannelDashboardResponse> getLiveDashboard() async {
-    LiveChannelDashboardResponse liveChannelDashboardResp = LiveChannelDashboardResponse.fromJson(
+    LiveChannelDashboardResponse liveChannelDashboardResp =
+        LiveChannelDashboardResponse.fromJson(
       await handleResponse(
         await buildHttpResponse(
           APIEndPoints.liveTvDashboard,
@@ -123,9 +133,11 @@ class CoreServiceApis {
   }
 
   // Original Search Details
-  static Future<SearchResponse> getSearchDetails({required String search}) async {
+  static Future<SearchResponse> getSearchDetails(
+      {required String search}) async {
     List<String> params = [];
-    if (selectedAccountProfile.value.isChildProfile.validate() == 1) params.add('is_restricted=0');
+    if (selectedAccountProfile.value.isChildProfile.validate() == 1)
+      params.add('is_restricted=0');
     if (search.isNotEmpty) params.add('search=$search');
     return SearchResponse.fromJson(
       await handleResponse(
@@ -173,7 +185,8 @@ class CoreServiceApis {
   }
 
   //Account Setting Screen
-  static Future<AccountSettingResponse> getAccountSettingsResponse({required String deviceId}) async {
+  static Future<AccountSettingResponse> getAccountSettingsResponse(
+      {required String deviceId}) async {
     String id = deviceId.isNotEmpty ? "?device_id=$deviceId" : "";
     return AccountSettingResponse.fromJson(
       await handleResponse(
@@ -186,9 +199,11 @@ class CoreServiceApis {
   }
 
   //Live Show details
-  static Future<LiveShowDetailResponse> getLiveShowDetails({required int channelId, int userId = -1}) async {
+  static Future<LiveShowDetailResponse> getLiveShowDetails(
+      {required int channelId, int userId = -1}) async {
     List<String> params = [];
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
 
     params.add('channel_id=$channelId');
     if (profileId.value != 0) params.add('profile_id=${profileId.value}');
@@ -203,11 +218,13 @@ class CoreServiceApis {
   }
 
   //Movie Details
-  static Future<MovieDetailResponse> getMovieDetails({required int movieId, int userId = -1}) async {
+  static Future<MovieDetailResponse> getMovieDetails(
+      {required int movieId, int userId = -1}) async {
     List<String> params = [];
     params.add('movie_id=$movieId');
     params.add('device_id=${yourDevice.value.deviceId}');
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
     if (profileId.value != 0) params.add('profile_id=${profileId.value}');
     return MovieDetailResponse.fromJson(
       await handleResponse(
@@ -221,9 +238,11 @@ class CoreServiceApis {
   }
 
   //Video Details
-  static Future<VideoDetailResponse> getVideoDetails({required int movieId, int userId = -1}) async {
+  static Future<VideoDetailResponse> getVideoDetails(
+      {required int movieId, int userId = -1}) async {
     List<String> params = [];
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
 
     params.add('video_id=$movieId');
     params.add('device_id=${yourDevice.value.deviceId}');
@@ -239,16 +258,22 @@ class CoreServiceApis {
   }
 
   //Episode Details
-  static Future<EpisodeModel> episodeDetails({required int episodeId, int userId = -1, required int tvShowId, required int seasonId}) async {
+  static Future<EpisodeModel> episodeDetails(
+      {required int episodeId,
+      int userId = -1,
+      required int tvShowId,
+      required int seasonId}) async {
     List<String> params = [];
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
     params.add('device_id=${yourDevice.value.deviceId}');
     params.add('episode_id=$episodeId');
     if (tvShowId > -1) params.add('tv_show=$tvShowId');
     if (seasonId > -1) params.add('season_id=$seasonId');
 
     if (profileId.value != 0) params.add('profile_id=${profileId.value}');
-    final EpisodeDetailResponse episodeListResp = EpisodeDetailResponse.fromJson(
+    final EpisodeDetailResponse episodeListResp =
+        EpisodeDetailResponse.fromJson(
       await handleResponse(
         await buildHttpResponse(
           getEndPoint(endPoint: APIEndPoints.episodeDetails, params: params),
@@ -261,11 +286,13 @@ class CoreServiceApis {
   }
 
   //TvShow Details
-  static Future<TvShowModel> getTvShowDetails({required int showId, int userId = -1}) async {
+  static Future<TvShowModel> getTvShowDetails(
+      {required int showId, int userId = -1}) async {
     List<String> params = [];
     params.add('tvshow_id=$showId');
     params.add('device_id=${yourDevice.value.deviceId}');
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
     if (profileId.value != 0) params.add('profile_id=${profileId.value}');
     return TvShowModel.fromJson(
       await handleResponse(
@@ -316,7 +343,8 @@ class CoreServiceApis {
     );
   }
 
-  static Future<BaseResponseModel> deleteFromDownload({required List<int> idList}) async {
+  static Future<BaseResponseModel> deleteFromDownload(
+      {required List<int> idList}) async {
     List<String> params = [];
     params.add('id=${idList.join(',')}');
     return BaseResponseModel.fromJson(
@@ -330,7 +358,8 @@ class CoreServiceApis {
   }
 
   // Save Continue Watch List API
-  static Future<BaseResponseModel> saveContinueWatch({required Map request}) async {
+  static Future<BaseResponseModel> saveContinueWatch(
+      {required Map request}) async {
     return BaseResponseModel.fromJson(
       await handleResponse(
         await buildHttpResponse(
@@ -369,7 +398,8 @@ class CoreServiceApis {
   }
 
   // Store View Movie
-  static Future<BaseResponseModel> storeViewDetails({required Map request}) async {
+  static Future<BaseResponseModel> storeViewDetails(
+      {required Map request}) async {
     return BaseResponseModel.fromJson(
       await handleResponse(
         await buildHttpResponse(
@@ -395,7 +425,8 @@ class CoreServiceApis {
   }
 
   // Save Subscription Details
-  static Future<SubscriptionResponseModel> saveSubscriptionDetails({required Map request}) async {
+  static Future<SubscriptionResponseModel> saveSubscriptionDetails(
+      {required Map request}) async {
     return SubscriptionResponseModel.fromJson(
       await handleResponse(
         await buildHttpResponse(
@@ -408,7 +439,8 @@ class CoreServiceApis {
   }
 
   // Cancel Subscription Details
-  static Future<SubscriptionResponseModel> cancelSubscription({required Map request}) async {
+  static Future<SubscriptionResponseModel> cancelSubscription(
+      {required Map request}) async {
     return SubscriptionResponseModel.fromJson(
       await handleResponse(
         await buildHttpResponse(
@@ -482,11 +514,13 @@ class CoreServiceApis {
     List<String> params = [];
     perPage ??= determinePerPage();
     params.add('per_page=$perPage&page=$page');
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
     if (actorId > -1) params.add('actor_id=$actorId');
     if (genresId > -1) params.add('genre_id=$genresId');
     if (language.isNotEmpty) params.add('language=$language');
-    if (selectedAccountProfile.value.isChildProfile.validate() == 1) params.add('is_restricted=0');
+    if (selectedAccountProfile.value.isChildProfile.validate() == 1)
+      params.add('is_restricted=0');
 
     ListResponse movieList = ListResponse.fromJson(
       await handleResponse(
@@ -498,7 +532,7 @@ class CoreServiceApis {
       ),
     );
     if (page == 1) getMovieList.clear();
-    getMovieList.addAll(movieList.data??[]);
+    getMovieList.addAll(movieList.data ?? []);
     lastPageCallBack?.call(movieList.data?.length != perPage);
     return getMovieList.obs;
   }
@@ -509,7 +543,8 @@ class CoreServiceApis {
   }) async {
     List<String> params = [];
     params.add('type=$type');
-    if (selectedAccountProfile.value.isChildProfile.validate() == 1) params.add('is_restricted=0');
+    if (selectedAccountProfile.value.isChildProfile.validate() == 1)
+      params.add('is_restricted=0');
 
     final response = await handleResponse(
       await buildHttpResponse(
@@ -519,8 +554,12 @@ class CoreServiceApis {
         ),
       ),
     );
-    if (response is Map && response['data'] is Map && response['data']['slider'] is List) {
-      final bannerList = (response['data']['slider'] as List).map((json) => SliderModel.fromJson(json)).toList();
+    if (response is Map &&
+        response['data'] is Map &&
+        response['data']['slider'] is List) {
+      final bannerList = (response['data']['slider'] as List)
+          .map((json) => SliderModel.fromJson(json))
+          .toList();
       return RxList<SliderModel>(bannerList);
     } else {
       return RxList<SliderModel>();
@@ -562,7 +601,8 @@ class CoreServiceApis {
     List<String> params = [];
     perPage ??= determinePerPage();
     params.add('per_page=$perPage&page=$page');
-    if (selectedAccountProfile.value.isChildProfile.validate() == 1) params.add('is_restricted=0');
+    if (selectedAccountProfile.value.isChildProfile.validate() == 1)
+      params.add('is_restricted=0');
     if (loginUserData.value.id > -1) {
       params.add('user_id=${loginUserData.value.id}');
     }
@@ -576,7 +616,7 @@ class CoreServiceApis {
       ),
     );
     if (page == 1) getTvShowList.clear();
-    getTvShowList.addAll(tvshowList.data??[]);
+    getTvShowList.addAll(tvshowList.data ?? []);
     lastPageCallBack?.call(tvshowList.data?.length != perPage);
 
     return getTvShowList.obs;
@@ -649,19 +689,21 @@ class CoreServiceApis {
       ),
     );
     if (page == 1) continueWatchList.clear();
-    continueWatchList.addAll(listResponse.data??[]);
+    continueWatchList.addAll(listResponse.data ?? []);
     lastPageCallBack?.call(listResponse.data?.length != perPage);
     return continueWatchList.obs;
   }
 
 //region Remove from Continue Watching
-  static Future<BaseResponseModel> removeContinueWatching({required int continueWatchingId}) async {
+  static Future<BaseResponseModel> removeContinueWatching(
+      {required int continueWatchingId}) async {
     List<String> params = [];
     params.add('id=$continueWatchingId');
     return BaseResponseModel.fromJson(
       await handleResponse(
         await buildHttpResponse(
-          getEndPoint(endPoint: APIEndPoints.deleteContinueWatch, params: params),
+          getEndPoint(
+              endPoint: APIEndPoints.deleteContinueWatch, params: params),
           method: HttpMethodType.POST,
         ),
       ),
@@ -678,7 +720,8 @@ class CoreServiceApis {
     List<String> params = [];
     perPage ??= determinePerPage();
     if (profileId.value != 0) params.add('profile_id=${profileId.value}');
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
     params.add('per_page=$perPage&page=$page');
 
     ListResponse listResponse = ListResponse.fromJson(
@@ -690,12 +733,13 @@ class CoreServiceApis {
       ),
     );
     if (page == 1) getWatchList.clear();
-    getWatchList.addAll(listResponse.data??[]);
+    getWatchList.addAll(listResponse.data ?? []);
     lastPageCallBack?.call(listResponse.data?.length != perPage);
     return getWatchList.obs;
   }
 
-  static Future<BaseResponseModel> deleteFromWatchlist({required List<int> idList}) async {
+  static Future<BaseResponseModel> deleteFromWatchlist(
+      {required List<int> idList}) async {
     List<String> params = [];
     params.add('id=${idList.join(',')}');
     params.add("profile_id=${profileId.value}");
@@ -718,9 +762,11 @@ class CoreServiceApis {
   }) async {
     List<String> params = [];
     perPage ??= determinePerPage();
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
     params.add('per_page=$perPage&page=$page');
-    if (selectedAccountProfile.value.isChildProfile.validate() == 1) params.add('is_restricted=0');
+    if (selectedAccountProfile.value.isChildProfile.validate() == 1)
+      params.add('is_restricted=0');
     final videoList = ListResponse.fromJson(
       await handleResponse(
         await buildHttpResponse(
@@ -730,7 +776,7 @@ class CoreServiceApis {
       ),
     );
     if (page == 1) getVideoList.clear();
-    getVideoList.addAll(videoList.data??[]);
+    getVideoList.addAll(videoList.data ?? []);
     lastPageCallBack?.call(videoList.data?.length != perPage);
     return getVideoList.obs;
   }
@@ -746,7 +792,8 @@ class CoreServiceApis {
   }) async {
     List<String> params = [];
     params.add('per_page=$perPage&page=$page');
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
     if (seasonId > -1) params.add('season_id=$seasonId');
     if (showId > -1) params.add('show_id=$showId');
     EpisodeDetailResponse it = EpisodeDetailResponse.fromJson(
@@ -843,7 +890,8 @@ class CoreServiceApis {
     );
   }
 
-  static Future<BaseResponseModel> saveViewCompleted({required Map request}) async {
+  static Future<BaseResponseModel> saveViewCompleted(
+      {required Map request}) async {
     return BaseResponseModel.fromJson(
       await handleResponse(
         await buildHttpResponse(
@@ -866,10 +914,12 @@ class CoreServiceApis {
     List<String> params = [];
     params.add('per_page=$perPage&page=$page');
     try {
-      WatchingProfileResponse profileResponseModel = WatchingProfileResponse.fromJson(
+      WatchingProfileResponse profileResponseModel =
+          WatchingProfileResponse.fromJson(
         await handleResponse(
           await buildHttpResponse(
-            getEndPoint(endPoint: APIEndPoints.getWatchingProfileList, params: params),
+            getEndPoint(
+                endPoint: APIEndPoints.getWatchingProfileList, params: params),
             method: HttpMethodType.GET,
           ),
         ),
@@ -889,7 +939,8 @@ class CoreServiceApis {
     List<File>? files,
     VoidCallback? onSuccess,
   }) async {
-    var multiPartRequest = await getMultiPartRequest(APIEndPoints.editWatchingProfile);
+    var multiPartRequest =
+        await getMultiPartRequest(APIEndPoints.editWatchingProfile);
     multiPartRequest.fields.addAll(await getMultipartFields(val: request));
 
     if (files.validate().isNotEmpty) {
@@ -902,11 +953,13 @@ class CoreServiceApis {
     }
 
     multiPartRequest.headers.addAll(buildHeaderTokens());
-    WatchingProfileResponse profileWatchingResponseModel = WatchingProfileResponse(newUserProfile: WatchingProfileModel());
+    WatchingProfileResponse profileWatchingResponseModel =
+        WatchingProfileResponse(newUserProfile: WatchingProfileModel());
     await sendMultiPartRequest(
       multiPartRequest,
       onSuccess: (temp) async {
-        profileWatchingResponseModel = WatchingProfileResponse.fromJson(jsonDecode(temp));
+        profileWatchingResponseModel =
+            WatchingProfileResponse.fromJson(jsonDecode(temp));
       },
       onError: (error, response) {
         profileWatchingResponseModel = WatchingProfileResponse(
@@ -926,7 +979,8 @@ class CoreServiceApis {
   }
 
 // Watching Delete Profile
-  static Future<BaseResponseModel> deleteWatchingProfile({required Map request}) async {
+  static Future<BaseResponseModel> deleteWatchingProfile(
+      {required Map request}) async {
     return BaseResponseModel.fromJson(
       await handleResponse(
         await buildHttpResponse(
@@ -940,7 +994,8 @@ class CoreServiceApis {
 
   /// Search Apis
 // Save search
-  static Future<WatchingProfileResponse> saveSearch({required Map request}) async {
+  static Future<WatchingProfileResponse> saveSearch(
+      {required Map request}) async {
     return WatchingProfileResponse.fromJson(
       await handleResponse(
         await buildHttpResponse(
@@ -965,7 +1020,8 @@ class CoreServiceApis {
   }
 
 // Particular Search Delete
-  static Future<BaseResponseModel> particularSearchDelete(int id, int profileId) async {
+  static Future<BaseResponseModel> particularSearchDelete(
+      int id, int profileId) async {
     return BaseResponseModel.fromJson(
       await handleResponse(
         await buildHttpResponse(
@@ -1011,7 +1067,8 @@ class CoreServiceApis {
     SubscriptionResponse profileResponseModel = SubscriptionResponse.fromJson(
       await handleResponse(
         await buildHttpResponse(
-          getEndPoint(endPoint: APIEndPoints.subscriptionHistory, params: params),
+          getEndPoint(
+              endPoint: APIEndPoints.subscriptionHistory, params: params),
           method: HttpMethodType.GET,
         ),
       ),
@@ -1051,7 +1108,8 @@ class CoreServiceApis {
     return couponList.obs;
   }
 
-  static Future<BaseResponseModel> changePin(String pin, String confirmPin) async {
+  static Future<BaseResponseModel> changePin(
+      String pin, String confirmPin) async {
     List<String> params = [];
     params.add('pin=$pin');
     params.add('confirm_pin=$confirmPin');
@@ -1090,7 +1148,8 @@ class CoreServiceApis {
     );
   }
 
-  static Future<BaseResponseModel> updateParentalLock(Map<String, dynamic> request) async {
+  static Future<BaseResponseModel> updateParentalLock(
+      Map<String, dynamic> request) async {
     return BaseResponseModel.fromJson(
       await handleResponse(
         await buildHttpResponse(
@@ -1116,7 +1175,9 @@ class CoreServiceApis {
   }
 
   static Future<PayPerViewModel> saveRentDetails({required Map request}) async {
-    return PayPerViewModel.fromJson(await handleResponse(await buildHttpResponse(APIEndPoints.saveRentDetails, request: request, method: HttpMethodType.POST)));
+    return PayPerViewModel.fromJson(await handleResponse(
+        await buildHttpResponse(APIEndPoints.saveRentDetails,
+            request: request, method: HttpMethodType.POST)));
   }
 
   static Future<RxList<VideoPlayerModel>> getRentedContent({
@@ -1131,8 +1192,10 @@ class CoreServiceApis {
     List<String> params = [];
     perPage ??= determinePerPage();
     params.add('per_page=$perPage&page=$page');
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
-    if (selectedAccountProfile.value.isChildProfile.validate() == 1) params.add('is_restricted=0');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
+    if (selectedAccountProfile.value.isChildProfile.validate() == 1)
+      params.add('is_restricted=0');
     RentedContent movieList = RentedContent.fromJson(
       await handleResponse(
         await buildHttpResponse(
@@ -1142,8 +1205,15 @@ class CoreServiceApis {
       ),
     );
     if (page == 1) rentedContentList.clear();
-    rentedContentList.addAll(movieList.data.movies + movieList.data.tvshows + movieList.data.videos + movieList.data.episodes);
-    lastPageCallBack?.call((movieList.data.movies.length + movieList.data.tvshows.length + movieList.data.videos.length + movieList.data.episodes.length) != perPage);
+    rentedContentList.addAll(movieList.data.movies +
+        movieList.data.tvshows +
+        movieList.data.videos +
+        movieList.data.episodes);
+    lastPageCallBack?.call((movieList.data.movies.length +
+            movieList.data.tvshows.length +
+            movieList.data.videos.length +
+            movieList.data.episodes.length) !=
+        perPage);
     return rentedContentList.obs;
   }
 
@@ -1156,8 +1226,10 @@ class CoreServiceApis {
     List<String> params = [];
     perPage ??= determinePerPage();
     params.add('per_page=$perPage&page=$page');
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
-    if (selectedAccountProfile.value.isChildProfile.validate() == 1) params.add('is_restricted=0');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
+    if (selectedAccountProfile.value.isChildProfile.validate() == 1)
+      params.add('is_restricted=0');
 
     ListResponse payPerViewList = ListResponse.fromJson(
       await handleResponse(
@@ -1168,13 +1240,15 @@ class CoreServiceApis {
       ),
     );
     if (page == 1) getPayPerViewList.clear();
-    getPayPerViewList.addAll(payPerViewList.data??[]);
+    getPayPerViewList.addAll(payPerViewList.data ?? []);
     lastPageCallBack?.call(payPerViewList.data?.length != perPage);
     return getPayPerViewList.obs;
   }
 
   static Future<BaseResponseModel> startDate({required Map request}) async {
-    return BaseResponseModel.fromJson(await handleResponse(await buildHttpResponse(APIEndPoints.startDate, request: request, method: HttpMethodType.POST)));
+    return BaseResponseModel.fromJson(await handleResponse(
+        await buildHttpResponse(APIEndPoints.startDate,
+            request: request, method: HttpMethodType.POST)));
   }
 
   static Future<RxList<RentalHistoryItem>> getRentalHistory({
@@ -1185,7 +1259,8 @@ class CoreServiceApis {
   }) async {
     List<String> params = [];
     params.add('per_page=$perPage&page=$page');
-    if (loginUserData.value.id > -1) params.add('user_id=${loginUserData.value.id}');
+    if (loginUserData.value.id > -1)
+      params.add('user_id=${loginUserData.value.id}');
 
     RentalHistoryModel res = RentalHistoryModel.fromJson(
       await handleResponse(

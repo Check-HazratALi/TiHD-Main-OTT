@@ -51,12 +51,14 @@ class VideoDetailsComponent extends StatelessWidget {
                 iconWidth: 20,
                 onTap: () {
                   if (isLoggedIn.isTrue) {
-                    movieDetailCont.saveWatchList(addToWatchList: !videoDetail.isWatchList);
+                    movieDetailCont.saveWatchList(
+                        addToWatchList: !videoDetail.isWatchList);
                   } else {
                     LiveStream().emit(podPlayerPauseKey);
                     Get.to(() => SignInScreen())?.then((value) {
                       if (isLoggedIn.isTrue) {
-                        movieDetailCont.saveWatchList(addToWatchList: !videoDetail.isWatchList);
+                        movieDetailCont.saveWatchList(
+                            addToWatchList: !videoDetail.isWatchList);
                       }
                     });
                   }
@@ -75,10 +77,16 @@ class VideoDetailsComponent extends StatelessWidget {
                 () {
                   if (movieDetailCont.showDownload.value) {
                     return CustomIconButton(
-                      icon: movieDetailCont.isDownloaded.value ? Assets.iconsIcDownloaded : Assets.iconsIcDownload,
+                      icon: movieDetailCont.isDownloaded.value
+                          ? Assets.iconsIcDownloaded
+                          : Assets.iconsIcDownload,
                       title: locale.value.download,
                       isTrue: movieDetailCont.isDownloaded.value,
-                      iconWidget: movieDetailCont.downloadPercentage.value >= 1 && movieDetailCont.downloadPercentage.value < 100 || movieDetailCont.isDownloading.value
+                      iconWidget: movieDetailCont.downloadPercentage.value >=
+                                      1 &&
+                                  movieDetailCont.downloadPercentage.value <
+                                      100 ||
+                              movieDetailCont.isDownloading.value
                           ? Stack(
                               alignment: Alignment.center,
                               children: [
@@ -86,11 +94,14 @@ class VideoDetailsComponent extends StatelessWidget {
                                   size: 30,
                                   loaderColor: appColorPrimary,
                                 ),
-                                if (movieDetailCont.downloadPercentage.value > 0)
+                                if (movieDetailCont.downloadPercentage.value >
+                                    0)
                                   Marquee(
                                     child: Text(
-                                      '${movieDetailCont.downloadPercentage.value}'.suffixText(value: '%'),
-                                      style: primaryTextStyle(color: appColorPrimary, size: 10),
+                                      '${movieDetailCont.downloadPercentage.value}'
+                                          .suffixText(value: '%'),
+                                      style: primaryTextStyle(
+                                          color: appColorPrimary, size: 10),
                                     ),
                                   )
                               ],
@@ -98,13 +109,19 @@ class VideoDetailsComponent extends StatelessWidget {
                           : null,
                       color: iconColor,
                       onTap: () async {
-                        if (movieDetailCont.isDownloaded.value || movieDetailCont.movieDetailsResp.value.requiredPlanLevel == 0) {
+                        if (movieDetailCont.isDownloaded.value ||
+                            movieDetailCont
+                                    .movieDetailsResp.value.requiredPlanLevel ==
+                                0) {
                           movieDetailCont.handleDownload(context);
                         } else {
                           onSubscriptionLoginCheck(
-                            videoAccess: movieDetailCont.movieDetailsResp.value.access,
+                            videoAccess:
+                                movieDetailCont.movieDetailsResp.value.access,
                             callBack: () {
-                              if (currentSubscription.value.level >= movieDetailCont.movieDetailsResp.value.requiredPlanLevel) {
+                              if (currentSubscription.value.level >=
+                                  movieDetailCont.movieDetailsResp.value
+                                      .requiredPlanLevel) {
                                 movieDetailCont.handleDownload(context);
                               }
                             },
@@ -150,13 +167,18 @@ class VideoDetailsComponent extends StatelessWidget {
                 () {
                   if (isCastingAvailable.value) {
                     return StreamBuilder<GoogleCastSession?>(
-                      stream: GoogleCastSessionManager.instance.currentSessionStream,
+                      stream: GoogleCastSessionManager
+                          .instance.currentSessionStream,
                       builder: (context, snapshot) {
-                        final bool isConnected = GoogleCastSessionManager.instance.connectionState == GoogleCastConnectState.connected;
+                        final bool isConnected =
+                            GoogleCastSessionManager.instance.connectionState ==
+                                GoogleCastConnectState.connected;
                         return CustomIconButton(
                           icon: '',
                           title: locale.value.videoCast,
-                          titleTextStyle: !checkCastSupport() ? secondaryTextStyle(size: 14, color: grey) : null,
+                          titleTextStyle: !checkCastSupport()
+                              ? secondaryTextStyle(size: 14, color: grey)
+                              : null,
                           iconWidget: Icon(
                             isConnected ? Icons.cast_connected : Icons.cast,
                             size: 20,
@@ -167,18 +189,21 @@ class VideoDetailsComponent extends StatelessWidget {
                               toast(locale.value.castSupportInfo);
                               return;
                             }
-                          
-                           
+
                             doIfLogin(
                               onLoggedIn: () {
                                 checkCastSupported(
                                   onCastSupported: () async {
                                     if (isConnected) {
-                                      await GoogleCastDiscoveryManager.instance.stopDiscovery();
-                                      await GoogleCastSessionManager.instance.endSessionAndStopCasting();
+                                      await GoogleCastDiscoveryManager.instance
+                                          .stopDiscovery();
+                                      await GoogleCastSessionManager.instance
+                                          .endSessionAndStopCasting();
                                     } else {
                                       LiveStream().emit(podPlayerPauseKey);
-                                      movieDetailCont.openBottomSheetForFCCastAvailableDevices(context);
+                                      movieDetailCont
+                                          .openBottomSheetForFCCastAvailableDevices(
+                                              context);
                                     }
                                   },
                                 );
@@ -197,19 +222,26 @@ class VideoDetailsComponent extends StatelessWidget {
           ).paddingSymmetric(vertical: 16),
         ),
         Obx(() {
-          final ads = getDashboardController().getBannerAdsForCategory(targetContentType: 'video', categoryId: videoDetail.id);
+          final ads = getDashboardController().getBannerAdsForCategory(
+              targetContentType: 'video', categoryId: videoDetail.id);
           if (ads.isEmpty) {
             return const SizedBox.shrink();
           }
           return CustomAdComponent(ads: ads);
         }),
-        MoreListComponent(moreList: videoDetail.moreItems).visible(videoDetail.moreItems.isNotEmpty),
+        MoreListComponent(moreList: videoDetail.moreItems)
+            .visible(videoDetail.moreItems.isNotEmpty),
       ],
     );
   }
 
   bool checkCastSupport() {
-    if (videoDetail.videoUploadType.toLowerCase() == PlayerTypes.hls.toLowerCase() || videoDetail.videoUploadType.toLowerCase() == PlayerTypes.url.toLowerCase() || videoDetail.videoUploadType.toLowerCase() == PlayerTypes.local.toLowerCase()) {
+    if (videoDetail.videoUploadType.toLowerCase() ==
+            PlayerTypes.hls.toLowerCase() ||
+        videoDetail.videoUploadType.toLowerCase() ==
+            PlayerTypes.url.toLowerCase() ||
+        videoDetail.videoUploadType.toLowerCase() ==
+            PlayerTypes.local.toLowerCase()) {
       return true;
     } else {
       return false;

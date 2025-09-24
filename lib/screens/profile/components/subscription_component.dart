@@ -15,7 +15,8 @@ class SubscriptionComponent extends StatelessWidget {
   final SubscriptionPlanModel planDetails;
   final VoidCallback? callback;
 
-  const SubscriptionComponent({super.key, this.callback, required this.planDetails});
+  const SubscriptionComponent(
+      {super.key, this.callback, required this.planDetails});
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +45,16 @@ class SubscriptionComponent extends StatelessWidget {
             children: [
               Marquee(
                 child: Text(
-                  planDetails.level > -1 ? planDetails.name.validate() : locale.value.subscribeToEnjoyMore,
+                  planDetails.status == "active"
+                      ? planDetails.name.validate()
+                      : locale.value.subscribeToEnjoyMore,
                   style: boldTextStyle(size: 14),
                 ),
               ),
               2.height,
               Marquee(
                 child: Text(
-                  planDetails.level > -1
+                  planDetails.status == "active"
                       ? planDetails.endDate.isNotEmpty
                           ? "${locale.value.expiringOn} ${dateFormat(planDetails.endDate)}"
                           : ""
@@ -67,7 +70,8 @@ class SubscriptionComponent extends StatelessWidget {
           16.width,
           InkWell(
             onTap: () {
-              Get.to(() => SubscriptionScreen(launchDashboard: false))?.then((value) {
+              Get.to(() => SubscriptionScreen(launchDashboard: false))
+                  ?.then((value) {
                 if (planDetails.level != currentSubscription.value.level) {
                   callback?.call();
                 }
@@ -75,10 +79,13 @@ class SubscriptionComponent extends StatelessWidget {
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-              decoration: boxDecorationDefault(color: white, borderRadius: BorderRadius.circular(4)),
+              decoration: boxDecorationDefault(
+                  color: white, borderRadius: BorderRadius.circular(4)),
               alignment: Alignment.center,
               child: Text(
-                planDetails.level == -1 ? locale.value.subscribe : locale.value.updrade,
+                planDetails.status != "active"
+                    ? locale.value.subscribe
+                    : locale.value.updrade,
                 style: secondaryTextStyle(
                   size: 12,
                   weight: FontWeight.w600,

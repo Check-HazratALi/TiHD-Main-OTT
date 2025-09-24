@@ -42,17 +42,28 @@ Map<String, String> buildHeaderTokens({
   if (endPoint == APIEndPoints.register) {
     header.putIfAbsent(HttpHeaders.acceptHeader, () => 'application/json');
   }
-  header.putIfAbsent(HttpHeaders.contentTypeHeader, () => 'application/json; charset=utf-8');
+  header.putIfAbsent(
+      HttpHeaders.contentTypeHeader, () => 'application/json; charset=utf-8');
 
-  if (isLoggedIn.value && extraKeys.containsKey('isFlutterWave') && extraKeys['isFlutterWave']) {
-    header.putIfAbsent(HttpHeaders.authorizationHeader, () => "Bearer ${extraKeys!['flutterWaveSecretKey']}");
-  } else if (isLoggedIn.value && extraKeys.containsKey('isAirtelMoney') && extraKeys['isAirtelMoney']) {
-    header.putIfAbsent(HttpHeaders.contentTypeHeader, () => 'application/json; charset=utf-8');
-    header.putIfAbsent(HttpHeaders.authorizationHeader, () => 'Bearer ${extraKeys!['access_token']}');
+  if (isLoggedIn.value &&
+      extraKeys.containsKey('isFlutterWave') &&
+      extraKeys['isFlutterWave']) {
+    header.putIfAbsent(HttpHeaders.authorizationHeader,
+        () => "Bearer ${extraKeys!['flutterWaveSecretKey']}");
+  } else if (isLoggedIn.value &&
+      extraKeys.containsKey('isAirtelMoney') &&
+      extraKeys['isAirtelMoney']) {
+    header.putIfAbsent(
+        HttpHeaders.contentTypeHeader, () => 'application/json; charset=utf-8');
+    header.putIfAbsent(HttpHeaders.authorizationHeader,
+        () => 'Bearer ${extraKeys!['access_token']}');
     header.putIfAbsent('X-Country', () => '${extraKeys!['X-Country']}');
     header.putIfAbsent('X-Currency', () => '${extraKeys!['X-Currency']}');
-  } else if ((getBoolAsync(SharedPreferenceConst.IS_LOGGED_IN) || isLoggedIn.value) && loginUserData.value.apiToken.isNotEmpty) {
-    header.putIfAbsent(HttpHeaders.authorizationHeader, () => 'Bearer ${loginUserData.value.apiToken}');
+  } else if ((getBoolAsync(SharedPreferenceConst.IS_LOGGED_IN) ||
+          isLoggedIn.value) &&
+      loginUserData.value.apiToken.isNotEmpty) {
+    header.putIfAbsent(HttpHeaders.authorizationHeader,
+        () => 'Bearer ${loginUserData.value.apiToken}');
   }
 
   return header;
@@ -75,14 +86,16 @@ Future<Response> buildHttpResponse(
   Map<String, String>? header,
   bool manageApiVersion = false,
 }) async {
-  var headers = header ?? buildHeaderTokens(extraKeys: extraKeys, endPoint: endPoint);
+  var headers =
+      header ?? buildHeaderTokens(extraKeys: extraKeys, endPoint: endPoint);
   Uri url = buildBaseUrl(endPoint, manageApiVersion: manageApiVersion);
 
   Response response;
 
   try {
     if (method == HttpMethodType.POST) {
-      response = await http.post(url, body: jsonEncode(request), headers: headers);
+      response =
+          await http.post(url, body: jsonEncode(request), headers: headers);
     } else if (method == HttpMethodType.DELETE) {
       response = await delete(url, headers: headers);
     } else if (method == HttpMethodType.PUT) {
@@ -103,7 +116,9 @@ Future<Response> buildHttpResponse(
     //Todo manage deleted account case
     // gets.Get.offAll(() => SignInScreen(showBackButton: false), arguments: true);
 
-    if (isLoggedIn.value && response.statusCode == 401 && !endPoint.startsWith('http')) {
+    if (isLoggedIn.value &&
+        response.statusCode == 401 &&
+        !endPoint.startsWith('http')) {
       return await reGenerateToken().then((value) async {
         return await buildHttpResponse(
           endPoint,
@@ -134,7 +149,8 @@ Future<Response> buildHttpResponse(
 
 Future<void> reGenerateToken() async {
   AuthServiceApis.clearData();
-  gets.Get.offAll(() => DashboardScreen(dashboardController: getDashboardController()));
+  gets.Get.offAll(
+      () => DashboardScreen(dashboardController: getDashboardController()));
 }
 
 Future handleResponse(
@@ -172,7 +188,8 @@ Future handleResponse(
       throw errorSomethingWentWrong;
     }
   } else if (response.statusCode == 400) {
-    BaseResponseModel baseResponseModel = BaseResponseModel.fromJson(jsonDecode(response.body.trim()));
+    BaseResponseModel baseResponseModel =
+        BaseResponseModel.fromJson(jsonDecode(response.body.trim()));
     if (baseResponseModel.message.isNotEmpty) {
       throw baseResponseModel.message;
     } else {
@@ -206,7 +223,8 @@ Future handleResponse(
 }
 
 //region CommonFunctions
-Future<Map<String, String>> getMultipartFields({required Map<String, dynamic> val}) async {
+Future<Map<String, String>> getMultipartFields(
+    {required Map<String, dynamic> val}) async {
   Map<String, String> data = {};
 
   val.forEach((key, value) {
@@ -216,13 +234,16 @@ Future<Map<String, String>> getMultipartFields({required Map<String, dynamic> va
   return data;
 }
 
-Future<MultipartRequest> getMultiPartRequest(String endPoint, {String? baseUrl}) async {
+Future<MultipartRequest> getMultiPartRequest(String endPoint,
+    {String? baseUrl}) async {
   String url = baseUrl ?? buildBaseUrl(endPoint).toString();
   return MultipartRequest('POST', Uri.parse(url));
 }
 
-Future<void> sendMultiPartRequest(MultipartRequest multiPartRequest, {Function(dynamic)? onSuccess, Function(String, Response)? onError}) async {
-  http.Response response = await http.Response.fromStream(await multiPartRequest.send());
+Future<void> sendMultiPartRequest(MultipartRequest multiPartRequest,
+    {Function(dynamic)? onSuccess, Function(String, Response)? onError}) async {
+  http.Response response =
+      await http.Response.fromStream(await multiPartRequest.send());
   apiPrint(
     url: multiPartRequest.url.toString(),
     headers: jsonEncode(multiPartRequest.headers),
@@ -257,7 +278,8 @@ Future<void> sendMultiPartRequest(MultipartRequest multiPartRequest, {Function(d
         error = errorData['message'];
       } else if (errorData.containsKey('error')) {
         error = errorData['error'];
-      } else if (errorData.containsKey('data') && errorData['data'] is Map<String, dynamic>) {
+      } else if (errorData.containsKey('data') &&
+          errorData['data'] is Map<String, dynamic>) {
         errorData = errorData['data'];
         if (errorData.containsKey('message')) {
           error = errorData['message'];
@@ -272,13 +294,15 @@ Future<void> sendMultiPartRequest(MultipartRequest multiPartRequest, {Function(d
   }
 }
 
-Future<List<MultipartFile>> getMultipartImages2({required List<XFile> files, required String name}) async {
+Future<List<MultipartFile>> getMultipartImages2(
+    {required List<XFile> files, required String name}) async {
   List<MultipartFile> multiPartRequest = [];
 
   await Future.forEach<XFile>(files, (element) async {
     int i = files.indexOf(element);
 
-    multiPartRequest.add(await MultipartFile.fromPath('$name[${i.toString()}]', element.path.validate()));
+    multiPartRequest.add(await MultipartFile.fromPath(
+        '$name[${i.toString()}]', element.path.validate()));
     log('MultipartFile: $name[${i.toString()}]');
   });
 
@@ -297,7 +321,8 @@ void apiPrint({
   Map? multipartRequest,
 }) {
   if (fullLog) {
-    dev.log("┌───────────────────────────────────────────────────────────────────────────────────────────────────────");
+    dev.log(
+        "┌───────────────────────────────────────────────────────────────────────────────────────────────────────");
     dev.log("\u001b[93m Url: \u001B[39m $url");
     dev.log("\u001b[93m endPoint: \u001B[39m \u001B[1m$endPoint\u001B[22m");
     dev.log("\u001b[93m header: \u001B[39m \u001b[96m$headers\u001B[39m");
@@ -313,7 +338,8 @@ void apiPrint({
     dev.log(statusCode.isSuccessful() ? "\u001b[32m" : "\u001b[31m");
     dev.log('Response ($methodType) $statusCode: $responseBody');
     dev.log("\u001B[0m");
-    dev.log("└───────────────────────────────────────────────────────────────────────────────────────────────────────");
+    dev.log(
+        "└───────────────────────────────────────────────────────────────────────────────────────────────────────");
   } else {
     log("┌───────────────────────────────────────────────────────────────────────────────────────────────────────");
     log("\u001b[93m Url: \u001B[39m $url");
@@ -359,7 +385,8 @@ Map<String, String> defaultHeaders() {
 Map<String, String> buildHeaderForFlutterWave(String flutterWaveSecretKey) {
   Map<String, String> header = defaultHeaders();
 
-  header.putIfAbsent(HttpHeaders.authorizationHeader, () => "Bearer $flutterWaveSecretKey");
+  header.putIfAbsent(
+      HttpHeaders.authorizationHeader, () => "Bearer $flutterWaveSecretKey");
 
   return header;
 }

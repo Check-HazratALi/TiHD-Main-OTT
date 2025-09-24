@@ -25,14 +25,19 @@ class RentedHistoryCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(rentalHistory.name, style: boldTextStyle(size: 20)),
-              if (rentalHistory.date.isNotEmpty && rentalHistory.expireDate.isNotEmpty) 12.height,
-              if (rentalHistory.date.isNotEmpty && rentalHistory.expireDate.isNotEmpty)
+              if (rentalHistory.date.isNotEmpty &&
+                  rentalHistory.expireDate.isNotEmpty)
+                12.height,
+              if (rentalHistory.date.isNotEmpty &&
+                  rentalHistory.expireDate.isNotEmpty)
                 Text(
                   "Validity: ${dateFormat(rentalHistory.date)} to ${dateFormat(rentalHistory.expireDate)}",
                   textAlign: TextAlign.start,
-                  style: secondaryTextStyle( size: 14, weight: FontWeight.w500),
+                  style: secondaryTextStyle(size: 14, weight: FontWeight.w500),
                 ),
-              if (rentalHistory.date.isNotEmpty && rentalHistory.expireDate.isNotEmpty) 10.height,
+              if (rentalHistory.date.isNotEmpty &&
+                  rentalHistory.expireDate.isNotEmpty)
+                10.height,
             ],
           ).expand(),
           16.width,

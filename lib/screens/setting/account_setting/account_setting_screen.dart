@@ -65,14 +65,28 @@ class AccountSettingScreen extends StatelessWidget {
                   return settingController.getAccountSetting();
                 },
                 children: [
-                  cachedProfileDetails != null && cachedProfileDetails?.data.planDetails.status.toString() == SubscriptionStatus.active
-                      ? SubscriptionComponent(planDetails: currentSubscription.value).paddingBottom(16)
-                      : SubscriptionComponent(planDetails: SubscriptionPlanModel()).paddingBottom(16),
-                  RegisterMobileComponent(mobileNo: settingController.accountSettingResp.value.registerMobileNumber.validate(), profileDetail: profileInfo)
-                      .visible(settingController.accountSettingResp.value.registerMobileNumber.isNotEmpty),
-                  if (!isDeviceLimitReached) YourDeviceComponent(deviceDet: yourDevice.value),
+                  cachedProfileDetails != null &&
+                          cachedProfileDetails?.data.planDetails.status
+                                  .toString() ==
+                              SubscriptionStatus.active
+                      ? SubscriptionComponent(
+                              planDetails: currentSubscription.value)
+                          .paddingBottom(16)
+                      : SubscriptionComponent(
+                              planDetails: SubscriptionPlanModel())
+                          .paddingBottom(16),
+                  RegisterMobileComponent(
+                          mobileNo: settingController
+                              .accountSettingResp.value.registerMobileNumber
+                              .validate(),
+                          profileDetail: profileInfo)
+                      .visible(settingController.accountSettingResp.value
+                          .registerMobileNumber.isNotEmpty),
+                  if (!isDeviceLimitReached)
+                    YourDeviceComponent(deviceDet: yourDevice.value),
                   OtherDevicesComponent(
-                    devicesDetail: settingController.accountSettingResp.value.otherDevice,
+                    devicesDetail:
+                        settingController.accountSettingResp.value.otherDevice,
                     onLogout: (logoutAll, device, String deviceName) {
                       if (logoutAll) {
                         settingController.logOutAll();

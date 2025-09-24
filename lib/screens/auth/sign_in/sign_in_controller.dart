@@ -37,7 +37,7 @@ class SignInController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isNormalLogin = false.obs;
 
-  RxString countryCode = "+91".obs;
+  RxString countryCode = "+880".obs;
   RxBool isOTPVerify = false.obs;
 
   Rx<String> verificationCode = ''.obs;
@@ -59,8 +59,8 @@ class SignInController extends GetxController {
   FocusNode phoneFocus = FocusNode();
   FocusNode countryCodeFocus = FocusNode();
 
-  TextEditingController emailCont = TextEditingController(text: Constants.DEFAULT_EMAIL);
-  TextEditingController passwordCont = TextEditingController(text: Constants.DEFAULT_PASS);
+  TextEditingController emailCont = TextEditingController();
+  TextEditingController passwordCont = TextEditingController();
 
   FocusNode emailFocus = FocusNode();
   FocusNode passwordFocus = FocusNode();
@@ -129,7 +129,8 @@ class SignInController extends GetxController {
     );
   }
 
-  Future<void> checkIfDemoUser({bool verify = false, required VoidCallback callBack}) async {
+  Future<void> checkIfDemoUser(
+      {bool verify = false, required VoidCallback callBack}) async {
     if (phoneCont.text.trim() == Constants.demoNumber) {
       verificationCode('123456');
       verifyCont.text = '123456';
@@ -215,7 +216,9 @@ class SignInController extends GetxController {
             isOTPSent(false);
             isPhoneAuthLoading(false);
             isLoading(false);
-            errorSnackBar(error: FirebaseAuthHandleExceptionsUtils().handleException(value));
+            errorSnackBar(
+                error:
+                    FirebaseAuthHandleExceptionsUtils().handleException(value));
           });
     } catch (e) {
       isLoading(false);
@@ -254,7 +257,8 @@ class SignInController extends GetxController {
         ),
       ),
 
-      showPhoneCode: true, // optional. Shows phone code before the country name.
+      showPhoneCode:
+          true, // optional. Shows phone code before the country name.
       onSelect: (Country country) {
         countryCode("+${country.phoneCode}");
         selectedCountry(country);
@@ -262,19 +266,32 @@ class SignInController extends GetxController {
     );
   }
 
-  Future<void> loginAPICall({required Map<String, dynamic> request, required bool isSocialLogin, bool isNormalLogin = false}) async {
-    await AuthServiceApis.loginUser(request: request, isSocialLogin: isSocialLogin).then((value) async {
-      handleLoginResponse(isSocialLogin: isSocialLogin, isNormalLogin: isNormalLogin);
+  Future<void> loginAPICall(
+      {required Map<String, dynamic> request,
+      required bool isSocialLogin,
+      bool isNormalLogin = false}) async {
+    await AuthServiceApis.loginUser(
+            request: request, isSocialLogin: isSocialLogin)
+        .then((value) async {
+      handleLoginResponse(
+          isSocialLogin: isSocialLogin, isNormalLogin: isNormalLogin);
     }).catchError((e) async {
-      if (e.toString().startsWith('404') || (e is Map<String, dynamic> && e.containsKey('status_code') && e['status_code'] == 404)) {
-        Get.offAll(() => SignUpScreen(), arguments: [true, mobileNo, countryCode]);
+      if (e.toString().startsWith('404') ||
+          (e is Map<String, dynamic> &&
+              e.containsKey('status_code') &&
+              e['status_code'] == 404)) {
+        Get.offAll(() => SignUpScreen(),
+            arguments: [true, mobileNo, countryCode]);
       } else {
         isLoading(false);
         if (!isNormalLogin) {
           Get.back();
         }
         errorSnackBar(error: e);
-        if (e is Map<String, dynamic> && e.containsKey('status_code') && e['status_code'] == 406 && e.containsKey('response')) {
+        if (e is Map<String, dynamic> &&
+            e.containsKey('status_code') &&
+            e['status_code'] == 406 &&
+            e.containsKey('response')) {
           ErrorModel errorData = ErrorModel.fromJson(e['response']);
           Get.bottomSheet(
             isDismissible: true,
@@ -287,7 +304,9 @@ class SignInController extends GetxController {
                 if (logoutAll) {
                   logOutAll(errorData.otherDevice.first.userId);
                 } else {
-                  deviceLogOut(device: deviceId, userId: errorData.otherDevice.first.userId.toInt());
+                  deviceLogOut(
+                      device: deviceId,
+                      userId: errorData.otherDevice.first.userId.toInt());
                 }
               },
             ),
@@ -312,7 +331,8 @@ class SignInController extends GetxController {
       'platform': yourDevice.value.platform,
     };
 
-    await loginAPICall(isSocialLogin: false, request: req, isNormalLogin: isNormalLogin);
+    await loginAPICall(
+        isSocialLogin: false, request: req, isNormalLogin: isNormalLogin);
   }
 
   Future<void> phoneSignIn() async {
@@ -431,12 +451,15 @@ class SignInController extends GetxController {
         onVerificationFailed: (value) {
           isLoading(false);
           verifyCont.clear();
-          errorSnackBar(error: FirebaseAuthHandleExceptionsUtils().handleException(value));
+          errorSnackBar(
+              error:
+                  FirebaseAuthHandleExceptionsUtils().handleException(value));
         });
   }
 
   Future<void> googleSignIn() async {
-    List<ConnectivityResult> connectivityResult = await Connectivity().checkConnectivity();
+    List<ConnectivityResult> connectivityResult =
+        await Connectivity().checkConnectivity();
 
     if (connectivityResult.first == ConnectivityResult.none) {
       toast(locale.value.yourInternetIsNotWorking, print: true);
@@ -468,7 +491,8 @@ class SignInController extends GetxController {
   }
 
   Future<void> appleSignIn() async {
-    List<ConnectivityResult> connectivityResult = await Connectivity().checkConnectivity();
+    List<ConnectivityResult> connectivityResult =
+        await Connectivity().checkConnectivity();
 
     if (connectivityResult.first == ConnectivityResult.none) {
       toast(locale.value.yourInternetIsNotWorking, print: true);
@@ -498,14 +522,20 @@ class SignInController extends GetxController {
     });
   }
 
-  void handleLoginResponse({String? password, bool isSocialLogin = false, bool isNormalLogin = false}) {
+  void handleLoginResponse(
+      {String? password,
+      bool isSocialLogin = false,
+      bool isNormalLogin = false}) {
     try {
-      setValue(SharedPreferenceConst.USER_PASSWORD, isSocialLogin ? "" : passwordCont.text.trim());
+      setValue(SharedPreferenceConst.USER_PASSWORD,
+          isSocialLogin ? "" : passwordCont.text.trim());
       setValue(SharedPreferenceConst.IS_LOGGED_IN, true);
       setValue(SharedPreferenceConst.IS_REMEMBER_ME, isRememberMe.value);
 
       Get.offAll(() => WatchingProfileScreen(), binding: BindingsBuilder(() {
-        Get.isRegistered<WatchingProfileController>() ? Get.find<WatchingProfileController>() : Get.put(WatchingProfileController(navigateToDashboard: true));
+        Get.isRegistered<WatchingProfileController>()
+            ? Get.find<WatchingProfileController>()
+            : Get.put(WatchingProfileController(navigateToDashboard: true));
       }));
 
       isLoading(false);
@@ -514,10 +544,13 @@ class SignInController extends GetxController {
     }
   }
 
-  Future<void> deviceLogOut({required String device, required int userId}) async {
+  Future<void> deviceLogOut(
+      {required String device, required int userId}) async {
     removeKey(SharedPreferenceConst.IS_PROFILE_ID);
     isLoading(true);
-    await AuthServiceApis.deviceLogoutApiWithoutAuth(deviceId: device, userId: userId).then((value) {
+    await AuthServiceApis.deviceLogoutApiWithoutAuth(
+            deviceId: device, userId: userId)
+        .then((value) {
       successSnackBar(value.message);
       // Close bottom sheet after success
       if (Get.isBottomSheetOpen ?? false) Get.back();
@@ -534,7 +567,8 @@ class SignInController extends GetxController {
     Get.back();
     if (isLoading.value) return;
     isLoading(true);
-    await AuthServiceApis.logOutAllAPIWithoutAuth(userId: userId).then((value) async {
+    await AuthServiceApis.logOutAllAPIWithoutAuth(userId: userId)
+        .then((value) async {
       successSnackBar(value.message);
       Get.back();
     }).catchError((e) {

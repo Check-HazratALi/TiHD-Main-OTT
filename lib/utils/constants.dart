@@ -6,13 +6,12 @@ import 'package:flutter/material.dart';
 class Constants {
   static const perPageItem = 20;
   static var labelTextSize = 16;
-  static var googleMapPrefix = 'https://www.google.com/maps/search/?api=1&query=';
-  static const DEFAULT_EMAIL = 'john@gmail.com';
-  static const DEFAULT_PASS = '12345678';
+  static var googleMapPrefix =
+      'https://www.google.com/maps/search/?api=1&query=';
   static const appLogoSize = 120.0;
   static const DECIMAL_POINT = 2;
   static const double shimmerTextSize = 12;
-  static const String defaultNumber = '+911234567890';
+  static const String defaultNumber = '+8801234567890';
 
   static const String demoNumber = '1234567890';
 
@@ -110,20 +109,26 @@ class SharedPreferenceConst {
   static const IS_18_PLUS = 'IS_18_PLUS';
   static const DOWNLOAD_VIDEOS = 'DOWNLOAD_VIDEOS';
   static const LAST_APP_CONFIGURATION_CALL_TIME = 'APP_CONFIGURATION_CALL_TIME';
-  static const IS_APP_CONFIGURATION_SYNCED_ONCE = 'IS_APP_CONFIGURATION_SYNCED_ONCE';
+  static const IS_APP_CONFIGURATION_SYNCED_ONCE =
+      'IS_APP_CONFIGURATION_SYNCED_ONCE';
   static const IS_PROFILE_ID = 'IS_PROFILE_ID';
   static const SUBSCRIPTION_PLAN_IDENTIFIER = 'SUBSCRIPTION_PLAN_IDENTIFIER';
-  static const SUBSCRIPTION_PLAN_GOOGLE_IDENTIFIER = 'SUBSCRIPTION_PLAN_GOOGLE_IDENTIFIER';
-  static const SUBSCRIPTION_PLAN_APPLE_IDENTIFIER = 'SUBSCRIPTION_PLAN_APPLE_IDENTIFIER';
+  static const SUBSCRIPTION_PLAN_GOOGLE_IDENTIFIER =
+      'SUBSCRIPTION_PLAN_GOOGLE_IDENTIFIER';
+  static const SUBSCRIPTION_PLAN_APPLE_IDENTIFIER =
+      'SUBSCRIPTION_PLAN_APPLE_IDENTIFIER';
   static const SUBSCRIPTION_ENTITLEMENT_ID = 'SUBSCRIPTION_ENTITLEMENT_ID';
   static const SUBSCRIPTION_GOOGLE_API_KEY = 'SUBSCRIPTION_GOOGLE_API_KEY';
   static const SUBSCRIPTION_APPLE_API_KEY = 'SUBSCRIPTION_APPLE_API_KEY';
   static const HAS_IN_APP_PURCHASE_ENABLE = 'HAS_IN_APP_PURCHASE_ENABLE';
-  static const HAS_IN_APP_SDK_INITIALISE_AT_LEASE_ONCE = 'HAS_IN_APP_SDK_INITIALISE_AT_LEASE_ONCE';
-  static const HAS_IN_APP_USER_LOGIN_DONE_AT_LEASE_ONCE = 'HAS_IN_APP_USER_LOGIN_DONE_AT_LEASE_ONCE';
+  static const HAS_IN_APP_SDK_INITIALISE_AT_LEASE_ONCE =
+      'HAS_IN_APP_SDK_INITIALISE_AT_LEASE_ONCE';
+  static const HAS_IN_APP_USER_LOGIN_DONE_AT_LEASE_ONCE =
+      'HAS_IN_APP_USER_LOGIN_DONE_AT_LEASE_ONCE';
   static const HAS_PURCHASE_STORED = 'HAS_PURCHASE_STORED';
   static const PURCHASE_REQUEST = 'PURCHASE_REQUEST';
-  static const IS_SUBSCRIPTION_PURCHASE_RESTORE_REQUIRED = 'IS_SUBSCRIPTION_PURCHASE_RESTORE_REQUIRED';
+  static const IS_SUBSCRIPTION_PURCHASE_RESTORE_REQUIRED =
+      'IS_SUBSCRIPTION_PURCHASE_RESTORE_REQUIRED';
   static const IS_SUPPORTED_DEVICE = 'IS_SUPPORTED_DEVICE';
 
   // locale
@@ -424,7 +429,6 @@ Map<String, String> languageMap = {
   "Yoruba": "yo",
   "Zulu": "zu",
 };
-
 
 class QualityConstants {
   static const String defaultQuality = 'default';

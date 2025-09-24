@@ -77,49 +77,62 @@ class SubscriptionPlanModel {
 
   factory SubscriptionPlanModel.fromJson(Map<String, dynamic> json) {
     return SubscriptionPlanModel(
-      id: json['id'] is int
-          ? json['id']
-          : json['plan_id'] is int
-              ? json['plan_id']
-              : -1,
-      name: json['name'] is String ? json['name'] : "",
-      identifier: json['identifier'] is String ? json['identifier'] : "",
-      price: json['price'] is num ? json['price'] : -1,
-      level: json['level'] is int ? json['level'] : -1,
-      duration: json['duration'] is String ? json['duration'] : "",
-      durationValue: json['duration_value'] is int ? json['duration_value'] : -1,
-      description: json['description'] is String ? json['description'] : "",
-      status: json['status'] is String ? json['status'] : '',
-      createdBy: json['created_by'] is int ? json['created_by'] : -1,
-      updatedBy: json['updated_by'] is int ? json['updated_by'] : -1,
-      deletedBy: json['deleted_by'] is int ? json['deleted_by'] : -1,
-      createdAt: json['created_at'] is String ? json['created_at'] : "",
-      updatedAt: json['updated_at'] is String ? json['updated_at'] : "",
-      deletedAt: json['deleted_at'] is String ? json['deleted_at'] : "",
-      discount: json['discount'] is num ? json['discount'] : -1,
-      discountPercentage: json['discount_percentage'] is num ? json['discount_percentage'] : -1,
-      totalPrice: json['total_price'] is num ? json['total_price'] : -1,
-      planId: json['plan_id'] is int ? json['plan_id'] : -1,
-      endDate: json['end_date'] is String ? json['end_date'] : "",
-      userId: json['user_id'] is int ? json['user_id'] : -1,
-      startDate: json['start_date'] is String ? json['start_date'] : "",
-      amount: json['amount'] is num ? json['amount'] : -1,
-      discountAmount: json['discount_amount'] is num ? json['discount_amount'] : -1,
-      taxAmount: json['tax_amount'] is num ? json['tax_amount'] : -1,
-      totalAmount: json['total_amount'] is num ? json['total_amount'] : -1,
-      type: json['type'] is String ? json['type'] : "",
-      planType: json['plan_type'] is List
-          ? List<PlanType>.from(json['plan_type'].map((x) => PlanType.fromJson(x)))
-          : json['plan_type'] is String
-              ? (jsonDecode(json['plan_type']) as List).map((item) => PlanType.fromJson(item)).toList()
-              : [],
-      paymentId: json['payment_id'] is int ? json['payment_id'] : -1,
-      deviceId: json['device_id'] is String ? json['device_id'] : "",
-      googleInAppPurchaseIdentifier: json['android_identifier'] is String ? json['android_identifier'] : '',
-      appleInAppPurchaseIdentifier: json['apple_identifier'] is String ? json['apple_identifier'] : '',
-      activePlanInAppPurchaseIdentifier: json['active_in_app_purchase_identifier'] is String ? json['active_in_app_purchase_identifier'] : '',
-      couponDiscount: json['coupon_discount'] is num ? json['coupon_discount'] : -1);
-
+        id: json['id'] is int
+            ? json['id']
+            : json['plan_id'] is int
+                ? json['plan_id']
+                : -1,
+        name: json['name'] is String ? json['name'] : "",
+        identifier: json['identifier'] is String ? json['identifier'] : "",
+        price: json['price'] is num ? json['price'] : -1,
+        level: json['level'] is int ? json['level'] : -1,
+        duration: json['duration'] is String ? json['duration'] : "",
+        durationValue:
+            json['duration_value'] is int ? json['duration_value'] : -1,
+        description: json['description'] is String ? json['description'] : "",
+        status: json['status'] is String ? json['status'] : '',
+        createdBy: json['created_by'] is int ? json['created_by'] : -1,
+        updatedBy: json['updated_by'] is int ? json['updated_by'] : -1,
+        deletedBy: json['deleted_by'] is int ? json['deleted_by'] : -1,
+        createdAt: json['created_at'] is String ? json['created_at'] : "",
+        updatedAt: json['updated_at'] is String ? json['updated_at'] : "",
+        deletedAt: json['deleted_at'] is String ? json['deleted_at'] : "",
+        discount: json['discount'] is num ? json['discount'] : -1,
+        discountPercentage: json['discount_percentage'] is num
+            ? json['discount_percentage']
+            : -1,
+        totalPrice: json['total_price'] is num ? json['total_price'] : -1,
+        planId: json['plan_id'] is int ? json['plan_id'] : -1,
+        endDate: json['end_date'] is String ? json['end_date'] : "",
+        userId: json['user_id'] is int ? json['user_id'] : -1,
+        startDate: json['start_date'] is String ? json['start_date'] : "",
+        amount: json['amount'] is num ? json['amount'] : -1,
+        discountAmount:
+            json['discount_amount'] is num ? json['discount_amount'] : -1,
+        taxAmount: json['tax_amount'] is num ? json['tax_amount'] : -1,
+        totalAmount: json['total_amount'] is num ? json['total_amount'] : -1,
+        type: json['type'] is String ? json['type'] : "",
+        planType: json['plan_type'] is List
+            ? List<PlanType>.from(
+                json['plan_type'].map((x) => PlanType.fromJson(x)))
+            : json['plan_type'] is String
+                ? (jsonDecode(json['plan_type']) as List)
+                    .map((item) => PlanType.fromJson(item))
+                    .toList()
+                : [],
+        paymentId: json['payment_id'] is int ? json['payment_id'] : -1,
+        deviceId: json['device_id'] is String ? json['device_id'] : "",
+        googleInAppPurchaseIdentifier: json['android_identifier'] is String
+            ? json['android_identifier']
+            : '',
+        appleInAppPurchaseIdentifier:
+            json['apple_identifier'] is String ? json['apple_identifier'] : '',
+        activePlanInAppPurchaseIdentifier:
+            json['active_in_app_purchase_identifier'] is String
+                ? json['active_in_app_purchase_identifier']
+                : '',
+        couponDiscount:
+            json['coupon_discount'] is num ? json['coupon_discount'] : -1);
   }
 
   Map<String, dynamic> toJson() {
@@ -179,14 +192,20 @@ class PlanType {
   factory PlanType.fromJson(Map<String, dynamic> json) {
     return PlanType(
       id: json['id'] is int ? json['id'] : -1,
-      planlimitationId: json['planlimitation_id'] is int ? json['planlimitation_id'] : -1,
-      limitationTitle: json['limitation_title'] is String ? json['limitation_title'] : "",
-      limitationValue: json['limitation_value'] is int ? json['limitation_value'] : -1,
-      limit: json['limit'] is Map<String, dynamic> ? PlanLimit.fromJson(json['limit']) : PlanLimit(),
+      planlimitationId:
+          json['planlimitation_id'] is int ? json['planlimitation_id'] : -1,
+      limitationTitle:
+          json['limitation_title'] is String ? json['limitation_title'] : "",
+      limitationValue:
+          json['limitation_value'] is int ? json['limitation_value'] : -1,
+      limit: json['limit'] is Map<String, dynamic>
+          ? PlanLimit.fromJson(json['limit'])
+          : PlanLimit(),
       slug: json['slug'] is String ? json['slug'] : "",
       status: json['status'] is int ? json['status'] : -1,
       message: json['message'] is String ? json['message'] : "",
-      limitationSlug: json['limitation_slug'] is String ? json['limitation_slug'] : "",
+      limitationSlug:
+          json['limitation_slug'] is String ? json['limitation_slug'] : "",
     );
   }
 
