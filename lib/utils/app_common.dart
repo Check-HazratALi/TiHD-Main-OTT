@@ -27,7 +27,7 @@ import 'common_base.dart';
 import 'constants.dart';
 
 ///DO NOT CHANGE THE APP PACKAGE NAME
-String appPackageName = 'com.iqonic.streamitlaravel';
+String appPackageName = 'com.media.tihd';
 
 Future<bool> get isIqonicProduct async =>
     await getPackageName() == appPackageName;
@@ -340,7 +340,8 @@ void onSubscriptionLoginCheck({
           preventDuplicates: false);
     } else {
       if (videoAccess == MovieAccess.freeAccess && isSupportedDevice.value) {
-        callBack.call();
+        Get.to(() => SubscriptionScreen(launchDashboard: false),
+          preventDuplicates: false);
       } else {
         if (((videoAccess == MovieAccess.paidAccess || planLevel > 0) &&
                 currentSubscription.value.level < planLevel) ||
@@ -350,13 +351,7 @@ void onSubscriptionLoginCheck({
             toast(
                 '${locale.value.yourDeviceIsNot} ${locale.value.pleaseUpgradeToContinue}');
           }
-          Get.to(() => SubscriptionScreen(launchDashboard: false),
-                  preventDuplicates: false, arguments: planLevel)
-              ?.then((v) {
-            if (currentSubscription.value.level >= planLevel) {
               callBack.call();
-            }
-          });
         } else {
           callBack.call();
         }

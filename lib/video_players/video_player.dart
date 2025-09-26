@@ -200,55 +200,58 @@ class VideoPlayersComponent extends StatelessWidget {
                       else if (!controller.isTrailer.value &&
                           isMoviePaid(
                               requiredPlanLevel: videoModel.requiredPlanLevel))
-                        GestureDetector(
-                          onTap: () {
-                            onSubscriptionLoginCheck(
-                              callBack: () {},
-                              videoAccess: videoModel.movieAccess,
-                              planId: videoModel.planId,
-                              planLevel: videoModel.requiredPlanLevel,
-                              isPurchased: videoModel.isPurchased,
-                            );
-                          },
-                          child: SizedBox(
-                            height: isPipModeOn.value ? 110 : 220,
-                            width: Get.width,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                if (getVideoURLLink().isNotEmpty)
-                                  Image.network(
-                                    getVideoURLLink(),
-                                    height: isPipModeOn.value ? 110 : 200,
-                                    width: Get.width,
-                                    fit: BoxFit.cover,
-                                    filterQuality: FilterQuality.medium,
-                                  )
-                                else
-                                  Container(
-                                    height: isPipModeOn.value ? 110 : 200,
-                                    width: Get.width,
-                                    decoration: boxDecorationDefault(
-                                        color: context.cardColor,
-                                        borderRadius: radius(0)),
-                                  ),
-                                Container(
-                                  height: 45,
-                                  width: 45,
-                                  decoration: boxDecorationDefault(
-                                    shape: BoxShape.circle,
-                                    color: btnColor,
-                                  ),
-                                  child: Icon(
-                                    Icons.play_arrow,
-                                    size: 24,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      else if (videoModel.movieAccess ==
+                       Obx(() => Stack(
+    children: [
+      // 1. Video Player (always visible)
+      buildVideoWidget(context),
+      
+      // 2. Overlay - show only when video is NOT playing AND user hasn't purchased
+      if (!controller.isVideoPlaying.value && 
+          !controller.videoModel.value.isPurchased &&
+          controller.isBuffering.isFalse) // Buffering না হলে overlay show করবে
+        Positioned.fill(
+          child: GestureDetector(
+            onTap: () async {
+              onSubscriptionLoginCheck(
+                callBack: () async {
+                  print("✅ Subscription Successful");
+                  
+                  onWatchNow?.call();
+                  
+                  // Wait for video initialization
+                  await Future.delayed(Duration(milliseconds: 800));
+                  
+                  // Force play the video
+                  if (controller.podPlayerController.value.isInitialised) {
+                    print("🎬 Manually starting video playback");
+                    controller.podPlayerController.value.play();
+                    controller.isVideoPlaying(true);
+                    controller.isBuffering(false);
+                  }
+                },
+                videoAccess: videoModel.movieAccess,
+                planId: videoModel.planId,
+                planLevel: videoModel.requiredPlanLevel,
+                isPurchased: videoModel.isPurchased,
+              );
+            },
+          ),
+        ),
+        
+      // 3. Loading indicator
+      if (controller.isBuffering.isTrue)
+        Positioned.fill(
+          child: Container(
+            color: Colors.black.withOpacity(0.3),
+            child: Center(
+              child: LoaderWidget(),
+            ),
+          ),
+        ),
+    ],
+  )
+                       )
+                       else if (videoModel.movieAccess ==
                               MovieAccess.payPerView &&
                           videoModel.isPurchased == false &&
                           !controller.isTrailer.value)
